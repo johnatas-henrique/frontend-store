@@ -7,6 +7,8 @@ class DetalheProduto extends Component {
     this.state = {
       quant: 0,
       comment: '',
+      email: '',
+      rating: 0,
     }
 
     this.ContainerBig = this.ContainerBig.bind(this);
@@ -16,6 +18,16 @@ class DetalheProduto extends Component {
     this.increment = this.increment.bind(this);
 
     this.decrement = this.decrement.bind(this);
+
+    this.CaixaComment = this.CaixaComment.bind(this);
+
+    this.CaixaEmail = this.CaixaEmail.bind(this);
+
+    this.emailChange = this.emailChange.bind(this);
+
+    this.ratingChange = this.ratingChange.bind(this);
+
+    this.commentChange = this.commentChange.bind(this);
 
   }
 
@@ -55,13 +67,59 @@ class DetalheProduto extends Component {
       <div className="container-big">
         <div className="Quant">
           <h2>Quantidade:</h2>
-          <button className="dec" onClick={quant === 0 ? {quant: 0} : this.decrement}>-</button>
+          <button className="dec" onClick={quant === 0 ? { quant: 0 } : this.decrement}>-</button>
           <h2>{this.state.quant}</h2>
           <button className="inc" onClick={this.increment}>+</button>
         </div>
-       <button>Adicionar ao Carrinho</button>
       </div>
     );
+  }
+
+  emailChange(event) {
+    this.setState({ email: event.target.value });
+  }
+
+  ratingChange(event) {
+    this.setState({ rating: parseFloat(event.target.value) });
+  }
+
+  commentChange(event) {
+    this.setState({ comment: event.target.value });
+  }
+
+  CaixaEmail() {
+    const { email, rating } = this.state;
+    return (
+      <div>
+        <h2>Avaliações</h2>
+        <label htmlFor="email">
+          E-mail:
+            <input type="text" value={email} onChange={this.emailChange} />
+        </label>
+        <label htmlFor="rating">
+          Avaliação:
+            <input
+            type="number"
+            value={rating}
+            onChange={(event) => this.ratingChange(event)}
+            min="0"
+            max="5"
+          />
+        </label>
+      </div>
+    );
+  }
+
+  CaixaComment() {
+    const { comment } = this.state;
+    return (
+      <div>
+        <label htmlFor="comment">
+          Comentários sobre o produto:<br />
+          <textarea value={comment} onChange={this.commentChange} />
+        </label>
+      </div>
+    )
   }
 
   render() {
@@ -69,6 +127,12 @@ class DetalheProduto extends Component {
       <div className="DetalheProduto">
         {this.ContainerBig()}
         {this.ContainerQuant()}
+        <button>Adicionar ao Carrinho</button>
+        <div className="container-comment">
+          {this.CaixaEmail()}
+          {this.CaixaComment()}
+        </div>
+        <br />
         <Link to="/">Voltar</Link>
       </div>
     );
