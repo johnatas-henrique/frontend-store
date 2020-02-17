@@ -3,11 +3,19 @@ import { Link } from 'react-router-dom';
 import Busca from '../components/Busca';
 
 class ListaProdutos extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { listagem: 'Você ainda não realizou uma busca' };
+  }
+
   render() {
     return (
       <div className="Carrinho">
         <h1>Lista Produtos</h1>
-        <Busca />
+        <input type="text" />
+        <Busca>
+          {this.state.listagem}
+        </Busca>
         <Link to="/carrinho">Carrinho</Link>
       </div>
 

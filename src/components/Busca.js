@@ -4,7 +4,7 @@ class Busca extends Component {
   render() {
     return (
       <div>
-        <input type="text" />
+        {this.props.children}
       </div>
     );
   }
