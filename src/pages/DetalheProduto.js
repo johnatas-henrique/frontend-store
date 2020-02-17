@@ -9,7 +9,7 @@ class DetalheProduto extends Component {
       comment: '',
       email: '',
       rating: 0,
-    }
+    };
 
     this.ContainerBig = this.ContainerBig.bind(this);
 
@@ -28,7 +28,6 @@ class DetalheProduto extends Component {
     this.ratingChange = this.ratingChange.bind(this);
 
     this.commentChange = this.commentChange.bind(this);
-
   }
 
   ContainerBig() {
@@ -50,15 +49,15 @@ class DetalheProduto extends Component {
   }
 
   increment() {
-    this.setState(state => ({
+    this.setState((state) => ({
       quant: state.quant + 1,
-    }))
+    }));
   }
 
   decrement() {
-    this.setState(state => ({
+    this.setState((state) => ({
       quant: state.quant - 1,
-    }))
+    }));
   }
 
   ContainerQuant() {
@@ -99,12 +98,12 @@ class DetalheProduto extends Component {
         <label htmlFor="rating">
           Avaliação:
             <input
-            type="number"
-            value={rating}
-            onChange={(event) => this.ratingChange(event)}
-            min="0"
-            max="5"
-          />
+              type="number"
+              value={rating}
+              onChange={(event) => this.ratingChange(event)}
+              min="0"
+              max="5"
+            />
         </label>
       </div>
     );
@@ -119,7 +118,7 @@ class DetalheProduto extends Component {
           <textarea value={comment} onChange={this.commentChange} />
         </label>
       </div>
-    )
+    );
   }
 
   render() {
