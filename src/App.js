@@ -1,7 +1,7 @@
 import React from 'react';
-import Carrinho from './pages/Carrinho';
-import ListaProdutos from './pages/ListaProdutos';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import ListaProdutos from './pages/ListaProdutos';
+import Carrinho from './pages/Carrinho';
 import './App.css';
 
 function App() {
