@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Busca from '../components/Busca';
 
 class ListaProdutos extends Component {
   render() {
     return (
       <div className="Carrinho">
         <h1>Lista Produtos</h1>
+        <Busca />
         <Link to="/carrinho">Carrinho</Link>
       </div>
 
