@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Busca.css';
 
 class Busca extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      catID: props.catID,
+      catID: 'xD',
       listagem: [],
     }
     /* this.muda = this.muda.bind(this); */
+    console.log(props.catID);
   }
 
   requisicao (event) {
@@ -25,11 +27,14 @@ class Busca extends Component {
     }
   }
 
-/*   componentDidUpdate () {
-    this.setState({
-      catID: this.props.catID,
-    })
-  } */
+  componentDidUpdate (prevProps) {
+    if (this.props.catID !== prevProps.catID) {
+      console.log('mudou a prop');
+       fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${this.props.catID}`, { method: 'GET' })
+        .then((response) => response.json())
+        .then((data) => this.setState((state) => ({ listagem: data.results })))
+    }
+  }
   /*  muda (event) {
     if (event.key === 'Enter') {
       this.setState({
@@ -39,11 +44,19 @@ class Busca extends Component {
   } */
 
   render () {
+    console.log(this.state.listagem);
     return (
       <div>
         <input type="text" onKeyPress={(event) => this.requisicao(event)} />
         <div> {this.state.listagem.map((item) => {
-          return <li>{item.title}</li>
+          return <div key={item.id}>
+            {item.title}
+            R$ {item.price}
+            <img src={item.thumbnail} alt={item.title}></img>
+            <div>
+              <Link to={`/${item.id}`}>Página</Link>
+              </div>
+            </div>
         })}
         </div>
       </div>

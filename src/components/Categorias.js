@@ -29,15 +29,15 @@ class Categorias extends Component {
 
   requisicao (event) {
     const { catID, listagem } = this.state;
-      /* if (catID === '') {
-        fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${event.target.value}`, { method: 'GET' })
-          .then((response) => response.json())
-          .then((data) => this.setState((state) => ({ listagem: data.results })))
-      } */
-      fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${this.state.catID}&q=${event.target.value}`, { method: 'GET' })
+    /* if (catID === '') {
+      fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${event.target.value}`, { method: 'GET' })
         .then((response) => response.json())
         .then((data) => this.setState((state) => ({ listagem: data.results })))
-        console.log(listagem);
+    } */
+    fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${this.state.catID}&q=${event.target.value}`, { method: 'GET' })
+      .then((response) => response.json())
+      .then((data) => this.setState((state) => ({ listagem: data.results })))
+
   }
 
   componentDidMount () {
