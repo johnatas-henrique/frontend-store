@@ -33,11 +33,11 @@ class DetalheProduto extends Component {
   ContainerBig() {
     return (
       <div className="container-big">
-        <div className="containerEsquerda">
+        <div className="box-Esquerda">
           {/* <h1>{Nome do Produto}: {preço do produto}</h1> */}
           {/* <img src={imagem do produto} alt={NomedoProduto} /> */}
         </div>
-        <div className="containerDireita">
+        <div className="box-Direita">
           <ul>Características do Produto:
             <li>Característica01</li>
             <li>Característica02</li>
