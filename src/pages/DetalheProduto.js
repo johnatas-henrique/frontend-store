@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 
 class DetalheProduto extends Component {
   constructor(props) {
@@ -98,25 +99,37 @@ class DetalheProduto extends Component {
         <label htmlFor="rating">
           Avaliação:
             <input
-              type="number"
-              value={rating}
-              onChange={(event) => this.ratingChange(event)}
-              min="0"
-              max="5"
-            />
+            type="number"
+            value={rating}
+            onChange={(event) => this.ratingChange(event)}
+            min="0"
+            max="5"
+          />
         </label>
       </div>
     );
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.setState({
+      emailsubmit: this.state.email
+    });
   }
 
   CaixaComment() {
     const { comment } = this.state;
     return (
       <div>
-        <label htmlFor="comment">
-          Comentários sobre o produto:<br />
-          <textarea value={comment} onChange={this.commentChange} />
-        </label>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="comment">
+            {this.CaixaEmail()}
+            Adicione um comentário:
+            <textarea value={comment} onChange={this.commentChange} />
+          </label>
+          <button type="submit">Adicionar comentário</button>
+        </form>
+        <p>{this.state.emailsubmit}</p>
       </div>
     );
   }
@@ -128,14 +141,19 @@ class DetalheProduto extends Component {
         {this.ContainerQuant()}
         <button>Adicionar ao Carrinho</button>
         <div className="container-comment">
-          {this.CaixaEmail()}
           {this.CaixaComment()}
         </div>
-        <br />
         <Link to="/">Voltar</Link>
       </div>
     );
   }
+}
+
+DetalheProduto.propTypes = {
+  email: PropTypes.string.isRequired,
+  comment: PropTypes.string,
+  rating: PropTypes.number.isRequired,
+
 }
 
 export default DetalheProduto;
