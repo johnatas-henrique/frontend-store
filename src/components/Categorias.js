@@ -17,7 +17,10 @@ class Categorias extends Component {
 
   filtraCat(value) {
     this.setState((state) => ({ catID: value}));
-  }
+    fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${this.state.catID}`, { method: 'GET' })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+}
 
   componentDidMount() {
     this.listaCategorias();

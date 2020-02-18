@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import ListaProdutos from './pages/ListaProdutos';
+import PagInicial from './pages/PagInicial';
 import Carrinho from './pages/Carrinho';
 import DetalheProduto from './pages/DetalheProduto';
 
@@ -10,7 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={ListaProdutos} />
+        <Route exact path="/" component={PagInicial} />
         <Route exact path="/carrinho" component={Carrinho} />
         <Route path="/carrinho/:id" component={DetalheProduto} />
       </Switch>

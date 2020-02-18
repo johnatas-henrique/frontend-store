@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Busca from '../components/Busca';
 import Categorias from '../components/Categorias';
 
-class ListaProdutos extends Component {
+class PagInicial extends Component {
   constructor(props) {
     super(props);
     this.state = { listagem: [] };
@@ -41,4 +41,4 @@ class ListaProdutos extends Component {
   }
 }
 
-export default ListaProdutos;
+export default PagInicial;
