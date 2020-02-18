@@ -129,7 +129,7 @@ class DetalheProduto extends Component {
           </label>
           <button type="submit">Adicionar comentário</button>
         </form>
-        <p>{this.state.emailsubmit}</p>
+        <p></p>
       </div>
     );
   }
