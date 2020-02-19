@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Busca.css';
 
 class Busca extends Component {
@@ -48,11 +49,15 @@ class Busca extends Component {
                 <Link to={`/${item.id}`}>Página</Link>
               </div>
             </div>
-            ))}
+          ))}
         </div>
       </div>
     );
   }
 }
+
+Busca.propTypes = {
+  catID: PropTypes.string.isRequired,
+};
 
 export default Busca;
