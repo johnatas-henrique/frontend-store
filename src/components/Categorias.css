@@ -5,6 +5,7 @@ li {
 .flexy {
     display: flex;
 }
+
 .categoria{
     border: 2px solid red;
 }

@@ -13,7 +13,6 @@ class Categorias extends Component {
     };
     this.listaCategorias = this.listaCategorias.bind(this);
     this.pegaCategoriaEscolhida = this.pegaCategoriaEscolhida.bind(this);
-    this.requisicao = this.requisicao.bind(this);
   }
 
   listaCategorias () {
@@ -22,22 +21,8 @@ class Categorias extends Component {
       .then((data) => this.setState({ categorias: data }))
   }
 
-  pegaCategoriaEscolhida (value, event) {
+  pegaCategoriaEscolhida (value) {
     this.setState(() => ({ catID: value }));
-    this.requisicao(event);
-  }
-
-  requisicao (event) {
-    const { catID, listagem } = this.state;
-    /* if (catID === '') {
-      fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${event.target.value}`, { method: 'GET' })
-        .then((response) => response.json())
-        .then((data) => this.setState((state) => ({ listagem: data.results })))
-    } */
-    fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${this.state.catID}&q=${event.target.value}`, { method: 'GET' })
-      .then((response) => response.json())
-      .then((data) => this.setState((state) => ({ listagem: data.results })))
-
   }
 
   componentDidMount () {
@@ -58,7 +43,7 @@ class Categorias extends Component {
                   value=""
                   id="teste"
                   type="radio"
-                  onClick={(event) => this.pegaCategoriaEscolhida('', event)}
+                  onClick={() => this.pegaCategoriaEscolhida('')}
                 /> Todas as Categorias
                 </label>
             </li>
@@ -72,7 +57,7 @@ class Categorias extends Component {
                     value={categoria.name}
                     id={categoria.id}
                     type="radio"
-                    onClick={(event) => this.pegaCategoriaEscolhida(categoria.id, event)}
+                    onClick={() => this.pegaCategoriaEscolhida(categoria.id)}
                   /> {categoria.name}
                 </label>
               </li>
