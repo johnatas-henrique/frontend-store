@@ -15,21 +15,21 @@ class Categorias extends Component {
     this.pegaCategoriaEscolhida = this.pegaCategoriaEscolhida.bind(this);
   }
 
-  listaCategorias () {
-    fetch('https://api.mercadolibre.com/sites/MLB/categories', { method: 'GET' })
-      .then((response) => response.json())
-      .then((data) => this.setState({ categorias: data }))
-  }
-
-  pegaCategoriaEscolhida (value) {
-    this.setState(() => ({ catID: value }));
-  }
-
-  componentDidMount () {
+  componentDidMount() {
     this.listaCategorias();
   }
 
-  render () {
+  listaCategorias() {
+    fetch('https://api.mercadolibre.com/sites/MLB/categories', { method: 'GET' })
+      .then((response) => response.json())
+      .then((data) => this.setState({ categorias: data }));
+  }
+
+  pegaCategoriaEscolhida(value) {
+    this.setState(() => ({ catID: value }));
+  }
+
+  render() {
     const { categorias } = this.state;
     return (
       <div className="flexy">
@@ -37,28 +37,18 @@ class Categorias extends Component {
           <h2>Categorias</h2>
           <ul>
             <li>
-              <label htmlFor='teste'>
-                <input
-                  name="categorias"
-                  value=""
-                  id="teste"
-                  type="radio"
-                  onClick={() => this.pegaCategoriaEscolhida('')}
-                /> Todas as Categorias
+              <label htmlFor="teste">
+                <input name="categorias" value="" id="teste" type="radio"
+                  onClick={() => this.pegaCategoriaEscolhida('')} />
+                Todas as Categorias
                 </label>
             </li>
-            {categorias.map(categoria =>
+            {categorias.map((categoria) =>
               <li key={categoria.id}>
-                <label
-                  htmlFor={categoria.id}
-                >
-                  <input
-                    name="categorias"
-                    value={categoria.name}
-                    id={categoria.id}
-                    type="radio"
-                    onClick={() => this.pegaCategoriaEscolhida(categoria.id)}
-                  /> {categoria.name}
+                <label htmlFor={categoria.id}>
+                  <input name="categorias" value={categoria.name} id={categoria.id} type="radio"
+                    onClick={() => this.pegaCategoriaEscolhida(categoria.id)} />
+                  {categoria.name}
                 </label>
               </li>
             )}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Categorias from '../components/Categorias';
 
 class PagInicial extends Component {
-  render () {
+  render() {
     return (
       <div className="Carrinho">
         <h1>Lista Produtos</h1>

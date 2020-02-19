@@ -1,11 +1,11 @@
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .flexy {
-    display: flex;
+  display: flex;
 }
 
-.categoria{
-    border: 2px solid red;
+.categoria {
+  border: 2px solid red;
 }
