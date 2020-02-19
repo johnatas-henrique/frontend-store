@@ -36,21 +36,23 @@ class Categorias extends Component {
         <aside className="categoria">
           <h2>Categorias</h2>
           <ul>
-            <li>
-              <label htmlFor="teste">
-                <input name="categorias" value="" id="teste" type="radio"
-                  onClick={() => this.pegaCategoriaEscolhida('')} />
-                Todas as Categorias
-                </label>
-            </li>
+            <li><label htmlFor="teste">
+              <input
+                name="categorias" value="" id="teste" type="radio"
+                onClick={() => this.pegaCategoriaEscolhida('')}
+              />
+              Todas as Categorias
+                </label></li>
             {categorias.map((categoria) =>
               <li key={categoria.id}>
                 <label htmlFor={categoria.id}>
-                  <input name="categorias" value={categoria.name} id={categoria.id} type="radio"
-                    onClick={() => this.pegaCategoriaEscolhida(categoria.id)} />
+                  <input
+                    name="categorias" value={categoria.name} id={categoria.id} type="radio"
+                    onClick={() => this.pegaCategoriaEscolhida(categoria.id)}
+                  />
                   {categoria.name}
                 </label>
-              </li>
+              </li>,
             )}
           </ul>
         </aside>
