@@ -51,8 +51,7 @@ class Categorias extends Component {
                     onClick={() => this.pegaCategoriaEscolhida(categoria.id)}
                   />
                   {categoria.name}
-                </label>
-              </li>,
+                </label></li>,
             )}
           </ul>
         </aside>
