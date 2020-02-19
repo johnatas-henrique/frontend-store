@@ -2,6 +2,20 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 
+// class MostraEmails extends Component {
+//   constructor(props) {
+//     super(props);
+//   }
+//   render() {
+//     return (
+//       <div>
+//         <li>{this.props.children}</li>
+//       </div>
+//     )
+//   }
+// }
+
+
 class DetalheProduto extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +24,7 @@ class DetalheProduto extends Component {
       comment: '',
       email: '',
       rating: 0,
+      emailsubmit: '',
     };
 
     this.ContainerBig = this.ContainerBig.bind(this);
@@ -29,6 +44,7 @@ class DetalheProduto extends Component {
     this.ratingChange = this.ratingChange.bind(this);
 
     this.commentChange = this.commentChange.bind(this);
+
   }
 
   ContainerBig() {
@@ -110,8 +126,8 @@ class DetalheProduto extends Component {
     );
   }
 
-  handleSubmit(event) {
-    event.preventDefault()
+  handleSubmit(e) {
+    e.preventDefault();
     this.setState({
       emailsubmit: this.state.email
     });
@@ -121,15 +137,10 @@ class DetalheProduto extends Component {
     const { comment } = this.state;
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="comment">
-            {this.CaixaEmail()}
-            Adicione um comentário:
+        <label htmlFor="comment">
+          Adicione um comentário:
             <textarea value={comment} onChange={this.commentChange} />
-          </label>
-          <button type="submit">Adicionar comentário</button>
-        </form>
-        <p></p>
+        </label>
       </div>
     );
   }
@@ -141,19 +152,26 @@ class DetalheProduto extends Component {
         {this.ContainerQuant()}
         <button>Adicionar ao Carrinho</button>
         <div className="container-comment">
-          {this.CaixaComment()}
+          <form>
+            {this.CaixaEmail()}
+            {this.CaixaComment()}
+            <button type="button" onClick={(e) => this.handleSubmit(e)}>Adicionar comentário</button>
+          </form>
         </div>
+        {/* <MostraEmails>
+          {this.state.emailsubmit}
+        </MostraEmails> */}
         <Link to="/">Voltar</Link>
       </div>
     );
   }
 }
 
-DetalheProduto.propTypes = {
-  email: PropTypes.string.isRequired,
-  comment: PropTypes.string,
-  rating: PropTypes.number.isRequired,
+// DetalheProduto.propTypes = {
+//   email: PropTypes.string.isRequired,
+//   comment: PropTypes.string,
+//   rating: PropTypes.number.isRequired,
 
-}
+// }
 
 export default DetalheProduto;
