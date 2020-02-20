@@ -33,31 +33,29 @@ class Categorias extends Component {
     const { categorias } = this.state;
     return (
       <div className="flexy">
-        <aside className="categoria">
-          <h2>Categorias</h2>
-          <ul>
-            <li><label htmlFor="teste">
-              <input
-                name="categorias" value="" id="teste" type="radio"
-                onClick={() => this.pegaCategoriaEscolhida('')}
-              />
-              Todas as Categorias
-                </label></li>
-            {categorias.map((categoria) =>
-              <li key={categoria.id}>
-                <label htmlFor={categoria.id}>
-                  <input
-                    name="categorias" value={categoria.name} id={categoria.id} type="radio"
-                    onClick={() => this.pegaCategoriaEscolhida(categoria.id)}
-                  />
-                  {categoria.name}
-                </label></li>,
-            )}
-          </ul>
+        <aside className="categorias-block">
+            <h2>Categorias</h2>
+            <ul>
+              <li><label htmlFor="teste">
+                <input
+                  name="categorias" value="" id="teste" type="radio"
+                  onClick={() => this.pegaCategoriaEscolhida('')}
+                />
+                Sem Categoria
+                  </label></li>
+              {categorias.map((categoria) =>
+                <li key={categoria.id}>
+                  <label htmlFor={categoria.id}>
+                    <input
+                      name="categorias" value={categoria.name} id={categoria.id} type="radio"
+                      onClick={() => this.pegaCategoriaEscolhida(categoria.id)}
+                    />
+                    {categoria.name}
+                  </label></li>,
+              )}
+            </ul>
         </aside>
-        <main className="busca">
           <Busca catID={this.state.catID} />
-        </main>
       </div>
     );
   }

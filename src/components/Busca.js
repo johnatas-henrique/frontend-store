@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import BotaoCarrinho from './BotaoCarrinho';
 import './Busca.css';
 
 class Busca extends Component {
@@ -9,6 +10,7 @@ class Busca extends Component {
     this.state = {
       listagem: [],
       pesquisa: '',
+      primeiraBusca: true,
     };
     this.valorPesquisa = this.valorPesquisa.bind(this);
   }
@@ -19,7 +21,10 @@ class Busca extends Component {
       fetch(`${linkML}?category=${this.props.catID}&q=${this.state.pesquisa}`,
         { method: 'GET' })
         .then((response) => response.json())
-        .then((data) => this.setState(() => ({ listagem: data.results })));
+        .then((data) => this.setState(() => ({ 
+          listagem: data.results,
+          primeiraBusca: false,
+        })));
     }
   }
 
@@ -31,22 +36,36 @@ class Busca extends Component {
   }
 
   render() {
-    const { listagem, pesquisa } = this.state;
+    const { listagem, pesquisa, primeiraBusca } = this.state;
+    if (primeiraBusca || listagem == []) {
+      return (
+        <div>
+          <input
+            type="text"
+            value={pesquisa}
+            onChange={(event) => this.valorPesquisa(event)}
+          />
+          <p>Busca ae!</p>
+        </div>
+      );
+    }
     return (
-      <div>
+      <div className="main-block">
         <input
           type="text"
           value={pesquisa}
           onChange={(event) => this.valorPesquisa(event)}
         />
-        <div>
+        <div className="busca">
           {listagem.map((item) => (
-            <div key={item.id}>
-              {item.title}
-              R$ {item.price}
-              <img src={item.thumbnail} alt={item.title} />
+            <div className="itemBusca" key={item.id}>
+              <Link to={`/${item.id}`}>
+                <h2 className="titulo">{item.title}</h2>
+              </Link>
+              <p>R$ {item.price}</p>
+              <img class="itemImage" src={item.thumbnail} alt={item.title} />
+              <BotaoCarrinho />
               <div>
-                <Link to={`/${item.id}`}>Página</Link>
               </div>
             </div>
           ))}
