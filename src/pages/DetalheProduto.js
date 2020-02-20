@@ -1,12 +1,17 @@
-/* eslint-disable react/jsx-filename-extension */
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import DescricaoeQuant from '../components/DescricaoeQuant';
+import FormComment from '../components/FormComment';
+// import CommentList from '../components/CommentList';
+// utilizar este componente aqui ou no FormComment.
 
-class DetalheProduto extends Component {
+class DetalheProduto extends React.Component {
+
   render() {
     return (
-      <div className="DetalheProduto">
-        <h1>Detalhes do Produto:</h1>
+      <div>
+        <DescricaoeQuant />
+        <FormComment />
         <Link to="/">Voltar</Link>
       </div>
     );
