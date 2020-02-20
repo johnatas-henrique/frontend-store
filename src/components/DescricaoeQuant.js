@@ -20,7 +20,7 @@ class DescricaoeQuant extends React.Component {
     const { quant } = this.state;
     if (quant === 0) {
       this.setState({
-        quant: 0
+        quant: 0,
       });
     } else {
       this.setState((state) => ({

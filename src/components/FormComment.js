@@ -5,9 +5,9 @@ class FormComment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      email: '',
       rating: 0,
-      comment: "",
+      comment: '',
     };
     this.formChange = this.formChange.bind(this);
 
@@ -37,12 +37,12 @@ class FormComment extends React.Component {
         <label htmlFor="rating">
           Avaliação:
             <input
-            type="number"
-            value={rating}
-            onChange={(event) => this.ratingChange(event)}
-            min="0"
-            max="5"
-          />
+              type="number"
+              value={rating}
+              onChange={(event) => this.ratingChange(event)}
+              min="0"
+              max="5"
+            />
         </label>
       </div>
     );
@@ -63,7 +63,8 @@ class FormComment extends React.Component {
         </label><br />
         <button
           type="button"
-          onClick={this.handleSubmit()}>
+          onClick={this.handleSubmit()}
+        >
           Adicionar comentário
         </button>
         <CommentList
