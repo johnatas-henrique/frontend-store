@@ -17,21 +17,25 @@ class DescricaoeQuant extends React.Component {
   }
 
   decrement() {
-    this.setState((state) => ({
-      quant: state.quant - 1,
-    }));
+    const { quant } = this.state;
+    if (quant === 0) {
+      this.setState({
+        quant: 0
+      });
+    } else {
+      this.setState((state) => ({
+        quant: state.quant - 1,
+      }));
+    }
   }
 
   containerQuant() {
-    const { quant } = this.state;
     return (
-      <div className="container-big">
-        <div className="Quant">
-          <h2>Quantidade:</h2>
-          <button className="dec" onClick={quant === 0 ? { quant: 0 } : this.decrement}>-</button>
-          <h2>{this.state.quant}</h2>
-          <button className="inc" onClick={this.increment}>+</button>
-        </div>
+      <div className="Quant">
+        <h2>Quantidade:</h2>
+        <button className="dec" onClick={this.decrement}>-</button>
+        <h2>{this.state.quant}</h2>
+        <button className="inc" onClick={this.increment}>+</button>
       </div>
     );
   }

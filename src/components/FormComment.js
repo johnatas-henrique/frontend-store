@@ -7,25 +7,22 @@ class FormComment extends React.Component {
     this.state = {
         email: "",
         rating: 0,
-        comment: ""
+        comment: '',
     }
-    this.emailChange = this.emailChange.bind(this);
+    this.formChange = this.formChange.bind(this);
 
     this.ratingChange = this.ratingChange.bind(this);
 
-    this.commentChange = this.commentChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)    
   };
 
-  emailChange(event) {
-    this.setState({ email: event.target.value });
+  formChange(event){
+    const { value, name } = event.target;
+    this.setState({[name]: value})
   }
 
   ratingChange(event) {
     this.setState({ rating: parseFloat(event.target.value) });
-  }
-
-  commentChange(event) {
-    this.setState({ comment: event.target.value });
   }
 
   CaixaEmail() {
@@ -35,7 +32,7 @@ class FormComment extends React.Component {
         <h2>Avaliações</h2>
         <label htmlFor="email">
           E-mail (opcional):
-            <input type="text" value={email} onChange={this.emailChange} />
+            <input name= "email" type="text" value={email} onChange={(e) => this.formChange(e)} />
         </label>
         <label htmlFor="rating">
           Avaliação:
@@ -50,19 +47,30 @@ class FormComment extends React.Component {
       </div>
     );
   }
-  
-  render() {
-    const { comment } = this.state;
+
+  handleSubmit(e) {
     return (
       <div>
+        {}
+      </div>
+    )
+  }
+  
+  render() {
+    const { comment, submit } = this.state;
+    console.log(submit)
+    return (
+      <form>
         {this.CaixaEmail()}
         <label htmlFor="comment">
           Adicione um comentário:<br/>
-          <textarea value={comment} onChange={this.commentChange} />
+          <textarea name="comment" value={comment} onChange={(event) => this.formChange(event)} />
         </label><br />
-        <button>Enviar comentário</button>
-        <CommentList/>
-      </div>
+        <button type="button" onClick={(event) => this.handleSubmit(event)}>Adicionar comentário</button>
+        <CommentList
+        Comentario={submit}
+        />
+      </form>
     );
   }
 }
