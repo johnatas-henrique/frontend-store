@@ -4,7 +4,7 @@ class Comment extends React.Component {
   render() {
     return (
       <div>
-        {this.props.emailComentado}
+        Componente Comment
       </div>
     );
   }

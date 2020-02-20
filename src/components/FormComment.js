@@ -5,20 +5,20 @@ class FormComment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        email: "",
-        rating: 0,
-        comment: '',
-    }
+      email: "",
+      rating: 0,
+      comment: "",
+    };
     this.formChange = this.formChange.bind(this);
 
     this.ratingChange = this.ratingChange.bind(this);
 
-    this.handleSubmit = this.handleSubmit.bind(this)    
-  };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  formChange(event){
+  formChange(event) {
     const { value, name } = event.target;
-    this.setState({[name]: value})
+    this.setState({ [name]: value });
   }
 
   ratingChange(event) {
@@ -32,7 +32,7 @@ class FormComment extends React.Component {
         <h2>Avaliações</h2>
         <label htmlFor="email">
           E-mail (opcional):
-            <input name= "email" type="text" value={email} onChange={(e) => this.formChange(e)} />
+            <input name="email" type="text" value={email} onChange={(e) => this.formChange(e)} />
         </label>
         <label htmlFor="rating">
           Avaliação:
@@ -48,27 +48,26 @@ class FormComment extends React.Component {
     );
   }
 
-  handleSubmit(e) {
-    return (
-      <div>
-        {}
-      </div>
-    )
+  handleSubmit() {
+    console.log(this.state);
   }
-  
+
   render() {
     const { comment, submit } = this.state;
-    console.log(submit)
     return (
       <form>
         {this.CaixaEmail()}
         <label htmlFor="comment">
-          Adicione um comentário:<br/>
+          Adicione um comentário: <br />
           <textarea name="comment" value={comment} onChange={(event) => this.formChange(event)} />
         </label><br />
-        <button type="button" onClick={(event) => this.handleSubmit(event)}>Adicionar comentário</button>
+        <button
+          type="button"
+          onClick={this.handleSubmit()}>
+          Adicionar comentário
+        </button>
         <CommentList
-        Comentario={submit}
+          Comentario={submit}
         />
       </form>
     );

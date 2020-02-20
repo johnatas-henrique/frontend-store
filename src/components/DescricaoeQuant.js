@@ -4,8 +4,8 @@ class DescricaoeQuant extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quant: 0
-    }
+      quant: 0,
+    };
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
   }
@@ -52,8 +52,8 @@ class DescricaoeQuant extends React.Component {
         </div>
         {this.containerQuant()}
       </div>
-    )
+    );
   }
 }
 
-export default DescricaoeQuant
+export default DescricaoeQuant;
