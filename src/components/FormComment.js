@@ -74,4 +74,4 @@ class FormComment extends React.Component {
   }
 }
 
-export default FormComment
+export default FormComment;
