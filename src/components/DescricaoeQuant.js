@@ -41,11 +41,13 @@ class DescricaoeQuant extends React.Component {
   }
 
   render() {
+    const { id, price, thumbnail, title } = this.props.produtoAtual;
     return (
       <div className="container-big">
         <div className="box-Esquerda">
-          {/* <h1>{Nome do Produto}: {preço do produto}</h1> */}
-          {/* <img src={imagem do produto} alt={NomedoProduto} /> */}
+          <h1>{title}</h1>
+          <h2>{price}</h2>
+          <img src={thumbnail} alt={title} />
         </div>
         <div className="box-Direita">
           <ul>Características do Produto:</ul>

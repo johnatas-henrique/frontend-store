@@ -14,7 +14,10 @@ class Busca extends Component {
       primeiraBusca: true,
     };
     this.valorPesquisa = this.valorPesquisa.bind(this);
-    this.salvaitem = this.salvaitem.bind(this);
+  }
+
+  componentDidMount() {
+    localStorage.setItem("Produtos", []);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -28,7 +31,6 @@ class Busca extends Component {
           primeiraBusca: false,
         })));
     }
-    console.log(this.state.listagem);
   }
 
   valorPesquisa(event) {
@@ -38,9 +40,16 @@ class Busca extends Component {
     });
   }
 
-  salvaitem(produtoV, nomeV, precoV) {
-    const produtosSalvos = localStorage.getItem("ProjetoCarrinhoIV")
-    localStorage.setItem("ProjetoCarrinhoIV", JSON.stringify({id: produtoV, title: nomeV, price: precoV}));
+  salvaItem(produto) {
+    const { id, title, price, thumbnail } = produto;
+    let guardar = JSON.parse(localStorage.getItem("Produtos") || "[]");
+    guardar.push({
+      id: id,
+      title: title,
+      price: parseFloat(price),
+      thumbnail: thumbnail,
+    });
+    localStorage.setItem("Produtos", JSON.stringify(guardar));
   }
 
   render() {
@@ -80,7 +89,7 @@ class Busca extends Component {
               <img className="itemImage" src={item.thumbnail} alt={item.title} />
               <button
                 type="button"
-                onClick={() => this.salvaitem(item.id, item.title, item.price)}
+                onClick={() => this.salvaItem(item)}
               >
                 Adicionar ao Carrinho
               </button>
