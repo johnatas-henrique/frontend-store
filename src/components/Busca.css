@@ -20,6 +20,25 @@ a:hover .titulo {
   flex-wrap: wrap;
 }
 
+.caixaBusca {
+  background-image: url(../images/lupa.svg);
+  background-position: 5px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-sizing: border-box;
+  font-size: 20px;
+  height: 40px;
+  padding-left: 50px;
+  width: 90%;
+}
+
+.carrinhoBusca {
+  height: 40px;
+  background-image: url(../images/carrinho.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .itemBusca {
   border: 2px solid black;
   box-sizing: border-box;

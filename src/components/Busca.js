@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import BotaoCarrinho from './BotaoCarrinho';
 import './Busca.css';
+import ImgCarrinho from '../images/carrinho.png';
 
 class Busca extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class Busca extends Component {
           primeiraBusca: false,
         })));
     }
+    console.log(this.state.listagem);
   }
 
   valorPesquisa(event) {
@@ -37,21 +39,27 @@ class Busca extends Component {
 
   render() {
     const { listagem, pesquisa, primeiraBusca } = this.state;
-    if (primeiraBusca || listagem == []) {
+    if (primeiraBusca) {
       return (
-        <div>
-          <input
-            type="text"
-            value={pesquisa}
-            onChange={(event) => this.valorPesquisa(event)}
-          />
-          <p>Busca ae!</p>
+        <div className="main-block">
+          <div className="flexy">
+            <input
+              className="caixaBusca"
+              type="text"
+              value={pesquisa}
+              onChange={(event) => this.valorPesquisa(event)}
+            />
+            {/* <img className="carrinhoBusca" src={ImgCarrinho} alt="Teste"/> */}
+            <p className="carrinhoBusca">Teste</p>
+          </div>
+          <p>Você ainda não realizou uma busca</p>
         </div>
       );
     }
     return (
       <div className="main-block">
         <input
+          className="caixaBusca"
           type="text"
           value={pesquisa}
           onChange={(event) => this.valorPesquisa(event)}
@@ -63,7 +71,7 @@ class Busca extends Component {
                 <h2 className="titulo">{item.title}</h2>
               </Link>
               <p>R$ {item.price}</p>
-              <img class="itemImage" src={item.thumbnail} alt={item.title} />
+              <img className="itemImage" src={item.thumbnail} alt={item.title} />
               <BotaoCarrinho />
               <div>
               </div>
