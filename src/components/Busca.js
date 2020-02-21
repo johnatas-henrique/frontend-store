@@ -39,7 +39,8 @@ class Busca extends Component {
   }
 
   salvaitem(produtoV, nomeV, precoV) {
-    localStorage.setItem(`${produtoV}`, JSON.stringify({ id: produtoV, title: nomeV, price: precoV }));
+    const produtosSalvos = localStorage.getItem("ProjetoCarrinhoIV")
+    localStorage.setItem("ProjetoCarrinhoIV", JSON.stringify({id: produtoV, title: nomeV, price: precoV}));
   }
 
   render() {
@@ -79,7 +80,7 @@ class Busca extends Component {
               <img className="itemImage" src={item.thumbnail} alt={item.title} />
               <button
                 type="button"
-                onClick={this.salvaitem(item.id, item.title, item.price)}
+                onClick={() => this.salvaitem(item.id, item.title, item.price)}
               >
                 Adicionar ao Carrinho
               </button>
