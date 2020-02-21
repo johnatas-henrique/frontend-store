@@ -29,6 +29,19 @@ class DescricaoeQuant extends React.Component {
     }
   }
 
+  salvaItem() {
+    const { id, price, thumbnail, title } = this.props.produtoAtual;
+    let guardar = JSON.parse(localStorage.getItem("Produtos") || "[]");
+    guardar.push({
+      id: id,
+      title: title,
+      price: parseFloat(price),
+      thumbnail: thumbnail,
+      quantity: this.state.quant,
+    });
+    localStorage.setItem("Produtos", JSON.stringify(guardar));
+  }
+
   containerQuant() {
     return (
       <div className="Quant">
@@ -46,13 +59,19 @@ class DescricaoeQuant extends React.Component {
       <div className="container-big">
         <div className="box-Esquerda">
           <h1>{title}</h1>
-          <h2>{price}</h2>
+          <h2>R${price}</h2>
           <img src={thumbnail} alt={title} />
         </div>
         <div className="box-Direita">
           <ul>Características do Produto:</ul>
         </div>
         {this.containerQuant()}
+        <button
+          type="button"
+          onClick={() => this.salvaItem()}
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }
