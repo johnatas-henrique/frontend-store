@@ -14,6 +14,7 @@ class Busca extends Component {
       primeiraBusca: true,
     };
     this.valorPesquisa = this.valorPesquisa.bind(this);
+    this.salvaitem = this.salvaitem.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -22,7 +23,7 @@ class Busca extends Component {
       fetch(`${linkML}?category=${this.props.catID}&q=${this.state.pesquisa}`,
         { method: 'GET' })
         .then((response) => response.json())
-        .then((data) => this.setState(() => ({ 
+        .then((data) => this.setState(() => ({
           listagem: data.results,
           primeiraBusca: false,
         })));
@@ -35,6 +36,10 @@ class Busca extends Component {
     this.setState({
       pesquisa: value,
     });
+  }
+
+  salvaitem(produtoV, nomeV, precoV) {
+    localStorage.setItem(`${produtoV}`, JSON.stringify({ id: produtoV, title: nomeV, price: precoV }));
   }
 
   render() {
@@ -68,13 +73,16 @@ class Busca extends Component {
           {listagem.map((item) => (
             <div className="itemBusca" key={item.id}>
               <Link to={`/${item.id}`}>
-                <h2 className="titulo">{item.title}</h2>
+                <h2 className="titulo" title={item.title}>{item.title}</h2>
               </Link>
               <p>R$ {item.price}</p>
               <img className="itemImage" src={item.thumbnail} alt={item.title} />
-              <BotaoCarrinho />
-              <div>
-              </div>
+              <button
+                type="button"
+                onClick={this.salvaitem(item.id, item.title, item.price)}
+              >
+                Adicionar ao Carrinho
+              </button>
             </div>
           ))}
         </div>
