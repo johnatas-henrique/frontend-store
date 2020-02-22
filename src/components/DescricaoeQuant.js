@@ -54,7 +54,7 @@ class DescricaoeQuant extends React.Component {
   }
 
   render() {
-    const { id, price, thumbnail, title } = this.props.produtoAtual;
+    const { id, price, thumbnail, title, attributes } = this.props.produtoAtual;
     return (
       <div className="container-big">
         <div className="box-Esquerda">
@@ -64,6 +64,7 @@ class DescricaoeQuant extends React.Component {
         </div>
         <div className="box-Direita">
           <ul>Características do Produto:</ul>
+          {attributes}
         </div>
         {this.containerQuant()}
         <button

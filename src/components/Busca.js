@@ -52,6 +52,10 @@ class Busca extends Component {
     localStorage.setItem("Produtos", JSON.stringify(guardar));
   }
 
+  trataCarac(param){
+    return param.map((item) => `${item.name}: ${item.value_name}`)
+  }
+
   render() {
     const { listagem, pesquisa, primeiraBusca } = this.state;
     if (primeiraBusca) {
@@ -90,7 +94,7 @@ class Busca extends Component {
                     title: `${item.title}`,
                     price: `${item.price}`,
                     thumbnail: `${item.thumbnail}`,
-                    attributes: `${item.attributes}`
+                    attributes: `${this.trataCarac(item.attributes)}`
                   }
                 }}
               >
