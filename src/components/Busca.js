@@ -52,16 +52,6 @@ class Busca extends Component {
     localStorage.setItem("Produtos", JSON.stringify(guardar));
   }
 
-  // itemVista(produto) {
-  //   const { id, title, price, thumbnail } = produto;
-  //   localStorage.setItem("produtosEmVista", JSON.stringify({
-  //     id: id,
-  //     title: title,
-  //     price: parseFloat(price),
-  //     thumbnail: thumbnail,
-  //   }));
-  // }
-
   render() {
     const { listagem, pesquisa, primeiraBusca } = this.state;
     if (primeiraBusca) {
@@ -93,8 +83,16 @@ class Busca extends Component {
           {listagem.map((item) => (
             <div className="itemBusca" key={item.id}>
               <Link
-                // onClick={() => this.itemVista(item)}
-                to={`/${item.id}`}
+                to={{
+                  pathname: `/${item.id}`,
+                  state: {
+                    id: `${item.id}`,
+                    title: `${item.title}`,
+                    price: `${item.price}`,
+                    thumbnail: `${item.thumbnail}`,
+                    attributes: `${item.attributes}`
+                  }
+                }}
               >
                 <h2 className="titulo" title={item.title}>{item.title}</h2>
               </Link>

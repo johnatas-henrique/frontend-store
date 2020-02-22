@@ -22,11 +22,10 @@ class DetalheProduto extends React.Component {
     });
   }
 
-
   render() {
     return (
       <div>
-        <DescricaoeQuant produtoAtual={this.state.produtoAtual} />
+        <DescricaoeQuant produtoAtual={this.props.location.state}/>
         <FormComment />
         <Link to="/">Voltar</Link>
       </div>
