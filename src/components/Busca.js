@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import BotaoCarrinho from './BotaoCarrinho';
+import BotaoQtdECarrinho from './BotaoQtdECarrinho';
 import './Busca.css';
 import ImgCarrinho from '../images/carrinho.png';
 
@@ -12,12 +13,9 @@ class Busca extends Component {
       listagem: [],
       pesquisa: '',
       primeiraBusca: true,
+      itensNoCarrinho: 0,
     };
     this.valorPesquisa = this.valorPesquisa.bind(this);
-  }
-
-  componentDidMount() {
-    localStorage.setItem("Produtos", []);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -42,21 +40,24 @@ class Busca extends Component {
 
   salvaItem(produto) {
     const { id, title, price, thumbnail } = produto;
-    let guardar = JSON.parse(localStorage.getItem("Produtos") || "[]");
+    let guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     guardar.push({
       id: id,
       title: title,
       price: parseFloat(price),
       thumbnail: thumbnail,
     });
-    localStorage.setItem("Produtos", JSON.stringify(guardar));
+    localStorage.setItem('Produtos', JSON.stringify(guardar));
+    this.setState({
+      itensNoCarrinho: guardar.length,
+    })
   }
 
-  trataCarac(param){
+  trataCarac(param) {
     return param.map((item) => `${item.name}: ${item.value_name}`)
   }
 
-  render() {
+  render () {
     const { listagem, pesquisa, primeiraBusca } = this.state;
     if (primeiraBusca) {
       return (
@@ -68,8 +69,7 @@ class Busca extends Component {
               value={pesquisa}
               onChange={(event) => this.valorPesquisa(event)}
             />
-            {/* <img className="carrinhoBusca" src={ImgCarrinho} alt="Teste"/> */}
-            <p className="carrinhoBusca">Teste</p>
+            <BotaoQtdECarrinho itensNoCarrinho={this.state.itensNoCarrinho} />
           </div>
           <p>Você ainda não realizou uma busca</p>
         </div>
@@ -77,12 +77,15 @@ class Busca extends Component {
     }
     return (
       <div className="main-block">
-        <input
-          className="caixaBusca"
-          type="text"
-          value={pesquisa}
-          onChange={(event) => this.valorPesquisa(event)}
-        />
+        <div className="flexy">
+          <input
+            className="caixaBusca"
+            type="text"
+            value={pesquisa}
+            onChange={(event) => this.valorPesquisa(event)}
+          />
+          <BotaoQtdECarrinho itensNoCarrinho={this.state.itensNoCarrinho} />
+        </div>
         <div className="busca">
           {listagem.map((item) => (
             <div className="itemBusca" key={item.id}>

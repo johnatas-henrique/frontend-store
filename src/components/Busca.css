@@ -34,9 +34,29 @@ a:hover .titulo {
 
 .carrinhoBusca {
   height: 40px;
-  background-image: url(../images/carrinho.png);
-  background-repeat: no-repeat;
-  background-size: contain;
+  width: 40px;
+}
+
+.imgCarrinho {
+  height: 40px;
+}
+
+.valorCarrinho {
+  display: inline-block;
+  font-weight: 700;
+  position: relative;
+  bottom: 38px;
+  left: 7px;
+  text-align: center;
+  width: 30px;
+}
+
+a .valorCarrinho {
+  color: black;
+}
+
+a:hover .valorCarrinho {
+  color: green;
 }
 
 .itemBusca {
