@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import BotaoCarrinho from './BotaoCarrinho';
 import BotaoQtdECarrinho from './BotaoQtdECarrinho';
 import './Busca.css';
-import ImgCarrinho from '../images/carrinho.png';
+/* import BotaoCarrinho from './BotaoCarrinho';
+import ImgCarrinho from '../images/carrinho.png'; */
 
 class Busca extends Component {
   constructor(props) {
@@ -40,24 +40,24 @@ class Busca extends Component {
 
   salvaItem(produto) {
     const { id, title, price, thumbnail } = produto;
-    let guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     guardar.push({
-      id: id,
-      title: title,
+      id,
+      title,
       price: parseFloat(price),
-      thumbnail: thumbnail,
+      thumbnail,
     });
     localStorage.setItem('Produtos', JSON.stringify(guardar));
     this.setState({
       itensNoCarrinho: guardar.length,
-    })
+    });
   }
 
   trataCarac(param) {
-    return param.map((item) => `${item.name}: ${item.value_name}`)
+    return param.map((item) => `${item.name}: ${item.value_name}`);
   }
 
-  render () {
+  render() {
     const { listagem, pesquisa, primeiraBusca } = this.state;
     if (primeiraBusca) {
       return (
@@ -97,13 +97,16 @@ class Busca extends Component {
                     title: `${item.title}`,
                     price: `${item.price}`,
                     thumbnail: `${item.thumbnail}`,
-                    attributes: `${this.trataCarac(item.attributes)}`
-                  }
+                    attributes: `${this.trataCarac(item.attributes)}`,
+                  },
                 }}
               >
                 <h2 className="titulo" title={item.title}>{item.title}</h2>
               </Link>
-              <p>R$ {item.price}</p>
+              <p>
+                R$
+                {item.price}
+              </p>
               <img className="itemImage" src={item.thumbnail} alt={item.title} />
               <button
                 type="button"

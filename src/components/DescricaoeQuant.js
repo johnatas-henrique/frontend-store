@@ -10,13 +10,13 @@ class DescricaoeQuant extends React.Component {
     this.decrement = this.decrement.bind(this);
   }
 
-  increment() {
+  increment () {
     this.setState((state) => ({
       quant: state.quant + 1,
     }));
   }
 
-  decrement() {
+  decrement () {
     const { quant } = this.state;
     if (quant === 0) {
       this.setState({
@@ -29,20 +29,22 @@ class DescricaoeQuant extends React.Component {
     }
   }
 
-  salvaItem() {
-    const { id, price, thumbnail, title } = this.props.produtoAtual;
-    let guardar = JSON.parse(localStorage.getItem("Produtos") || "[]");
+  salvaItem () {
+    const {
+      id, price, thumbnail, title,
+    } = this.props.produtoAtual;
+    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     guardar.push({
-      id: id,
-      title: title,
+      id,
+      title,
       price: parseFloat(price),
-      thumbnail: thumbnail,
+      thumbnail,
       quantity: this.state.quant,
     });
-    localStorage.setItem("Produtos", JSON.stringify(guardar));
+    localStorage.setItem('Produtos', JSON.stringify(guardar));
   }
 
-  containerQuant() {
+  containerQuant () {
     return (
       <div className="Quant">
         <h2>Quantidade:</h2>
@@ -53,13 +55,18 @@ class DescricaoeQuant extends React.Component {
     );
   }
 
-  render() {
-    const { id, price, thumbnail, title, attributes } = this.props.produtoAtual;
+  render () {
+    const {
+      id, price, thumbnail, title, attributes,
+    } = this.props.produtoAtual;
     return (
       <div className="container-big">
         <div className="box-Esquerda">
           <h1>{title}</h1>
-          <h2>R${price}</h2>
+          <h2>
+            R$
+            {price}
+          </h2>
           <img src={thumbnail} alt={title} />
         </div>
         <div className="box-Direita">

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import imgCarrinho from '../images/carrinho-aberto-120px.png';
 
 class BotaoQtdECarrinho extends Component {
@@ -10,14 +11,14 @@ class BotaoQtdECarrinho extends Component {
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     this.setState({
       qtdeNoCarrinho: guardar.length,
     });
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.itensNoCarrinho !== prevProps.itensNoCarrinho) {
       this.setState({
         qtdeNoCarrinho: this.props.itensNoCarrinho,
@@ -25,17 +26,21 @@ class BotaoQtdECarrinho extends Component {
     }
   }
 
-  render () {
+  render() {
     const { qtdeNoCarrinho } = this.state;
     return (
       <Link to="/carrinho" className="carrinhoBusca">
-          <img className="imgCarrinho" src={imgCarrinho} alt="Carrinho de Compras" />
-          <span className="valorCarrinho">
-            {qtdeNoCarrinho}
-          </span>
+        <img className="imgCarrinho" src={imgCarrinho} alt="Carrinho de Compras" />
+        <span className="valorCarrinho">
+          {qtdeNoCarrinho}
+        </span>
       </Link>
     );
   }
 }
+
+BotaoQtdECarrinho.propTypes = {
+  itensNoCarrinho: PropTypes.number.isRequired,
+};
 
 export default BotaoQtdECarrinho;

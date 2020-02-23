@@ -42,11 +42,11 @@ a:hover .titulo {
 }
 
 .valorCarrinho {
+  bottom: 38px;
   display: inline-block;
   font-weight: 700;
-  position: relative;
-  bottom: 38px;
   left: 7px;
+  position: relative;
   text-align: center;
   width: 30px;
 }
