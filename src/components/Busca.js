@@ -16,7 +16,9 @@ class Busca extends Component {
       itensNoCarrinho: 0,
     };
     this.valorPesquisa = this.valorPesquisa.bind(this);
+    this.trataCarac = this.trataCarac.bind(this);
   }
+
 
   componentDidUpdate(prevProps, prevState) {
     const linkML = 'https://api.mercadolibre.com/sites/MLB/search';
@@ -31,6 +33,10 @@ class Busca extends Component {
     }
   }
 
+  trataCarac(param) {
+    return param.map((item) => `${item.name}: ${item.value_name}`);
+  }
+
   valorPesquisa(event) {
     const { value } = event.target;
     this.setState({
@@ -39,7 +45,9 @@ class Busca extends Component {
   }
 
   salvaItem(produto) {
-    const { id, title, price, thumbnail } = produto;
+    const {
+      id, title, price, thumbnail,
+    } = produto;
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     guardar.push({
       id,
@@ -53,9 +61,6 @@ class Busca extends Component {
     });
   }
 
-  trataCarac(param) {
-    return param.map((item) => `${item.name}: ${item.value_name}`);
-  }
 
   render() {
     const { listagem, pesquisa, primeiraBusca } = this.state;
@@ -71,7 +76,7 @@ class Busca extends Component {
             />
             <BotaoQtdECarrinho itensNoCarrinho={this.state.itensNoCarrinho} />
           </div>
-          <p>Você ainda não realizou uma busca</p>
+          <p className="buscaZerada">Você ainda não realizou uma busca</p>
         </div>
       );
     }

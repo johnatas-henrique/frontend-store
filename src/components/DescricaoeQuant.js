@@ -58,7 +58,7 @@ class DescricaoeQuant extends React.Component {
 
   render() {
     const {
-      id, price, thumbnail, title, attributes,
+      price, thumbnail, title, attributes,
     } = this.props.produtoAtual;
     return (
       <div className="container-big">
@@ -88,10 +88,11 @@ class DescricaoeQuant extends React.Component {
 
 DescricaoeQuant.propTypes = {
   produtoAtual: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    price: PropTypes.string,
+    thumbnail: PropTypes.string,
+    title: PropTypes.string,
+    attributes: PropTypes.string,
   }).isRequired,
 };
 

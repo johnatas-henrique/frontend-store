@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './Categorias.css';
 import Busca from './Busca';
+import './Categorias.css';
 
 class Categorias extends Component {
   constructor(props) {
@@ -28,6 +28,23 @@ class Categorias extends Component {
     this.setState(() => ({ catID: value }));
   }
 
+  categoriaVazia() {
+    return (
+      <li>
+        <label htmlFor="teste">
+          <input
+            name="categorias"
+            value=""
+            id="teste"
+            type="radio"
+            onClick={() => this.pegaCategoriaEscolhida('')}
+          />
+          Sem Categoria
+        </label>
+      </li>
+    );
+  }
+
   render() {
     const { categorias } = this.state;
     return (
@@ -35,18 +52,7 @@ class Categorias extends Component {
         <aside className="categorias-block">
           <h2>Categorias</h2>
           <ul>
-            <li>
-              <label htmlFor="teste">
-                <input
-                  name="categorias"
-                  value=""
-                  id="teste"
-                  type="radio"
-                  onClick={() => this.pegaCategoriaEscolhida('')}
-                />
-                Sem Categoria
-              </label>
-            </li>
+            {this.categoriaVazia()}
             {categorias.map((categoria) => (
               <li key={categoria.id}>
                 <label htmlFor={categoria.id}>
