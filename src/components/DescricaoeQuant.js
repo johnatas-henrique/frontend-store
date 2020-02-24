@@ -57,9 +57,7 @@ class DescricaoeQuant extends React.Component {
   }
 
   render() {
-    const {
-      price, thumbnail, title, attributes,
-    } = this.props.produtoAtual;
+    const { price, thumbnail, title, attributes } = this.props.produtoAtual;
     return (
       <div className="container-big">
         <div className="box-Esquerda">
@@ -71,8 +69,10 @@ class DescricaoeQuant extends React.Component {
           <img src={thumbnail} alt={title} />
         </div>
         <div className="box-Direita">
-          <ul>Características do Produto:</ul>
-          {attributes}
+          <ul>
+            <h2>Características do Produto:</h2>
+            {attributes.map(attribute => <li key={attribute}>{attribute}</li>)}
+          </ul>
         </div>
         {this.containerQuant()}
         <button
@@ -92,7 +92,7 @@ DescricaoeQuant.propTypes = {
     price: PropTypes.string,
     thumbnail: PropTypes.string,
     title: PropTypes.string,
-    attributes: PropTypes.string,
+    attributes: PropTypes.array,
   }).isRequired,
 };
 

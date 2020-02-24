@@ -12,18 +12,26 @@ class BotaoQtdECarrinho extends Component {
   }
 
   componentDidMount() {
+    this.funcaoProCCMount();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.itensNoCarrinho !== prevProps.itensNoCarrinho) {
+      this.funcaoproCCUpdate();
+    }
+  }
+
+  funcaoProCCMount() {
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     this.setState({
       qtdeNoCarrinho: guardar.length,
     });
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.itensNoCarrinho !== prevProps.itensNoCarrinho) {
-      this.setState({
-        qtdeNoCarrinho: this.props.itensNoCarrinho,
-      });
-    }
+  funcaoproCCUpdate() {
+    this.setState({
+      qtdeNoCarrinho: this.props.itensNoCarrinho,
+    });
   }
 
   render() {

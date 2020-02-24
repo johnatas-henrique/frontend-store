@@ -16,7 +16,6 @@ class Busca extends Component {
       itensNoCarrinho: 0,
     };
     this.valorPesquisa = this.valorPesquisa.bind(this);
-    this.trataCarac = this.trataCarac.bind(this);
   }
 
 
@@ -31,10 +30,6 @@ class Busca extends Component {
           primeiraBusca: false,
         })));
     }
-  }
-
-  trataCarac(param) {
-    return param.map((item) => `${item.name}: ${item.value_name}`);
   }
 
   valorPesquisa(event) {
@@ -63,7 +58,9 @@ class Busca extends Component {
 
 
   render() {
-    const { listagem, pesquisa, primeiraBusca } = this.state;
+    const {
+      listagem, pesquisa, primeiraBusca, itensNoCarrinho,
+    } = this.state;
     if (primeiraBusca) {
       return (
         <div className="main-block">
@@ -74,7 +71,7 @@ class Busca extends Component {
               value={pesquisa}
               onChange={(event) => this.valorPesquisa(event)}
             />
-            <BotaoQtdECarrinho itensNoCarrinho={this.state.itensNoCarrinho} />
+            <BotaoQtdECarrinho itensNoCarrinho={itensNoCarrinho} />
           </div>
           <p className="buscaZerada">Você ainda não realizou uma busca</p>
         </div>
@@ -89,7 +86,7 @@ class Busca extends Component {
             value={pesquisa}
             onChange={(event) => this.valorPesquisa(event)}
           />
-          <BotaoQtdECarrinho itensNoCarrinho={this.state.itensNoCarrinho} />
+          <BotaoQtdECarrinho itensNoCarrinho={itensNoCarrinho} />
         </div>
         <div className="busca">
           {listagem.map((item) => (
@@ -102,7 +99,7 @@ class Busca extends Component {
                     title: `${item.title}`,
                     price: `${item.price}`,
                     thumbnail: `${item.thumbnail}`,
-                    attributes: `${this.trataCarac(item.attributes)}`,
+                    attributes: item.attributes.map((item) => `${item.name}: ${item.value_name}`),
                   },
                 }}
               >

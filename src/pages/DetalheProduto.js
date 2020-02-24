@@ -14,7 +14,12 @@ class DetalheProduto extends React.Component {
     };
   }
 
+
   componentDidMount() {
+    this.funcaoProCCMount();
+  }
+
+  funcaoProCCMount() {
     const { match } = this.props;
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     const produtoAtual = guardar.find((item) => item.id === match.params.id);
