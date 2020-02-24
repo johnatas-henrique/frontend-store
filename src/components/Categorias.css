@@ -4,8 +4,10 @@ li {
 
 .flexy {
   display: flex;
+  width: 100%;
 }
 
-.categoria {
-  border: 2px solid red;
+.categorias-block {
+  border: 2px solid black;
+  width: 25%;
 }

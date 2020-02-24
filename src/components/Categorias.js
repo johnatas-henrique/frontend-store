@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import './Categorias.css';
 import Busca from './Busca';
+import './Categorias.css';
 
 class Categorias extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -29,35 +28,48 @@ class Categorias extends Component {
     this.setState(() => ({ catID: value }));
   }
 
+  categoriaVazia() {
+    return (
+      <li>
+        <label htmlFor="teste">
+          <input
+            name="categorias"
+            value=""
+            id="teste"
+            type="radio"
+            onClick={() => this.pegaCategoriaEscolhida('')}
+          />
+          Sem Categoria
+        </label>
+      </li>
+    );
+  }
+
   render() {
     const { categorias } = this.state;
     return (
       <div className="flexy">
-        <aside className="categoria">
+        <aside className="categorias-block">
           <h2>Categorias</h2>
           <ul>
-            <li><label htmlFor="teste">
-              <input
-                name="categorias" value="" id="teste" type="radio"
-                onClick={() => this.pegaCategoriaEscolhida('')}
-              />
-              Todas as Categorias
-                </label></li>
-            {categorias.map((categoria) =>
+            {this.categoriaVazia()}
+            {categorias.map((categoria) => (
               <li key={categoria.id}>
                 <label htmlFor={categoria.id}>
                   <input
-                    name="categorias" value={categoria.name} id={categoria.id} type="radio"
+                    name="categorias"
+                    value={categoria.name}
+                    id={categoria.id}
+                    type="radio"
                     onClick={() => this.pegaCategoriaEscolhida(categoria.id)}
                   />
                   {categoria.name}
-                </label></li>,
-            )}
+                </label>
+              </li>
+            ))}
           </ul>
         </aside>
-        <main className="busca">
-          <Busca catID={this.state.catID} />
-        </main>
+        <Busca catID={this.state.catID} />
       </div>
     );
   }

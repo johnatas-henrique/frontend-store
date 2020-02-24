@@ -1,3 +1,82 @@
+a {
+  text-decoration: none;
+}
+
+a .titulo {
+  color: rgb(56, 50, 50);
+  text-align: center;
+}
+
+a:hover .titulo {
+  color: black;
+  text-align: center;
+}
+
+.main-block {
+  width: 75%;
+}
+
 .busca {
-  border: 2px solid green;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.caixaBusca {
+  background-image: url('../images/lupa.svg');
+  background-position: 5px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-sizing: border-box;
+  font-size: 20px;
+  height: 40px;
+  padding-left: 50px;
+  width: 90%;
+}
+
+.carrinhoBusca {
+  height: 40px;
+  width: 40px;
+}
+
+.imgCarrinho {
+  height: 40px;
+}
+
+.valorCarrinho {
+  bottom: 38px;
+  display: inline-block;
+  font-weight: 700;
+  left: 7px;
+  position: relative;
+  text-align: center;
+  width: 30px;
+}
+
+a .valorCarrinho {
+  color: black;
+}
+
+a:hover .valorCarrinho {
+  color: green;
+}
+
+.itemBusca {
+  border: 2px solid black;
+  box-sizing: border-box;
+  padding: 0 1%;
+  width: 25%;
+}
+
+.itemBusca:hover {
+  background-color: rgb(216, 202, 202);
+}
+
+.buscaZerada {
+  font-size: 24px;
+  text-align: center;
+}
+
+.itemImage {
+  margin: 0 auto;
 }

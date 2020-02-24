@@ -13,7 +13,7 @@ class FormComment extends React.Component {
 
     this.ratingChange = this.ratingChange.bind(this);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    /* this.handleSubmit = this.handleSubmit.bind(this); */
   }
 
   formChange(event) {
@@ -32,25 +32,25 @@ class FormComment extends React.Component {
         <h2>Avaliações</h2>
         <label htmlFor="email">
           E-mail (opcional):
-            <input name="email" type="text" value={email} onChange={(e) => this.formChange(e)} />
+          <input name="email" type="text" value={email} onChange={(e) => this.formChange(e)} />
         </label>
         <label htmlFor="rating">
           Avaliação:
-            <input
-              type="number"
-              value={rating}
-              onChange={(event) => this.ratingChange(event)}
-              min="0"
-              max="5"
-            />
+          <input
+            type="number"
+            value={rating}
+            onChange={(event) => this.ratingChange(event)}
+            min="0"
+            max="5"
+          />
         </label>
       </div>
     );
   }
 
-  handleSubmit() {
+/*   handleSubmit() {
     console.log(this.state);
-  }
+  } Não aguentava mais esse console.log - Johnatas */
 
   render() {
     const { comment, submit } = this.state;
@@ -58,12 +58,15 @@ class FormComment extends React.Component {
       <form>
         {this.CaixaEmail()}
         <label htmlFor="comment">
-          Adicione um comentário: <br />
+          Adicione um comentário:
+          {' '}
+          <br />
           <textarea name="comment" value={comment} onChange={(event) => this.formChange(event)} />
-        </label><br />
+        </label>
+        <br />
         <button
           type="button"
-          onClick={this.handleSubmit()}
+          /* onClick={this.handleSubmit()} */
         >
           Adicionar comentário
         </button>
