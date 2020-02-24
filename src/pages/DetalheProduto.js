@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import DescricaoeQuant from '../components/DescricaoeQuant';
 import FormComment from '../components/FormComment';
 // import CommentList from '../components/CommentList';
@@ -15,22 +16,28 @@ class DetalheProduto extends React.Component {
 
   componentDidMount() {
     const { match } = this.props;
-    let guardar = JSON.parse(localStorage.getItem("Produtos") || "[]");
-    let produtoAtual = guardar.find((item) => item.id === match.params.id);
+    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    const produtoAtual = guardar.find((item) => item.id === match.params.id);
     this.setState({
-      produtoAtual: produtoAtual,
+      produtoAtual,
     });
   }
 
   render() {
     return (
       <div>
-        <DescricaoeQuant produtoAtual={this.props.location.state}/>
+        <DescricaoeQuant produtoAtual={this.props.location.state} />
         <FormComment />
         <Link to="/">Voltar</Link>
       </div>
     );
   }
 }
+
+DetalheProduto.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.object,
+  }).isRequired,
+};
 
 export default DetalheProduto;

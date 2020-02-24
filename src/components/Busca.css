@@ -4,10 +4,12 @@ a {
 
 a .titulo {
   color: rgb(56, 50, 50);
+  text-align: center;
 }
 
 a:hover .titulo {
   color: black;
+  text-align: center;
 }
 
 .main-block {
@@ -21,7 +23,7 @@ a:hover .titulo {
 }
 
 .caixaBusca {
-  background-image: url(../images/lupa.svg);
+  background-image: url("../images/lupa.svg");
   background-position: 5px;
   background-repeat: no-repeat;
   background-size: contain;
@@ -68,10 +70,6 @@ a:hover .valorCarrinho {
 
 .itemBusca:hover {
   background-color: rgb(216, 202, 202);
-}
-
-.titulo {
-  text-align: center;
 }
 
 .itemImage {

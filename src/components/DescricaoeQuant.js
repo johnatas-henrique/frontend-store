@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class DescricaoeQuant extends React.Component {
   constructor(props) {
@@ -10,13 +11,13 @@ class DescricaoeQuant extends React.Component {
     this.decrement = this.decrement.bind(this);
   }
 
-  increment () {
+  increment() {
     this.setState((state) => ({
       quant: state.quant + 1,
     }));
   }
 
-  decrement () {
+  decrement() {
     const { quant } = this.state;
     if (quant === 0) {
       this.setState({
@@ -29,7 +30,7 @@ class DescricaoeQuant extends React.Component {
     }
   }
 
-  salvaItem () {
+  salvaItem() {
     const {
       id, price, thumbnail, title,
     } = this.props.produtoAtual;
@@ -44,18 +45,18 @@ class DescricaoeQuant extends React.Component {
     localStorage.setItem('Produtos', JSON.stringify(guardar));
   }
 
-  containerQuant () {
+  containerQuant() {
     return (
       <div className="Quant">
         <h2>Quantidade:</h2>
-        <button className="dec" onClick={this.decrement}>-</button>
+        <button type="button" className="dec" onClick={this.decrement}>-</button>
         <h2>{this.state.quant}</h2>
-        <button className="inc" onClick={this.increment}>+</button>
+        <button type="button" className="inc" onClick={this.increment}>+</button>
       </div>
     );
   }
 
-  render () {
+  render() {
     const {
       id, price, thumbnail, title, attributes,
     } = this.props.produtoAtual;
@@ -84,5 +85,14 @@ class DescricaoeQuant extends React.Component {
     );
   }
 }
+
+DescricaoeQuant.propTypes = {
+  produtoAtual: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default DescricaoeQuant;

@@ -3,7 +3,6 @@ import './Categorias.css';
 import Busca from './Busca';
 
 class Categorias extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -34,28 +33,37 @@ class Categorias extends Component {
     return (
       <div className="flexy">
         <aside className="categorias-block">
-            <h2>Categorias</h2>
-            <ul>
-              <li><label htmlFor="teste">
+          <h2>Categorias</h2>
+          <ul>
+            <li>
+              <label htmlFor="teste">
                 <input
-                  name="categorias" value="" id="teste" type="radio"
+                  name="categorias"
+                  value=""
+                  id="teste"
+                  type="radio"
                   onClick={() => this.pegaCategoriaEscolhida('')}
                 />
                 Sem Categoria
-                  </label></li>
-              {categorias.map((categoria) =>
-                <li key={categoria.id}>
-                  <label htmlFor={categoria.id}>
-                    <input
-                      name="categorias" value={categoria.name} id={categoria.id} type="radio"
-                      onClick={() => this.pegaCategoriaEscolhida(categoria.id)}
-                    />
-                    {categoria.name}
-                  </label></li>,
-              )}
-            </ul>
+              </label>
+            </li>
+            {categorias.map((categoria) => (
+              <li key={categoria.id}>
+                <label htmlFor={categoria.id}>
+                  <input
+                    name="categorias"
+                    value={categoria.name}
+                    id={categoria.id}
+                    type="radio"
+                    onClick={() => this.pegaCategoriaEscolhida(categoria.id)}
+                  />
+                  {categoria.name}
+                </label>
+              </li>
+            ))}
+          </ul>
         </aside>
-          <Busca catID={this.state.catID} />
+        <Busca catID={this.state.catID} />
       </div>
     );
   }
