@@ -4,16 +4,20 @@ import CommentList from './CommentList';
 class FormComment extends React.Component {
   constructor(props) {
     super(props);
+    const teste = JSON.parse(localStorage.getItem('Comentários'));
     this.state = {
-      email: '',
-      rating: 0,
-      comment: '',
+      userEmail: '',
+      review: '',
+      result: teste || [{
+        userEmailSubmit: '',
+        reviewSubmit: '',
+      }],
     };
     this.formChange = this.formChange.bind(this);
 
     this.ratingChange = this.ratingChange.bind(this);
 
-    /* this.handleSubmit = this.handleSubmit.bind(this); */
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   formChange(event) {
@@ -23,6 +27,31 @@ class FormComment extends React.Component {
 
   ratingChange(event) {
     this.setState({ rating: parseFloat(event.target.value) });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState((state) => ({
+      result: [...state.result, { userEmailSubmit: state.userEmail, reviewSubmit: state.review }],
+    }));
+  }
+
+  generateReview() {
+    const { result } = this.state;
+    return (
+      <div>
+        {result.map((resultado) => (
+          <div>
+            <p><strong>{resultado.userEmailSubmit}</strong></p>
+            <p>{resultado.reviewSubmit} </p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  componentDidUpdate(){
+    this.generateReview();
   }
 
   CaixaEmail() {
@@ -48,32 +77,27 @@ class FormComment extends React.Component {
     );
   }
 
-/*   handleSubmit() {
-    console.log(this.state);
-  } Não aguentava mais esse console.log - Johnatas */
-
   render() {
     const { comment, submit } = this.state;
     return (
-      <form>
-        {this.CaixaEmail()}
-        <label htmlFor="comment">
-          Adicione um comentário:
-          {' '}
+      <div>
+        <form onSubmit={e => this.handleSubmit(e)}>
+          {this.CaixaEmail()}
+          <label htmlFor="comment">
+            Adicione um comentário:
+            <br />
+            <textarea name="comment" value={comment} maxLength="1000" onChange={(event) => this.formChange(event)} />
+          </label>
           <br />
-          <textarea name="comment" value={comment} onChange={(event) => this.formChange(event)} />
-        </label>
-        <br />
-        <button
-          type="button"
-          /* onClick={this.handleSubmit()} */
-        >
-          Adicionar comentário
+          <button
+            type="submit"
+            onClick={(e) => this.handleSubmit(e)}
+          >
+            Adicionar comentário
         </button>
-        <CommentList
-          Comentario={submit}
-        />
-      </form>
+        </form>
+        {this.generateReview()}
+      </div>
     );
   }
 }
