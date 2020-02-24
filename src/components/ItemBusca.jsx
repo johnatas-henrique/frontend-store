@@ -35,7 +35,7 @@ class ItemBusca extends Component {
 
   render() {
     return (
-      <>
+      <div>
         <div className="busca">
           {this.props.listagem.map((list) => (
             <div className="itemBusca" key={list.id}>
@@ -49,12 +49,13 @@ class ItemBusca extends Component {
             </div>
           ))}
         </div>
-      </>
+      </div>
     );
   }
 }
 
 ItemBusca.propTypes = {
+  callbackCarrinho: PropTypes.func.isRequired,
   listagem: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     price: PropTypes.number,

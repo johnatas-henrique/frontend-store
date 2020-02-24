@@ -17,7 +17,7 @@ class Busca extends Component {
     this.salvaItem = this.salvaItem.bind(this);
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const linkML = 'https://api.mercadolibre.com/sites/MLB/search';
     if (this.props.catID !== prevProps.catID || this.state.pesquisa !== prevState.pesquisa) {
       fetch(`${linkML}?category=${this.props.catID}&q=${this.state.pesquisa}`,
@@ -30,14 +30,14 @@ class Busca extends Component {
     }
   }
 
-  valorPesquisa (event) {
+  valorPesquisa(event) {
     const { value } = event.target;
     this.setState({
       pesquisa: value,
     });
   }
 
-  salvaItem (produto) {
+  salvaItem(produto) {
     const {
       id, title, price, thumbnail,
     } = produto;
@@ -51,7 +51,7 @@ class Busca extends Component {
     });
   }
 
-  topoDoComponente () {
+  topoDoComponente() {
     const { pesquisa, itensNoCarrinho } = this.state;
     return (
       <div className="flexy">
@@ -66,7 +66,7 @@ class Busca extends Component {
     );
   }
 
-  render () {
+  render() {
     const { listagem, buscaVazia } = this.state;
     if (buscaVazia) {
       return (
@@ -79,7 +79,7 @@ class Busca extends Component {
     return (
       <div className="main-block">
         {this.topoDoComponente()}
-        <ItemBusca 
+        <ItemBusca
           listagem={listagem}
           callbackCarrinho={this.salvaItem}
         />
