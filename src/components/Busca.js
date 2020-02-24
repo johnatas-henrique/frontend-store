@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ItemBusca from './ItemBusca';
 import BotaoQtdECarrinho from './BotaoQtdECarrinho';
 import './Busca.css';
-/* import BotaoCarrinho from './BotaoCarrinho';
-import ImgCarrinho from '../images/carrinho.png'; */
 
 class Busca extends Component {
   constructor(props) {
@@ -12,14 +10,14 @@ class Busca extends Component {
     this.state = {
       listagem: [],
       pesquisa: '',
-      primeiraBusca: true,
+      buscaVazia: true,
       itensNoCarrinho: 0,
     };
     this.valorPesquisa = this.valorPesquisa.bind(this);
+    this.salvaItem = this.salvaItem.bind(this);
   }
 
-
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate (prevProps, prevState) {
     const linkML = 'https://api.mercadolibre.com/sites/MLB/search';
     if (this.props.catID !== prevProps.catID || this.state.pesquisa !== prevState.pesquisa) {
       fetch(`${linkML}?category=${this.props.catID}&q=${this.state.pesquisa}`,
@@ -27,28 +25,25 @@ class Busca extends Component {
         .then((response) => response.json())
         .then((data) => this.setState(() => ({
           listagem: data.results,
-          primeiraBusca: false,
+          buscaVazia: false,
         })));
     }
   }
 
-  valorPesquisa(event) {
+  valorPesquisa (event) {
     const { value } = event.target;
     this.setState({
       pesquisa: value,
     });
   }
 
-  salvaItem(produto) {
+  salvaItem (produto) {
     const {
       id, title, price, thumbnail,
     } = produto;
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     guardar.push({
-      id,
-      title,
-      price: parseFloat(price),
-      thumbnail,
+      id, title, price: parseFloat(price), thumbnail,
     });
     localStorage.setItem('Produtos', JSON.stringify(guardar));
     this.setState({
@@ -56,69 +51,38 @@ class Busca extends Component {
     });
   }
 
+  topoDoComponente () {
+    const { pesquisa, itensNoCarrinho } = this.state;
+    return (
+      <div className="flexy">
+        <input
+          className="caixaBusca"
+          type="text"
+          value={pesquisa}
+          onChange={(event) => this.valorPesquisa(event)}
+        />
+        <BotaoQtdECarrinho itensNoCarrinho={itensNoCarrinho} />
+      </div>
+    );
+  }
 
-  render() {
-    const {
-      listagem, pesquisa, primeiraBusca, itensNoCarrinho,
-    } = this.state;
-    if (primeiraBusca) {
+  render () {
+    const { listagem, buscaVazia } = this.state;
+    if (buscaVazia) {
       return (
         <div className="main-block">
-          <div className="flexy">
-            <input
-              className="caixaBusca"
-              type="text"
-              value={pesquisa}
-              onChange={(event) => this.valorPesquisa(event)}
-            />
-            <BotaoQtdECarrinho itensNoCarrinho={itensNoCarrinho} />
-          </div>
+          {this.topoDoComponente()}
           <p className="buscaZerada">Você ainda não realizou uma busca</p>
         </div>
       );
     }
     return (
       <div className="main-block">
-        <div className="flexy">
-          <input
-            className="caixaBusca"
-            type="text"
-            value={pesquisa}
-            onChange={(event) => this.valorPesquisa(event)}
-          />
-          <BotaoQtdECarrinho itensNoCarrinho={itensNoCarrinho} />
-        </div>
-        <div className="busca">
-          {listagem.map((item) => (
-            <div className="itemBusca" key={item.id}>
-              <Link
-                to={{
-                  pathname: `/${item.id}`,
-                  state: {
-                    id: `${item.id}`,
-                    title: `${item.title}`,
-                    price: `${item.price}`,
-                    thumbnail: `${item.thumbnail}`,
-                    attributes: item.attributes.map((item) => `${item.name}: ${item.value_name}`),
-                  },
-                }}
-              >
-                <h2 className="titulo" title={item.title}>{item.title}</h2>
-              </Link>
-              <p>
-                R$
-                {item.price}
-              </p>
-              <img className="itemImage" src={item.thumbnail} alt={item.title} />
-              <button
-                type="button"
-                onClick={() => this.salvaItem(item)}
-              >
-                Adicionar ao Carrinho
-              </button>
-            </div>
-          ))}
-        </div>
+        {this.topoDoComponente()}
+        <ItemBusca 
+          listagem={listagem}
+          callbackCarrinho={this.salvaItem}
+        />
       </div>
     );
   }

@@ -31,9 +31,7 @@ class DescricaoeQuant extends React.Component {
   }
 
   salvaItem() {
-    const {
-      id, price, thumbnail, title,
-    } = this.props.produtoAtual;
+    const { id, price, thumbnail, title } = this.props.produtoAtual;
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     guardar.push({
       id,
@@ -57,7 +55,9 @@ class DescricaoeQuant extends React.Component {
   }
 
   render() {
-    const { price, thumbnail, title, attributes } = this.props.produtoAtual;
+    const {
+      price, thumbnail, title, attributes,
+    } = this.props.produtoAtual;
     return (
       <div className="container-big">
         <div className="box-Esquerda">
@@ -71,7 +71,7 @@ class DescricaoeQuant extends React.Component {
         <div className="box-Direita">
           <ul>
             <h2>Características do Produto:</h2>
-            {attributes.map(attribute => <li key={attribute}>{attribute}</li>)}
+            {attributes.map((attribute) => <li key={attribute}>{attribute}</li>)}
           </ul>
         </div>
         {this.containerQuant()}
