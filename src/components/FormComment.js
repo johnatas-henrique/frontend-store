@@ -20,20 +20,20 @@ class FormComment extends React.Component {
   componentDidMount() {
     const commSalvos = JSON.parse(localStorage.getItem(`Comentários_${this.props.id}`) || '[]');
     if (commSalvos.length > 0) {
-      this.setaOState(commSalvos)
+      this.setaOState(commSalvos);
     }
+  }
+
+  componentWillUnmount() {
+    const { result } = this.state;
+    localStorage.setItem(`Comentários_${this.props.id}`, JSON.stringify(result));
   }
 
   setaOState(parametro) {
     this.setState({
       listaVazia: false,
       result: parametro,
-    })
-  }
-
-  componentWillUnmount() {
-    const { result } = this.state;
-    localStorage.setItem(`Comentários_${this.props.id}`, JSON.stringify(result));
+    });
   }
 
   handleChange(event) {
