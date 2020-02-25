@@ -30,7 +30,7 @@ class Carrinho extends Component {
     return (
       <div className="Carrinho">
         <h1>Carrinho de Compras</h1>
-        <ItemCarrinho 
+        <ItemCarrinho
           itensCarrinho={itensCarrinho}
           carrinhoVazio={carrinhoVazio}
         />
