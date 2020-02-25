@@ -5,7 +5,7 @@ class DescricaoeQuant extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quant: 0,
+      quant: 1,
     };
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);

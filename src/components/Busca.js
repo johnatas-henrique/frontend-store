@@ -41,14 +41,23 @@ class Busca extends Component {
     const {
       id, title, price, thumbnail,
     } = produto;
-    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
-    guardar.push({
-      id, title, price: parseFloat(price), thumbnail,
-    });
-    localStorage.setItem('Produtos', JSON.stringify(guardar));
-    this.setState({
-      itensNoCarrinho: guardar.length,
-    });
+    const quant = 1;
+    let guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    const itemExistente = (guardar.find((item) => item.id === id));
+    if (itemExistente) {
+      itemExistente.quant += 1;
+      guardar = guardar.filter((item) => item.id !== id);
+      guardar.push(itemExistente);
+      localStorage.setItem('Produtos', JSON.stringify(guardar));
+    } else {
+      guardar.push({
+        id, title, price: parseFloat(price), thumbnail, quant,
+      });
+      localStorage.setItem('Produtos', JSON.stringify(guardar));
+      this.setState({
+        itensNoCarrinho: guardar.length,
+      });
+    }
   }
 
   topoDoComponente() {
