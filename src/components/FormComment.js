@@ -1,23 +1,27 @@
 import React from 'react';
-import CommentList from './CommentList';
 
 class FormComment extends React.Component {
   constructor(props) {
     super(props);
-    const commSalvos = JSON.parse(localStorage.getItem('Comentários'));
     this.state = {
+      listaVazia: true,
       userEmail: '',
       review: '',
       rating: '',
-      result: commSalvos || [{
-        userEmailSubmit: '',
-        reviewSubmit: '',
-        ratingSubmit: '',
-      }],
+      result: [],
     };
     this.review = this.review.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount(){
+    const commSalvos = JSON.parse(localStorage.getItem(`Comentários_${this.props.id}`) || '[]');
+    if (commSalvos.length > 0){
+    this.setState({
+      listaVazia: false,
+      result: commSalvos})
+    }
   }
 
   handleChange(event) {
@@ -34,16 +38,24 @@ class FormComment extends React.Component {
   handleFormSubmit() {
     this.setState((state) => ({
       result: [...state.result, { userEmailSubmit: state.userEmail, reviewSubmit: state.review, ratingSubmit: state.rating }],
+      listaVazia: false,
     }));
   }
 
   generateReview() {
-    const { result } = this.state;
+    const { result, listaVazia } = this.state;
+    if (listaVazia) {
+      return (
+        <div>
+          <p>Seja o primeiro a comentar!</p>
+        </div>
+      )
+    } 
     return (
       <div>
         {result.map((resultado) => (
-          <div>
-            <p><strong>{resultado.userEmailSubmit}</strong> (nota:{resultado.ratingSubmit})</p>
+          <div key={`${resultado.userEmailSubmit} ${resultado.ratingSubmit} ${resultado.reviewSubmit}`}>
+            <p><strong>{resultado.userEmailSubmit}</strong> Nota: {resultado.ratingSubmit}</p>
             <p>{resultado.reviewSubmit} </p>
           </div>
         ))}
@@ -91,9 +103,12 @@ class FormComment extends React.Component {
     );
   }
 
-  render() {
+  componentWillUnmount(){
     const { result } = this.state;
-    localStorage.setItem('Comentários', JSON.stringify(result));
+    localStorage.setItem(`Comentários_${this.props.id}`, JSON.stringify(result));
+  }
+
+  render() {
     return (
       <div>
         {this.review()}

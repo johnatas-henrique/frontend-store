@@ -32,7 +32,7 @@ class DetalheProduto extends React.Component {
     return (
       <div>
         <DescricaoeQuant produtoAtual={this.props.location.state} />
-        <FormComment />
+        <FormComment id={this.props.location.state.id} />
         <Link to="/">Voltar</Link>
       </div>
     );
