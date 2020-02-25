@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import CarrinhoVazio from './CarrinhoVazio';
 
 class ItemCarrinho extends Component {
-
   render() {
     const { itensCarrinho, carrinhoVazio } = this.props;
     if (carrinhoVazio) return <CarrinhoVazio />;
@@ -12,11 +11,18 @@ class ItemCarrinho extends Component {
         {itensCarrinho.map((list) => (
           <div className="itemBusca" key={list.id}>
             {list.title}
+            <div>
+              <img className="itemImage" src={list.thumbnail} alt={list.title} />
+            </div>
+            <hr />
             <p>
-              R$
+              Quantidade:&nbsp;
+              {list.quant}
+            </p>
+            <p>
+              R$&nbsp;
               {list.price}
             </p>
-            <img className="itemImage" src={list.thumbnail} alt={list.title} />
           </div>
         ))}
       </div>
