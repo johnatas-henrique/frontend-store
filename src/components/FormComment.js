@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class FormComment extends React.Component {
   constructor(props) {
@@ -13,15 +14,26 @@ class FormComment extends React.Component {
     this.review = this.review.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.setaOState = this.setaOState.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const commSalvos = JSON.parse(localStorage.getItem(`Comentários_${this.props.id}`) || '[]');
-    if (commSalvos.length > 0){
+    if (commSalvos.length > 0) {
+      this.setaOState(commSalvos)
+    }
+  }
+
+  setaOState(parametro) {
     this.setState({
       listaVazia: false,
-      result: commSalvos})
-    }
+      result: parametro,
+    })
+  }
+
+  componentWillUnmount() {
+    const { result } = this.state;
+    localStorage.setItem(`Comentários_${this.props.id}`, JSON.stringify(result));
   }
 
   handleChange(event) {
@@ -37,9 +49,27 @@ class FormComment extends React.Component {
 
   handleFormSubmit() {
     this.setState((state) => ({
-      result: [...state.result, { userEmailSubmit: state.userEmail, reviewSubmit: state.review, ratingSubmit: state.rating }],
+      result: [...state.result, {
+        userEmailSubmit: state.userEmail,
+        reviewSubmit: state.review,
+        ratingSubmit: state.rating,
+      }],
       listaVazia: false,
     }));
+  }
+
+  inputEmail() {
+    const { userEmail } = this.state;
+    return (
+      <input
+        type="text"
+        className="userEmail"
+        name="userEmail"
+        placeholder="E-mail"
+        value={userEmail}
+        onChange={this.handleChange}
+      />
+    );
   }
 
   generateReview() {
@@ -49,8 +79,8 @@ class FormComment extends React.Component {
         <div>
           <p>Seja o primeiro a comentar!</p>
         </div>
-      )
-    } 
+      );
+    }
     return (
       <div>
         {result.map((resultado) => (
@@ -64,18 +94,11 @@ class FormComment extends React.Component {
   }
 
   review() {
-    const {userEmail, rating, review} = this.state;
+    const { rating, review } = this.state;
     return (
       <div className="reviewBox">
         <form onSubmit={this.handleFormSubmit}>
-          <input
-            type="text"
-            className="userEmail"
-            name="userEmail"
-            placeholder="E-mail"
-            value={userEmail}
-            onChange={this.handleChange}
-          />
+          {this.inputEmail()}
           <label htmlFor="rating">
             Avaliação:
             <input
@@ -85,7 +108,7 @@ class FormComment extends React.Component {
               min="0"
               max="5"
             />
-          </label><br/>
+          </label><br />
           <textarea
             type="text"
             className="review"
@@ -103,11 +126,6 @@ class FormComment extends React.Component {
     );
   }
 
-  componentWillUnmount(){
-    const { result } = this.state;
-    localStorage.setItem(`Comentários_${this.props.id}`, JSON.stringify(result));
-  }
-
   render() {
     return (
       <div>
@@ -117,5 +135,9 @@ class FormComment extends React.Component {
     );
   }
 }
+
+FormComment.propTypes = {
+  id: PropTypes.string.isRequired,
+};
 
 export default FormComment;
