@@ -19,9 +19,9 @@ class DescricaoeQuant extends React.Component {
 
   decrement() {
     const { quant } = this.state;
-    if (quant === 0) {
+    if (quant === 1) {
       this.setState({
-        quant: 0,
+        quant: 1,
       });
     } else {
       this.setState((state) => ({
