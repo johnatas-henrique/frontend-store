@@ -4,35 +4,36 @@ import CommentList from './CommentList';
 class FormComment extends React.Component {
   constructor(props) {
     super(props);
-    const teste = JSON.parse(localStorage.getItem('Comentários'));
+    const commSalvos = JSON.parse(localStorage.getItem('Comentários'));
     this.state = {
       userEmail: '',
       review: '',
-      result: teste || [{
+      rating: '',
+      result: commSalvos || [{
         userEmailSubmit: '',
         reviewSubmit: '',
+        ratingSubmit: '',
       }],
     };
-    this.formChange = this.formChange.bind(this);
-
-    this.ratingChange = this.ratingChange.bind(this);
-
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.review = this.review.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  formChange(event) {
+  handleChange(event) {
     const { value, name } = event.target;
-    this.setState({ [name]: value });
+    this.setState(() => {
+      this.setState({ [name]: value });
+    });
   }
 
   ratingChange(event) {
     this.setState({ rating: parseFloat(event.target.value) });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleFormSubmit() {
     this.setState((state) => ({
-      result: [...state.result, { userEmailSubmit: state.userEmail, reviewSubmit: state.review }],
+      result: [...state.result, { userEmailSubmit: state.userEmail, reviewSubmit: state.review, ratingSubmit: state.rating }],
     }));
   }
 
@@ -42,7 +43,7 @@ class FormComment extends React.Component {
       <div>
         {result.map((resultado) => (
           <div>
-            <p><strong>{resultado.userEmailSubmit}</strong></p>
+            <p><strong>{resultado.userEmailSubmit}</strong> (nota:{resultado.ratingSubmit})</p>
             <p>{resultado.reviewSubmit} </p>
           </div>
         ))}
@@ -50,52 +51,52 @@ class FormComment extends React.Component {
     );
   }
 
-  componentDidUpdate(){
-    this.generateReview();
-  }
-
-  CaixaEmail() {
-    const { email, rating } = this.state;
+  review() {
+    const {userEmail, rating, review} = this.state;
     return (
-      <div>
-        <h2>Avaliações</h2>
-        <label htmlFor="email">
-          E-mail (opcional):
-          <input name="email" type="text" value={email} onChange={(e) => this.formChange(e)} />
-        </label>
-        <label htmlFor="rating">
-          Avaliação:
+      <div className="reviewBox">
+        <form onSubmit={this.handleFormSubmit}>
           <input
-            type="number"
-            value={rating}
-            onChange={(event) => this.ratingChange(event)}
-            min="0"
-            max="5"
+            type="text"
+            className="userEmail"
+            name="userEmail"
+            placeholder="E-mail"
+            value={userEmail}
+            onChange={this.handleChange}
           />
-        </label>
+          <label htmlFor="rating">
+            Avaliação:
+            <input
+              type="number"
+              value={rating}
+              onChange={(event) => this.ratingChange(event)}
+              min="0"
+              max="5"
+            />
+          </label><br/>
+          <textarea
+            type="text"
+            className="review"
+            name="review"
+            placeholder="Mensagem (opcional)"
+            value={review}
+            maxLength="1000"
+            onChange={this.handleChange}
+          />
+        </form>
+        <button type="submit" className="reviewButton" onClick={this.handleFormSubmit}>
+          Avaliar
+      </button>
       </div>
     );
   }
 
   render() {
-    const { comment, submit } = this.state;
+    const { result } = this.state;
+    localStorage.setItem('Comentários', JSON.stringify(result));
     return (
       <div>
-        <form onSubmit={e => this.handleSubmit(e)}>
-          {this.CaixaEmail()}
-          <label htmlFor="comment">
-            Adicione um comentário:
-            <br />
-            <textarea name="comment" value={comment} maxLength="1000" onChange={(event) => this.formChange(event)} />
-          </label>
-          <br />
-          <button
-            type="submit"
-            onClick={(e) => this.handleSubmit(e)}
-          >
-            Adicionar comentário
-        </button>
-        </form>
+        {this.review()}
         {this.generateReview()}
       </div>
     );
