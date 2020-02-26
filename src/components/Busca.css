@@ -16,6 +16,11 @@ a:hover .titulo {
   width: 75%;
 }
 
+.flexBusca {
+  box-sizing: border-box;
+  display: flex;
+}
+
 .busca {
   box-sizing: border-box;
   display: flex;
@@ -27,7 +32,10 @@ a:hover .titulo {
   background-position: 5px;
   background-repeat: no-repeat;
   background-size: contain;
+  border: 4px solid black;
+  border-radius: 20px;
   box-sizing: border-box;
+  flex-shrink: 1;
   font-size: 20px;
   height: 40px;
   padding-left: 50px;
@@ -36,6 +44,7 @@ a:hover .titulo {
 
 .carrinhoBusca {
   height: 40px;
+  margin-left: 2%;
   width: 40px;
 }
 
@@ -73,8 +82,11 @@ a:hover .valorCarrinho {
 }
 
 .buscaZerada {
-  font-size: 24px;
+  font-size: 36px;
+  font-weight: 700;
+  margin-top: 50px;
   text-align: center;
+  width: 95%;
 }
 
 .itemImage {

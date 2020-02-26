@@ -63,7 +63,7 @@ class Busca extends Component {
   topoDoComponente() {
     const { pesquisa, itensNoCarrinho } = this.state;
     return (
-      <div className="flexy">
+      <div className="flexBusca">
         <input
           className="caixaBusca"
           type="text"
