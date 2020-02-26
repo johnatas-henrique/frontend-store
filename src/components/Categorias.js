@@ -8,7 +8,6 @@ class Categorias extends Component {
     this.state = {
       categorias: [],
       catID: '',
-      listagem: [],
     };
     this.listaCategorias = this.listaCategorias.bind(this);
     this.pegaCategoriaEscolhida = this.pegaCategoriaEscolhida.bind(this);
@@ -30,9 +29,10 @@ class Categorias extends Component {
 
   categoriaVazia() {
     return (
-      <li>
+      <li className="categoriaLi">
         <label htmlFor="teste">
           <input
+            className="categoriaInput"
             name="categorias"
             value=""
             id="teste"
@@ -46,17 +46,18 @@ class Categorias extends Component {
   }
 
   render() {
-    const { categorias } = this.state;
+    const { categorias, catID } = this.state;
     return (
-      <div className="flexy">
-        <aside className="categorias-block">
-          <h2>Categorias</h2>
+      <div className="flexCategorias">
+        <aside className="categoriasBlock">
+          <h2 className="categoriaTitle">Categorias</h2>
           <ul>
             {this.categoriaVazia()}
             {categorias.map((categoria) => (
-              <li key={categoria.id}>
+              <li className="categoriaLi" key={categoria.id}>
                 <label htmlFor={categoria.id}>
                   <input
+                    className="categoriaInput"
                     name="categorias"
                     value={categoria.name}
                     id={categoria.id}
@@ -69,7 +70,7 @@ class Categorias extends Component {
             ))}
           </ul>
         </aside>
-        <Busca catID={this.state.catID} />
+        <Busca catID={catID} />
       </div>
     );
   }
