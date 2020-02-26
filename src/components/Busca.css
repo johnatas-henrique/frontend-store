@@ -2,16 +2,6 @@ a {
   text-decoration: none;
 }
 
-a .titulo {
-  color: rgb(56, 50, 50);
-  text-align: center;
-}
-
-a:hover .titulo {
-  color: black;
-  text-align: center;
-}
-
 .main-block {
   width: 75%;
 }
