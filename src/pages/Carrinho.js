@@ -34,7 +34,10 @@ class Carrinho extends Component {
           itensCarrinho={itensCarrinho}
           carrinhoVazio={carrinhoVazio}
         />
-        <Link to="/">Voltar</Link>
+        <div className="links">
+          <Link to="/">Voltar</Link>
+          <Link to="/carrinho/checkout">Checkout</Link>
+        </div>
       </div>
     );
   }

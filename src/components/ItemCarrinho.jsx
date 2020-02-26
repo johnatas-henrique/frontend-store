@@ -5,6 +5,10 @@ import CarrinhoVazio from './CarrinhoVazio';
 class ItemCarrinho extends Component {
   render() {
     const { itensCarrinho, carrinhoVazio } = this.props;
+    if (itensCarrinho.quant === 'undefined') {
+      return itensCarrinho.quant === 1;
+    }
+    console.log(itensCarrinho.quant);
     if (carrinhoVazio) return <CarrinhoVazio />;
     return (
       <div>
