@@ -1,9 +1,9 @@
 a .titulo {
     color: rgb(56, 50, 50);
     text-align: center;
-  }
-  
-  a:hover .titulo {
+}
+
+a:hover .titulo {
     color: black;
     text-align: center;
-  }
+}

@@ -26,14 +26,14 @@ class Busca extends Component {
     const linkML = 'https://api.mercadolibre.com/sites/MLB/search';
     const { pesquisa } = this.state;
     const { catID } = this.props;
-    if (catID !== prevProps.catID || pesquisa !== prevState.pesquisa) {
-      if (pesquisa === '') {
-        return this.fetchCategoria(linkML);
-      }
-      if (catID === '') {
-        return this.fetchProduto(linkML);
-      }
-      return this.fetchTotal(linkML);
+    if (pesquisa === '' && catID !== prevProps.catID) {
+      this.fetchCategoria(linkML);
+    }
+    if (catID === '' && pesquisa !== prevState.pesquisa) {
+      this.fetchProduto(linkML);
+    }
+    if (catID !== '' && pesquisa !== '') {
+      this.fetchTotal(linkML);
     }
   }
 
