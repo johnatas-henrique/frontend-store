@@ -1,0 +1,9 @@
+.centralizaFigura {
+    margin: 0 auto;
+    text-align: center;
+    width: 30%;
+}
+
+.caixaVazia {
+    width: 100%;
+}
