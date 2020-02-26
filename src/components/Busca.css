@@ -32,9 +32,9 @@ a:hover .titulo {
   background-position: 5px;
   background-repeat: no-repeat;
   background-size: contain;
-  box-sizing: border-box;
   border: 4px solid black;
   border-radius: 20px;
+  box-sizing: border-box;
   flex-shrink: 1;
   font-size: 20px;
   height: 40px;
