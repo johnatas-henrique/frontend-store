@@ -1,9 +1,41 @@
-a .titulo {
-    color: rgb(56, 50, 50);
-    text-align: center;
+.containerBusca {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-a:hover .titulo {
-    color: black;
-    text-align: center;
+.itemBusca {
+  border: 2px solid black;
+  border-radius: 20px;
+  box-sizing: border-box;
+  margin: 30px 1%;
+  overflow: hidden;
+  width: 30%;
+}
+
+.itemTeste {
+  background-color: yellow;
+}
+
+.itemTitulo {
+  background-color: rgb(216, 216, 216);
+  padding: 0 5%;
+}
+
+a .itemTituloTexto {
+  color: black;
+  text-align: center;
+}
+
+.itemCorpo {
+  padding: 0 5%;
+  text-align: center;
+}
+
+.itemImage {
+  width: 50%;
+}
+
+.itemBotaoAdd {
+  margin-bottom: 10px;
 }
