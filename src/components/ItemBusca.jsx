@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './ItemBusca.css';
 
 class ItemBusca extends Component {
   static linkETitle(list) {
@@ -17,7 +18,7 @@ class ItemBusca extends Component {
           },
         }}
       >
-        <h2 className="titulo" title={list.title}>{list.title}</h2>
+        <h2 className="itemTituloTexto">{list.title}</h2>
       </Link>
     );
   }
@@ -25,6 +26,7 @@ class ItemBusca extends Component {
   botaoSalvaItem(list) {
     return (
       <button
+        className="itemBotaoAdd"
         type="button"
         onClick={() => this.props.callbackCarrinho(list)}
       >
@@ -36,16 +38,20 @@ class ItemBusca extends Component {
   render() {
     return (
       <div>
-        <div className="busca">
+        <div className="containerBusca">
           {this.props.listagem.map((list) => (
             <div className="itemBusca" key={list.id}>
-              {ItemBusca.linkETitle(list)}
-              <p>
-                R$
-                {list.price}
-              </p>
-              <img className="itemImage" src={list.thumbnail} alt={list.title} />
-              {this.botaoSalvaItem(list)}
+              <div className="itemTitulo">
+                {ItemBusca.linkETitle(list)}
+              </div>
+              <div className="itemCorpo">
+                <img className="itemImage" src={list.thumbnail} alt={list.title} />
+                <p>
+                  R$
+                  {list.price}
+                </p>
+                {this.botaoSalvaItem(list)}
+              </div>
             </div>
           ))}
         </div>

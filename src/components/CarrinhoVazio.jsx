@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import CaixaJpg from '../images/caixa-vazia.jpg';
+import './CarrinhoVazio.css';
 
 class CarrinhoVazio extends Component {
   render() {
     return (
-      <div>
+      <div className="centralizaFigura">
         <img
           className="caixaVazia"
           src={CaixaJpg}

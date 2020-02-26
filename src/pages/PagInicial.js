@@ -5,10 +5,11 @@ import Categorias from '../components/Categorias';
 class PagInicial extends Component {
   render() {
     return (
-      <div className="Carrinho">
-        <h1>Lista Produtos</h1>
+      <div>
         <Categorias />
-        <Link to="/carrinho">Carrinho</Link>
+        <Link to="/carrinho">
+          Carrinho
+        </Link>
       </div>
     );
   }

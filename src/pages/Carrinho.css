@@ -1,0 +1,14 @@
+.setaVoltarCarrinho {
+  height: 50px;
+  margin: 20px 0 20px 25px;
+}
+
+.flexCarrinhoTitulo {
+  align-items: center;
+  display: flex;
+  height: 50px;
+}
+
+.imgCarrinhoTitulo {
+  height: 100%;
+}

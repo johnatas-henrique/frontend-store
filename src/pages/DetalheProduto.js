@@ -34,6 +34,7 @@ class DetalheProduto extends React.Component {
         <DescricaoeQuant produtoAtual={this.props.location.state} />
         <FormComment id={this.props.location.state.id} />
         <Link to="/">Voltar</Link>
+        <Link to="/carrinho">Carrinho</Link>
       </div>
     );
   }

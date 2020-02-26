@@ -2,24 +2,13 @@ a {
   text-decoration: none;
 }
 
-a .titulo {
-  color: rgb(56, 50, 50);
-  text-align: center;
-}
-
-a:hover .titulo {
-  color: black;
-  text-align: center;
-}
-
 .main-block {
   width: 75%;
 }
 
-.busca {
+.flexBusca {
   box-sizing: border-box;
   display: flex;
-  flex-wrap: wrap;
 }
 
 .caixaBusca {
@@ -27,7 +16,10 @@ a:hover .titulo {
   background-position: 5px;
   background-repeat: no-repeat;
   background-size: contain;
+  border: 2px solid black;
+  border-radius: 20px;
   box-sizing: border-box;
+  flex-shrink: 1;
   font-size: 20px;
   height: 40px;
   padding-left: 50px;
@@ -36,6 +28,7 @@ a:hover .titulo {
 
 .carrinhoBusca {
   height: 40px;
+  margin-left: 2%;
   width: 40px;
 }
 
@@ -61,22 +54,10 @@ a:hover .valorCarrinho {
   color: green;
 }
 
-.itemBusca {
-  border: 2px solid black;
-  box-sizing: border-box;
-  padding: 0 1%;
-  width: 25%;
-}
-
-.itemBusca:hover {
-  background-color: rgb(216, 202, 202);
-}
-
 .buscaZerada {
-  font-size: 24px;
+  font-size: 36px;
+  font-weight: 700;
+  margin-top: 50px;
   text-align: center;
-}
-
-.itemImage {
-  margin: 0 auto;
+  width: 95%;
 }
