@@ -9,32 +9,111 @@ class Busca extends Component {
     super(props);
     this.state = {
       listagem: [],
+      inputPesquisa: '',
       pesquisa: '',
+      resultadoVazio: false,
       buscaVazia: true,
       itensNoCarrinho: 0,
     };
     this.valorPesquisa = this.valorPesquisa.bind(this);
     this.salvaItem = this.salvaItem.bind(this);
+    this.fetchCategoria = this.fetchCategoria.bind(this);
+    this.fetchProduto = this.fetchProduto.bind(this);
+    this.fetchTotal = this.fetchTotal.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
     const linkML = 'https://api.mercadolibre.com/sites/MLB/search';
-    if (this.props.catID !== prevProps.catID || this.state.pesquisa !== prevState.pesquisa) {
-      fetch(`${linkML}?category=${this.props.catID}&q=${this.state.pesquisa}`,
-        { method: 'GET' })
-        .then((response) => response.json())
-        .then((data) => this.setState(() => ({
-          listagem: data.results,
-          buscaVazia: false,
-        })));
+    const { pesquisa } = this.state;
+    const { catID } = this.props;
+    if (pesquisa === '' && catID !== prevProps.catID) {
+      this.fetchCategoria(linkML);
     }
+    if (catID === '' && pesquisa !== prevState.pesquisa) {
+      this.fetchProduto(linkML);
+    }
+    if (catID !== '' && pesquisa !== '') {
+      this.fetchTotal(linkML);
+    }
+  }
+
+  fetchCategoria(linkML) {
+    fetch(`${linkML}?category=${this.props.catID}`,
+      { method: 'GET' })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.results.length === 0) {
+          this.setState(() => ({
+            listagem: data.results,
+            buscaVazia: false,
+            resultadoVazio: true,
+          }));
+        } else {
+          this.setState(() => ({
+            listagem: data.results,
+            buscaVazia: false,
+            resultadoVazio: false,
+          }));
+        }
+      });
+  }
+
+  fetchProduto(linkML) {
+    fetch(`${linkML}?q=${this.state.pesquisa}`,
+      { method: 'GET' })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.results.length === 0) {
+          this.setState(() => ({
+            listagem: data.results,
+            buscaVazia: false,
+            resultadoVazio: true,
+          }));
+        } else {
+          this.setState(() => ({
+            listagem: data.results,
+            buscaVazia: false,
+            resultadoVazio: false,
+          }));
+        }
+      });
+  }
+
+  fetchTotal(linkML) {
+    fetch(`${linkML}?category=${this.props.catID}&q=${this.state.pesquisa}`,
+      { method: 'GET' })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.results.length === 0) {
+          this.setState(() => ({
+            listagem: data.results,
+            buscaVazia: false,
+            resultadoVazio: true,
+          }));
+        } else {
+          this.setState(() => ({
+            listagem: data.results,
+            buscaVazia: false,
+            resultadoVazio: false,
+          }));
+        }
+      });
   }
 
   valorPesquisa(event) {
     const { value } = event.target;
     this.setState({
-      pesquisa: value,
+      inputPesquisa: value,
     });
+  }
+
+  passaPesquisa(event) {
+    const { value } = event.target;
+    if (event.key === 'Enter') {
+      this.setState(() => ({
+        pesquisa: value,
+      }));
+    }
   }
 
   salvaItem(produto) {
@@ -61,14 +140,15 @@ class Busca extends Component {
   }
 
   topoDoComponente() {
-    const { pesquisa, itensNoCarrinho } = this.state;
+    const { inputPesquisa, itensNoCarrinho } = this.state;
     return (
       <div className="flexBusca">
         <input
           className="caixaBusca"
           type="text"
-          value={pesquisa}
+          value={inputPesquisa}
           onChange={(event) => this.valorPesquisa(event)}
+          onKeyPress={(event) => this.passaPesquisa(event)}
         />
         <BotaoQtdECarrinho itensNoCarrinho={itensNoCarrinho} />
       </div>
@@ -76,12 +156,20 @@ class Busca extends Component {
   }
 
   render() {
-    const { listagem, buscaVazia } = this.state;
+    const { listagem, buscaVazia, resultadoVazio } = this.state;
     if (buscaVazia) {
       return (
         <div className="main-block">
           {this.topoDoComponente()}
           <p className="buscaZerada">Você ainda não realizou uma busca</p>
+        </div>
+      );
+    }
+    if (resultadoVazio) {
+      return (
+        <div className="main-block">
+          {this.topoDoComponente()}
+          <p className="buscaZerada">Nenhum produto foi encontrado</p>
         </div>
       );
     }
