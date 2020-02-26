@@ -47,8 +47,8 @@ class ItemBusca extends Component {
               <div className="itemCorpo">
                 <img className="itemImage" src={list.thumbnail} alt={list.title} />
                 <p>
-                  R$
-                  {list.price}
+                  {new Intl.NumberFormat('pt-BR',
+                    { style: 'currency', currency: 'BRL' }).format(list.price)}
                 </p>
                 {this.botaoSalvaItem(list)}
               </div>

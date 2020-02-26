@@ -24,6 +24,7 @@
 
 a .itemTituloTexto {
   color: black;
+  font-size: 20px;
   text-align: center;
 }
 
@@ -37,5 +38,15 @@ a .itemTituloTexto {
 }
 
 .itemBotaoAdd {
+  background-color: white;
+  border: 1px solid black;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0.8em 0.5em;
   margin-bottom: 10px;
+}
+
+.itemBotaoAdd:hover {
+  background-color: rgb(72, 72, 72);
+  color: white;
 }
