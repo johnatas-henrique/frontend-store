@@ -20,9 +20,8 @@ class ItemCarrinho extends Component {
   }
 
   componentDidMount() {
-    this.setState(() => ({
-      quant: this.props.quant,
-    }));
+    const { quant } = this.props;
+    this.changeQuant(quant);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -30,6 +29,12 @@ class ItemCarrinho extends Component {
     if (quant !== prevState.quant) {
       this.atualizaPreco(quant);
     }
+  }
+
+  changeQuant(parametro) {
+    this.setState(({
+      quant: parametro,
+    }));
   }
 
   atualizaPreco(parametro) {
@@ -42,7 +47,7 @@ class ItemCarrinho extends Component {
   salvaNovaQuant() {
     const { id } = this.props;
     const { quant } = this.state;
-    let guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     const itemExistente = (guardar.find((item) => item.id === id));
     if (itemExistente) {
       salvaLocal(itemExistente, guardar, quant, id);
@@ -138,7 +143,6 @@ ItemCarrinho.propTypes = {
   quant: PropTypes.number.isRequired,
   carrinhoVazio: PropTypes.bool.isRequired,
   price: PropTypes.number.isRequired,
-  newPrice: PropTypes.number.isRequired,
 };
 
 
