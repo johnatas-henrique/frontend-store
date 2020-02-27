@@ -12,6 +12,7 @@ class BotaoQtdECarrinho extends Component {
   }
 
   componentDidMount() {
+    console.log('montou');
     this.funcaoProCCMount();
   }
 
@@ -23,14 +24,18 @@ class BotaoQtdECarrinho extends Component {
 
   funcaoProCCMount() {
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    console.log(guardar);
     this.setState({
-      qtdeNoCarrinho: guardar.length,
+      qtdeNoCarrinho: guardar.reduce((acc, item) => item.quant + acc, 0),
     });
   }
 
   funcaoproCCUpdate() {
+    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    console.log(guardar);
+    const sumQuant = guardar.reduce((acc, item) => item.quant + acc, 0);
     this.setState({
-      qtdeNoCarrinho: this.props.itensNoCarrinho,
+      qtdeNoCarrinho: sumQuant,
     });
   }
 
