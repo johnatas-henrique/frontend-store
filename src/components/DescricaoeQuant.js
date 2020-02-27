@@ -37,7 +37,7 @@ class DescricaoeQuant extends React.Component {
   salvaItem() {
     const { id, price, thumbnail, title } = this.props.produtoAtual;
     const { quant } = this.state;
-    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    let guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     const itemExistente = (guardar.find((item) => item.id === id));
     if (itemExistente) {
       salvaLocal(itemExistente, guardar, quant, id);
