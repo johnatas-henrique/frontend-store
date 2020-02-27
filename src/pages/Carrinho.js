@@ -29,7 +29,7 @@ class Carrinho extends Component {
   }
 
   render() {
-    const { itensCarrinho, carrinhoVazio } = this.state;
+    const { itensCarrinho } = this.state;
     console.log(itensCarrinho);
     return (
       <div className="Carrinho">

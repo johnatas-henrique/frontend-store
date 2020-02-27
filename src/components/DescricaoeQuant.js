@@ -1,4 +1,5 @@
 import React from 'react';
+import salvaLocal from './salvaLocal';
 import PropTypes from 'prop-types';
 
 class DescricaoeQuant extends React.Component {
@@ -39,10 +40,7 @@ class DescricaoeQuant extends React.Component {
     let guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     const itemExistente = (guardar.find((item) => item.id === id));
     if (itemExistente) {
-      itemExistente.quant = quant;
-      guardar = guardar.filter((item) => item.id !== id);
-      guardar.push(itemExistente);
-      localStorage.setItem('Produtos', JSON.stringify(guardar));
+      salvaLocal(itemExistente, guardar, quant, id);
     } else {
       guardar.push({
         id,
@@ -60,7 +58,14 @@ class DescricaoeQuant extends React.Component {
     return (
       <div className="Quant">
         <h2>Quantidade:</h2>
-        <button type="button" className="dec" onClick={this.decrement} disabled={disabled}>-</button>
+        <button
+          type="button"
+          className="dec"
+          onClick={this.decrement}
+          disabled={disabled}
+        >
+          -
+        </button>
         <h2>{quant}</h2>
         <button type="button" className="inc" onClick={this.increment}>+</button>
       </div>

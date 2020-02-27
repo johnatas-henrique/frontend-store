@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import salvaLocal from './salvaLocal';
 import CarrinhoVazio from './CarrinhoVazio';
 
 class ItemCarrinho extends Component {
@@ -15,10 +16,10 @@ class ItemCarrinho extends Component {
     this.decrement = this.decrement.bind(this);
     this.salvaNovaQuant = this.salvaNovaQuant.bind(this);
     this.removeProduct = this.removeProduct.bind(this);
+    this.atualizaPreco = this.atualizaPreco.bind(this);
   }
 
   componentDidMount() {
-    const { quant } = this.state;
     this.setState(() => ({
       quant: this.props.quant,
     }));
@@ -27,11 +28,15 @@ class ItemCarrinho extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { quant } = this.state;
     if (quant !== prevState.quant) {
-      this.setState((state) => ({
-        newPrice: state.quant * this.props.price,
-      }));
-      this.salvaNovaQuant();
+      this.atualizaPreco(quant);
     }
+  }
+
+  atualizaPreco(parametro) {
+    this.setState(({
+      newPrice: parametro * this.props.price,
+    }));
+    this.salvaNovaQuant();
   }
 
   salvaNovaQuant() {
@@ -40,10 +45,7 @@ class ItemCarrinho extends Component {
     let guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     const itemExistente = (guardar.find((item) => item.id === id));
     if (itemExistente) {
-      itemExistente.quant = quant;
-      guardar = guardar.filter((item) => item.id !== id);
-      guardar.push(itemExistente);
-      localStorage.setItem('Produtos', JSON.stringify(guardar));
+      salvaLocal(itemExistente, guardar, quant, id);
     }
   }
 
@@ -84,9 +86,30 @@ class ItemCarrinho extends Component {
     }
   }
 
+  buttons() {
+    const { quant, disabled } = this.state;
+    return (
+      <div>
+        <button
+          type="button"
+          className="dec"
+          onClick={this.decrement}
+          disabled={disabled}
+        >
+          -
+        </button>
+        <h2>
+          Quantidade:&nbsp;
+          {quant}
+        </h2>
+        <button type="button" className="inc" onClick={this.increment}>+</button>
+      </div>
+    );
+  }
+
   render() {
     const { title, image, price, carrinhoVazio } = this.props;
-    const { quant, disabled, newPrice, shown } = this.state;
+    const { newPrice, shown } = this.state;
     if (carrinhoVazio) return <CarrinhoVazio />;
     return (
       <div>
@@ -97,12 +120,7 @@ class ItemCarrinho extends Component {
             <img className="itemImage" src={image} alt={title} />
           </div>
           <hr />
-          <button type="button" className="dec" onClick={this.decrement} disabled={disabled}>-</button>
-          <h2>
-            Quantidade:&nbsp;
-            {quant}
-          </h2>
-          <button type="button" className="inc" onClick={this.increment}>+</button>
+          {this.buttons()}
           <p>
             R$&nbsp;
             {price} - {newPrice}
@@ -114,14 +132,13 @@ class ItemCarrinho extends Component {
 }
 
 ItemCarrinho.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  quant: PropTypes.number.isRequired,
   carrinhoVazio: PropTypes.bool.isRequired,
-  itensCarrinho: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    price: PropTypes.number,
-    thumbnail: PropTypes.string,
-    title: PropTypes.string,
-    attributes: PropTypes.array,
-  })).isRequired,
+  price: PropTypes.number.isRequired,
+  newPrice: PropTypes.number.isRequired,
 };
 
 
