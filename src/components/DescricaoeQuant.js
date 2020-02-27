@@ -1,6 +1,6 @@
 import React from 'react';
-import salvaLocal from './salvaLocal';
 import PropTypes from 'prop-types';
+import salvaLocal from './salvaLocal';
 
 class DescricaoeQuant extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class DescricaoeQuant extends React.Component {
   salvaItem() {
     const { id, price, thumbnail, title } = this.props.produtoAtual;
     const { quant } = this.state;
-    let guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     const itemExistente = (guardar.find((item) => item.id === id));
     if (itemExistente) {
       salvaLocal(itemExistente, guardar, quant, id);
