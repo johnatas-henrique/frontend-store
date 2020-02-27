@@ -14,7 +14,7 @@ function App() {
         <Route exact path="/" component={PagInicial} />
         <Route exact path="/carrinho" component={Carrinho} />
         <Route path="/carrinho/checkout" component={Checkout} />
-        <Route path="/:id" component={Product} />
+        <Route path="/products/:id_of_product" component={Product} />
       </Switch>
     </BrowserRouter>
   );
