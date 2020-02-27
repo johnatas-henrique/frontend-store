@@ -1,8 +1,8 @@
-export default function salvaLocal(array1, array2, quantState, id) {
-  const firstArray = array1;
-  let secondArray = array2;
-  firstArray.quant = quantState;
-  secondArray = secondArray.filter((item) => item.id !== id);
-  secondArray.push(firstArray);
-  localStorage.setItem('Produtos', JSON.stringify(secondArray));
+export default function salvaLocal(obj1, obj2, quantState, id) {
+  const firstObject = obj1;
+  let secondObject = obj2;
+  firstObject.quant = quantState;
+  secondObject = secondObject.filter((item) => item.id !== id);
+  secondObject.push(firstObject);
+  localStorage.setItem('Produtos', JSON.stringify(secondObject));
 }
