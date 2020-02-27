@@ -35,14 +35,23 @@ class DescricaoeQuant extends React.Component {
 
   salvaItem() {
     const { id, price, thumbnail, title } = this.props.produtoAtual;
-    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
-    guardar.push({
-      id,
-      title,
-      price: parseFloat(price),
-      thumbnail,
-      quantity: this.state.quant,
-    });
+    const { quant } = this.state;
+    let guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    const itemExistente = (guardar.find((item) => item.id === id));
+    if (itemExistente) {
+      itemExistente.quant = quant;
+      guardar = guardar.filter((item) => item.id !== id);
+      guardar.push(itemExistente);
+      localStorage.setItem('Produtos', JSON.stringify(guardar));
+    } else {
+      guardar.push({
+        id,
+        title,
+        price: parseFloat(price),
+        thumbnail,
+        quantity: this.state.quant,
+      });
+    }
     localStorage.setItem('Produtos', JSON.stringify(guardar));
   }
 
