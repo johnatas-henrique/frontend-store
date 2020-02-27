@@ -20,8 +20,8 @@ class ItemCarrinho extends Component {
               {list.quant}
             </p>
             <p>
-              R$&nbsp;
-              {list.price}
+              {new Intl.NumberFormat('pt-BR',
+                { style: 'currency', currency: 'BRL' }).format(list.price)}
             </p>
           </div>
         ))}
