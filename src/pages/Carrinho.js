@@ -30,6 +30,7 @@ class Carrinho extends Component {
 
   render() {
     const { itensCarrinho, carrinhoVazio } = this.state;
+    console.log(itensCarrinho);
     return (
       <div className="Carrinho">
         <Link to="/">
@@ -41,10 +42,16 @@ class Carrinho extends Component {
             Carrinho de Compras
           </h1>
         </div>
-        <ItemCarrinho
-          itensCarrinho={itensCarrinho}
-          carrinhoVazio={carrinhoVazio}
-        />
+        {itensCarrinho.map((item) => (
+          <ItemCarrinho
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            image={item.thumbnail}
+            price={item.price}
+            quant={item.quant}
+          />
+        ))}
         <div className="links">
           <Link to="/">Voltar</Link>
           <Link to="/carrinho/checkout">Checkout</Link>
