@@ -30,7 +30,6 @@ class Carrinho extends Component {
 
   render() {
     const { itensCarrinho } = this.state;
-    console.log(itensCarrinho);
     return (
       <div className="Carrinho">
         <Link to="/">

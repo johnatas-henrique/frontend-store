@@ -2,41 +2,21 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class Checkout extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listaVazia: false,
-    };
-    this.setaListaVazia = this.setaListaVazia.bind(this);
-  }
-
-  componentDidMount() {
-    const prodSalvos = JSON.parse(localStorage.getItem('Produtos'));
-    if (prodSalvos.length === 0) {
-      this.setaListaVazia(true);
-    }
-  }
-
-  setaListaVazia(parametro) {
-    this.setState({
-      listaVazia: parametro,
-    });
-  }
 
   render() {
-    const { listaVazia } = this.state;
-    if (listaVazia) {
-      return (
-        <div className="Carrinho">
-          <h1>Pagina Checkout</h1>
-          <h2>O Carrinho está vazio</h2>
-          <Link to="/">Continuar comprando</Link>
-        </div>
-      );
-    }
+    const products = JSON.parse(localStorage.getItem('Produtos'));
+    console.log(products);
     return (
       <div>
         <h1>Confira os produtos!</h1>
+        {products.map((item) => (
+          <div className="product-checkout">
+            <p>{item.title}</p>
+            <p>{item.quant}</p>
+            <p>{item.quant * item.price}</p>
+            <img src={item.thumbnail} alt={item.title}/>
+          </div>
+        ))}
         <Link to="/">Continuar comprando</Link>
       </div>
     );
