@@ -23,9 +23,12 @@ class BotaoQtdECarrinho extends Component {
 
   funcaoProCCMount() {
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
-    this.setState({
-      qtdeNoCarrinho: guardar.length,
-    });
+    if (guardar.length > 0) {
+      this.setState({
+        qtdeNoCarrinho: guardar
+          .reduce((acum, curr) => parseInt(acum, 10) + parseInt(curr.quant, 10), 0),
+      });
+    }
   }
 
   funcaoproCCUpdate() {
