@@ -128,7 +128,8 @@ class ItemCarrinho extends Component {
           {this.buttons()}
           <p>
             R$&nbsp;
-            {price} - {newPrice}
+            {new Intl.NumberFormat('pt-BR',
+              { style: 'currency', currency: 'BRL' }).format(price)} - {newPrice}
           </p>
         </div>
       </div>

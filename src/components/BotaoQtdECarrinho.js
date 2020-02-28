@@ -12,7 +12,6 @@ class BotaoQtdECarrinho extends Component {
   }
 
   componentDidMount() {
-    console.log('montou');
     this.funcaoProCCMount();
   }
 
@@ -24,18 +23,14 @@ class BotaoQtdECarrinho extends Component {
 
   funcaoProCCMount() {
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
-    console.log(guardar);
     this.setState({
-      qtdeNoCarrinho: guardar.reduce((acc, item) => item.quant + acc, 0),
+      qtdeNoCarrinho: guardar.length,
     });
   }
 
   funcaoproCCUpdate() {
-    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
-    console.log(guardar);
-    const sumQuant = guardar.reduce((acc, item) => item.quant + acc, 0);
     this.setState({
-      qtdeNoCarrinho: sumQuant,
+      qtdeNoCarrinho: this.props.itensNoCarrinho,
     });
   }
 
@@ -51,9 +46,7 @@ class BotaoQtdECarrinho extends Component {
     );
   }
 }
-
 BotaoQtdECarrinho.propTypes = {
   itensNoCarrinho: PropTypes.number.isRequired,
 };
-
 export default BotaoQtdECarrinho;
