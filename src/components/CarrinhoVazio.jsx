@@ -6,7 +6,7 @@ import SetaVoltarCarrinho from '../images/seta-voltar.png';
 import './CarrinhoVazio.css';
 
 class CarrinhoVazio extends Component {
-  render () {
+  render() {
     return (
       <div>
         <Link to="/">

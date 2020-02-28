@@ -56,13 +56,7 @@ class Carrinho extends Component {
   render() {
     const { itensCarrinho, carrinhoVazio } = this.state;
 
-    if (carrinhoVazio) {
-      return (
-        <div>
-          <CarrinhoVazio />
-        </div>
-      );
-    }
+    if (carrinhoVazio) return <CarrinhoVazio />;
 
     return (
       <div className="Carrinho">
@@ -71,9 +65,7 @@ class Carrinho extends Component {
         </Link>
         <div className="flexCarrinhoTitulo">
           <img className="imgCarrinhoTitulo" src={ImgCarrinho} alt="" />
-          <h1 className="tituloCarrinho">
-            Carrinho de Compras
-          </h1>
+          <h1 className="tituloCarrinho">Carrinho de Compras</h1>
         </div>
         {itensCarrinho.map((item) => (
           <ItemCarrinho
@@ -86,10 +78,7 @@ class Carrinho extends Component {
             callbackCarrinhoVazio={this.testaCarrinhoVazio}
           />
         ))}
-        <div className="links">
-          <Link to="/">Voltar</Link>
-          <Link to="/carrinho/checkout">Checkout</Link>
-        </div>
+        <Link to="/carrinho/checkout">Checkout</Link>
       </div>
     );
   }

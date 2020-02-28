@@ -137,6 +137,7 @@ class ItemCarrinho extends Component {
 }
 
 ItemCarrinho.propTypes = {
+  callbackCarrinhoVazio: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
