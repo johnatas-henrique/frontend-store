@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import HeaderCarrinho from '../components/HeaderCarrinho';
 import ItemCarrinho from '../components/ItemCarrinho';
 import CarrinhoVazio from '../components/CarrinhoVazio';
-import ImgCarrinho from '../images/carrinho.png';
-import SetaVoltarCarrinho from '../images/seta-voltar.png';
 import './Carrinho.css';
 
 class Carrinho extends Component {
@@ -60,13 +59,7 @@ class Carrinho extends Component {
 
     return (
       <div className="Carrinho">
-        <Link to="/">
-          <img className="setaVoltarCarrinho" src={SetaVoltarCarrinho} alt="" />
-        </Link>
-        <div className="flexCarrinhoTitulo">
-          <img className="imgCarrinhoTitulo" src={ImgCarrinho} alt="" />
-          <h1 className="tituloCarrinho">Carrinho de Compras</h1>
-        </div>
+        <HeaderCarrinho />
         {itensCarrinho.map((item) => (
           <ItemCarrinho
             key={item.id}
