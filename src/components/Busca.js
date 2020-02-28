@@ -32,7 +32,9 @@ class Busca extends Component {
     if (catID === '' && pesquisa !== prevState.pesquisa) {
       this.fetchProduto(linkML);
     }
-    if (catID !== '' && pesquisa !== '') {
+    if ((catID !== '' && pesquisa !== '')
+        && (pesquisa !== prevState.pesquisa || catID !== prevProps.catID)
+    ) {
       this.fetchTotal(linkML);
     }
   }
@@ -80,6 +82,7 @@ class Busca extends Component {
   }
 
   fetchTotal(linkML) {
+    console.log('passei aqui');
     fetch(`${linkML}?category=${this.props.catID}&q=${this.state.pesquisa}`,
       { method: 'GET' })
       .then((response) => response.json())

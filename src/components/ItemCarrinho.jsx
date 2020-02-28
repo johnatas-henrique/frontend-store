@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import salvaLocal from './salvaLocal';
-import CarrinhoVazio from './CarrinhoVazio';
 
 class ItemCarrinho extends Component {
   constructor(props) {
@@ -67,6 +66,7 @@ class ItemCarrinho extends Component {
         quant: 0,
         shown: true,
       }));
+      this.props.callbackCarrinhoVazio();
     }
   }
 
@@ -113,9 +113,8 @@ class ItemCarrinho extends Component {
   }
 
   render() {
-    const { title, image, price, carrinhoVazio } = this.props;
+    const { title, image, price } = this.props;
     const { newPrice, shown } = this.state;
-    if (carrinhoVazio) return <CarrinhoVazio />;
     return (
       <div>
         <div className="itemBusca" hidden={shown}>
@@ -142,7 +141,6 @@ ItemCarrinho.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   quant: PropTypes.number.isRequired,
-  carrinhoVazio: PropTypes.bool.isRequired,
   price: PropTypes.number.isRequired,
 };
 

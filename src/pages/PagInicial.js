@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Categorias from '../components/Categorias';
 
 class PagInicial extends Component {
@@ -7,9 +6,6 @@ class PagInicial extends Component {
     return (
       <div>
         <Categorias />
-        <Link to="/carrinho">
-          Carrinho
-        </Link>
       </div>
     );
   }
