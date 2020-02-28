@@ -35,7 +35,8 @@ class Product extends React.Component {
   salvaQtdItem() {
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     this.setState({
-      itensNoCarrinho: guardar.length,
+      itensNoCarrinho: guardar
+        .reduce((acum, curr) => parseInt(acum, 10) + parseInt(curr.quant, 10), 0),
     });
   }
 

@@ -83,10 +83,11 @@ class Busca extends Component {
         id, title, price: parseFloat(price), thumbnail, quant,
       });
       localStorage.setItem('Produtos', JSON.stringify(guardar));
-      this.setState({
-        itensNoCarrinho: guardar.length,
-      });
     }
+    this.setState({
+      itensNoCarrinho: guardar
+        .reduce((acum, curr) => parseInt(acum, 10) + parseInt(curr.quant, 10), 0),
+    });
   }
 
   topoDoComponente() {
