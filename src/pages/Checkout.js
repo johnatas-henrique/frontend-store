@@ -20,16 +20,16 @@ class Checkout extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
+/*   handleChange(event) {
     const { value, name } = event.target;
     this.setState(() => {
       this.setState({ [name]: value });
     });
-  }
+  } */
 
   generateform(array) {
     return (
-      array.map((item, index) => (
+      array.map((item) => (
         <input
           type="text"
           className="form-checkout"
