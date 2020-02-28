@@ -66,13 +66,14 @@ class DescricaoeQuant extends React.Component {
             -
           </button>
           <h2 className="textQuant">{quant}</h2>
-          <button type="button" className="btnQuant" onClick={this.increment}>
-            +
-          </button>
-          <button type="button" className="quantProdutoAdd" onClick={() => {
-            this.salvaItem();
-            this.props.callbackItem();
-          }}
+          <button type="button" className="btnQuant" onClick={this.increment}>+</button>
+          <button
+            type="button"
+            className="quantProdutoAdd"
+            onClick={() => {
+              this.salvaItem();
+              this.props.callbackItem();
+            }}
           >
             Adicionar ao Carrinho
           </button>
@@ -109,6 +110,7 @@ class DescricaoeQuant extends React.Component {
 }
 
 DescricaoeQuant.propTypes = {
+  callbackItem: PropTypes.func.isRequired,
   produtoAtual: PropTypes.shape({
     id: PropTypes.string,
     price: PropTypes.string,
