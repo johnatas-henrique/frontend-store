@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
-import CaixaJpg from '../images/caixa-vazia.jpg';
+import HeaderCarrinho from './HeaderCarrinho';
+import CaixaJpg from '../images/caixa-vazia.png';
+
 import './CarrinhoVazio.css';
 
 class CarrinhoVazio extends Component {
   render() {
     return (
-      <div className="centralizaFigura">
-        <img
-          className="caixaVazia"
-          src={CaixaJpg}
-          alt="Caixa Vazia"
-        />
-        <h2>Seu carrinho está vazio</h2>
+      <div>
+        <HeaderCarrinho />
+        <div className="centralizaFigura">
+          <img
+            className="caixaVazia"
+            src={CaixaJpg}
+            alt="Caixa Vazia"
+          />
+          <h2>Seu carrinho está vazio</h2>
+        </div>
       </div>
     );
   }

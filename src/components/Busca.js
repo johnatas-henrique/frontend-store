@@ -17,8 +17,6 @@ class Busca extends Component {
     };
     this.valorPesquisa = this.valorPesquisa.bind(this);
     this.salvaItem = this.salvaItem.bind(this);
-    this.fetchCategoria = this.fetchCategoria.bind(this);
-    this.fetchProduto = this.fetchProduto.bind(this);
     this.fetchTotal = this.fetchTotal.bind(this);
   }
 
@@ -26,57 +24,9 @@ class Busca extends Component {
     const linkML = 'https://api.mercadolibre.com/sites/MLB/search';
     const { pesquisa } = this.state;
     const { catID } = this.props;
-    if (pesquisa === '' && catID !== prevProps.catID) {
-      this.fetchCategoria(linkML);
-    }
-    if (catID === '' && pesquisa !== prevState.pesquisa) {
-      this.fetchProduto(linkML);
-    }
-    if (catID !== '' && pesquisa !== '') {
+    if (pesquisa !== prevState.pesquisa || catID !== prevProps.catID) {
       this.fetchTotal(linkML);
     }
-  }
-
-  fetchCategoria(linkML) {
-    fetch(`${linkML}?category=${this.props.catID}`,
-      { method: 'GET' })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.results.length === 0) {
-          this.setState(() => ({
-            listagem: data.results,
-            buscaVazia: false,
-            resultadoVazio: true,
-          }));
-        } else {
-          this.setState(() => ({
-            listagem: data.results,
-            buscaVazia: false,
-            resultadoVazio: false,
-          }));
-        }
-      });
-  }
-
-  fetchProduto(linkML) {
-    fetch(`${linkML}?q=${this.state.pesquisa}`,
-      { method: 'GET' })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.results.length === 0) {
-          this.setState(() => ({
-            listagem: data.results,
-            buscaVazia: false,
-            resultadoVazio: true,
-          }));
-        } else {
-          this.setState(() => ({
-            listagem: data.results,
-            buscaVazia: false,
-            resultadoVazio: false,
-          }));
-        }
-      });
   }
 
   fetchTotal(linkML) {
