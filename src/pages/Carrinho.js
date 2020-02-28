@@ -4,6 +4,7 @@ import ItemCarrinho from '../components/ItemCarrinho';
 import ImgCarrinho from '../images/carrinho.png';
 import SetaVoltarCarrinho from '../images/seta-voltar.png';
 import './Carrinho.css';
+import CarrinhoVazio from '../components/CarrinhoVazio';
 
 class Carrinho extends Component {
   constructor(props) {
@@ -29,7 +30,23 @@ class Carrinho extends Component {
   }
 
   render() {
-    const { itensCarrinho } = this.state;
+    const { itensCarrinho, carrinhoVazio } = this.state;
+
+    if (carrinhoVazio) {
+      return (
+        <div>
+          <Link to="/">
+            <img className="setaVoltarCarrinho" src={SetaVoltarCarrinho} alt="" />
+          </Link>
+          <div className="flexCarrinhoTitulo">
+            <img className="imgCarrinhoTitulo" src={ImgCarrinho} alt="" />
+            <h1 className="tituloCarrinho">Carrinho de Compras</h1>
+          </div>
+          <CarrinhoVazio />
+        </div>
+      );
+    }
+
     return (
       <div className="Carrinho">
         <Link to="/">
