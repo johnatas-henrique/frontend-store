@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import BotaoQtdECarrinho from '../components/BotaoQtdECarrinho';
 import DescricaoeQuant from '../components/DescricaoeQuant';
 import FormComment from '../components/FormComment';
+import SetaVoltarProduct from '../images/seta-voltar.png';
+import './Product.css';
 // import CommentList from '../components/CommentList';
 // utilizar este componente aqui ou no FormComment.
 
@@ -11,9 +14,10 @@ class Product extends React.Component {
     super(props);
     this.state = {
       produtoAtual: {},
+      itensNoCarrinho: 0,
     };
+    this.salvaQtdItem = this.salvaQtdItem.bind(this);
   }
-
 
   componentDidMount() {
     this.funcaoProCCMount();
@@ -28,13 +32,28 @@ class Product extends React.Component {
     });
   }
 
+  salvaQtdItem() {
+    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    this.setState({
+      itensNoCarrinho: guardar.length,
+    });
+  }
+
   render() {
+    const { itensNoCarrinho } = this.state;
     return (
       <div>
-        <DescricaoeQuant produtoAtual={this.props.location.state} />
+        <div className="flexProduct">
+          <Link to="/">
+            <img className="setaVoltarProduct" src={SetaVoltarProduct} alt="" />
+          </Link>
+          <BotaoQtdECarrinho itensNoCarrinho={itensNoCarrinho} />
+        </div>
+        <DescricaoeQuant
+          produtoAtual={this.props.location.state}
+          callbackItem={this.salvaQtdItem}
+        />
         <FormComment id={this.props.location.state.id} />
-        <Link to="/">Voltar</Link>
-        <Link to="/carrinho">Carrinho</Link>
       </div>
     );
   }

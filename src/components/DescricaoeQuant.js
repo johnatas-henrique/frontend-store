@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import salvaLocal from './salvaLocal';
+import './DescricaoeQuant.css';
 
 class DescricaoeQuant extends React.Component {
   constructor(props) {
@@ -35,7 +36,9 @@ class DescricaoeQuant extends React.Component {
   }
 
   salvaItem() {
-    const { id, price, thumbnail, title } = this.props.produtoAtual;
+    const {
+      id, price, thumbnail, title,
+    } = this.props.produtoAtual;
     const { quant } = this.state;
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     const itemExistente = (guardar.find((item) => item.id === id));
@@ -47,7 +50,7 @@ class DescricaoeQuant extends React.Component {
         title,
         price: parseFloat(price),
         thumbnail,
-        quantity: this.state.quant,
+        quant: this.state.quant,
       });
     }
     localStorage.setItem('Produtos', JSON.stringify(guardar));
@@ -56,18 +59,24 @@ class DescricaoeQuant extends React.Component {
   containerQuant() {
     const { disabled, quant } = this.state;
     return (
-      <div className="Quant">
-        <h2>Quantidade:</h2>
-        <button
-          type="button"
-          className="dec"
-          onClick={this.decrement}
-          disabled={disabled}
-        >
-          -
-        </button>
-        <h2>{quant}</h2>
-        <button type="button" className="inc" onClick={this.increment}>+</button>
+      <div className="containerQuant">
+        <h2 className="tituloQuant">Quantidade</h2>
+        <div className="flexQuant">
+          <button type="button" className="btnQuant" onClick={this.decrement} disabled={disabled}>
+            -
+          </button>
+          <h2 className="textQuant">{quant}</h2>
+          <button type="button" className="btnQuant" onClick={this.increment}>
+            +
+          </button>
+          <button type="button" className="quantProdutoAdd" onClick={() => {
+            this.salvaItem();
+            this.props.callbackItem();
+          }}
+          >
+            Adicionar ao Carrinho
+          </button>
+        </div>
       </div>
     );
   }
@@ -77,28 +86,23 @@ class DescricaoeQuant extends React.Component {
       price, thumbnail, title, attributes,
     } = this.props.produtoAtual;
     return (
-      <div className="container-big">
-        <div className="box-Esquerda">
-          <h1>{title}</h1>
-          <h2>
-            R$
-            {price}
-          </h2>
-          <img src={thumbnail} alt={title} />
-        </div>
-        <div className="box-Direita">
-          <ul>
-            <h2>Características do Produto:</h2>
-            {attributes.map((attribute) => <li key={attribute}>{attribute}</li>)}
-          </ul>
+      <div className="containerDescricao">
+        <h1 className="tituloDesc">
+          {title}
+          {' - '}
+          {new Intl.NumberFormat('pt-BR',
+            { style: 'currency', currency: 'BRL' }).format(price)}
+        </h1>
+        <div className="flexDescricao">
+          <div className="boxEsquerda">
+            <img className="imgDesc" src={thumbnail} alt={title} />
+          </div>
+          <div className="boxDireita">
+            <h2 className="tituloBoxDireita">Especificações técnicas</h2>
+            <ul>{attributes.map((item) => <li className="liDesc" key={item}>{item}</li>)}</ul>
+          </div>
         </div>
         {this.containerQuant()}
-        <button
-          type="button"
-          onClick={() => this.salvaItem()}
-        >
-          Adicionar ao Carrinho
-        </button>
       </div>
     );
   }
