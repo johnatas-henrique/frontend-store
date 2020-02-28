@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import salvaLocal from './salvaLocal';
 
 class DescricaoeQuant extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       quant: 1,
+      disabled: true,
     };
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
@@ -14,15 +16,17 @@ class DescricaoeQuant extends React.Component {
   increment() {
     this.setState((state) => ({
       quant: state.quant + 1,
+      disabled: false,
     }));
   }
 
   decrement() {
     const { quant } = this.state;
-    if (quant === 1) {
-      this.setState({
+    if (quant <= 2) {
+      this.setState((state) => ({
         quant: 1,
-      });
+        disabled: !state.disabled,
+      }));
     } else {
       this.setState((state) => ({
         quant: state.quant - 1,
@@ -32,23 +36,37 @@ class DescricaoeQuant extends React.Component {
 
   salvaItem() {
     const { id, price, thumbnail, title } = this.props.produtoAtual;
+    const { quant } = this.state;
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
-    guardar.push({
-      id,
-      title,
-      price: parseFloat(price),
-      thumbnail,
-      quantity: this.state.quant,
-    });
+    const itemExistente = (guardar.find((item) => item.id === id));
+    if (itemExistente) {
+      salvaLocal(itemExistente, guardar, quant, id);
+    } else {
+      guardar.push({
+        id,
+        title,
+        price: parseFloat(price),
+        thumbnail,
+        quantity: this.state.quant,
+      });
+    }
     localStorage.setItem('Produtos', JSON.stringify(guardar));
   }
 
   containerQuant() {
+    const { disabled, quant } = this.state;
     return (
       <div className="Quant">
         <h2>Quantidade:</h2>
-        <button type="button" className="dec" onClick={this.decrement}>-</button>
-        <h2>{this.state.quant}</h2>
+        <button
+          type="button"
+          className="dec"
+          onClick={this.decrement}
+          disabled={disabled}
+        >
+          -
+        </button>
+        <h2>{quant}</h2>
         <button type="button" className="inc" onClick={this.increment}>+</button>
       </div>
     );

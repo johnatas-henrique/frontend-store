@@ -46,9 +46,7 @@ class BotaoQtdECarrinho extends Component {
     );
   }
 }
-
 BotaoQtdECarrinho.propTypes = {
   itensNoCarrinho: PropTypes.number.isRequired,
 };
-
 export default BotaoQtdECarrinho;

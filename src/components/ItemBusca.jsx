@@ -8,7 +8,7 @@ class ItemBusca extends Component {
     return (
       <Link
         to={{
-          pathname: `/${list.id}`,
+          pathname: `/products/${list.id}`,
           state: {
             id: `${list.id}`,
             title: `${list.title}`,

@@ -6,7 +6,7 @@ import FormComment from '../components/FormComment';
 // import CommentList from '../components/CommentList';
 // utilizar este componente aqui ou no FormComment.
 
-class DetalheProduto extends React.Component {
+class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,12 +34,13 @@ class DetalheProduto extends React.Component {
         <DescricaoeQuant produtoAtual={this.props.location.state} />
         <FormComment id={this.props.location.state.id} />
         <Link to="/">Voltar</Link>
+        <Link to="/carrinho">Carrinho</Link>
       </div>
     );
   }
 }
 
-DetalheProduto.propTypes = {
+Product.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.object,
   }).isRequired,
@@ -50,4 +51,4 @@ DetalheProduto.propTypes = {
   }).isRequired,
 };
 
-export default DetalheProduto;
+export default Product;
