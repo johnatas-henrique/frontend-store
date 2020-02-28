@@ -4,7 +4,7 @@ import ImgCarrinho from '../images/carrinho.png';
 import SetaVoltarCarrinho from '../images/seta-voltar.png';
 
 class HeaderCarrinho extends Component {
-  render () {
+  render() {
     return (
       <div>
         <Link to="/">
