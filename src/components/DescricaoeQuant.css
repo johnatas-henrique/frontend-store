@@ -1,0 +1,79 @@
+.containerDescricao {
+  margin: 0 3%;
+}
+
+.flexDescricao {
+  display: flex;
+}
+
+.tituloDesc {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.imgDesc {
+  width: 70%;
+}
+
+.boxEsquerda {
+  border: 2px solid black;
+  text-align: center;
+  width: 31%;
+}
+
+.boxDireita {
+  border: 2px solid black;
+  margin-left: 4%;
+  width: 60%;
+}
+
+.tituloBoxDireita {
+  font-size: 20px;
+  margin: 5px 0 15px 10px;
+}
+
+.liDesc {
+  font-size: 18px;
+  list-style-position: inside;
+  margin-left: 5%;
+}
+
+.tituloQuant {
+  margin: 20px 0 10px;
+}
+
+.flexQuant {
+  display: flex;
+}
+
+.btnQuant {
+  background-color: white;
+  border: none;
+  font-size: 36px;
+  line-height: 50px;
+  width: 50px;
+}
+
+.textQuant {
+  border: 1px solid black;
+  border-radius: 100%;
+  font-size: 20px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  width: 48px;
+}
+
+.quantProdutoAdd {
+  background-color: white;
+  border: 1px solid black;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0.8em 0.5em;
+  width: 20%;
+}
+
+.quantProdutoAdd:hover {
+  background-color: rgb(72, 72, 72);
+  color: white;
+}

@@ -1,0 +1,14 @@
+.flexProduct {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 94.5%;
+}
+
+.setaVoltarProduct {
+  height: 50px;
+  margin: 20px 0;
+}
