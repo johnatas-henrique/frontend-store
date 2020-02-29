@@ -5,27 +5,27 @@ class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullName: '',
+      ['Nome Completo']: '',
       CPF: '',
-      email: '',
-      telephone: '',
+      Email: '',
+      Telefone: '',
       CEP: '',
-      address: '',
-      info: '',
-      number: '',
-      city: '',
-      state: '',
-      payment: '',
+      Endereço: '',
+      Complemento: '',
+      Número: '',
+      Cidade: '',
+      Estado: '',
+      Pagamento: '',
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
-/*   handleChange(event) {
+  handleChange(event) {
     const { value, name } = event.target;
     this.setState(() => {
       this.setState({ [name]: value });
     });
-  } */
+  }
 
   generateform(array) {
     return (
@@ -42,7 +42,8 @@ class Checkout extends Component {
   }
 
   render() {
-    const customerInfo = ['fullName', 'CPF', 'email', 'telephone', 'CEP', 'address', 'info', 'number', 'city', 'state'];
+    const customerInfo = ['Nome Completo', 'CPF', 'Email', 'Telefone', 'CEP', 'Endereço', 'Complemento', 'Número', 'Cidade'];
+    const estados = ['Estado', 'AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RO', 'RS', 'RR', 'SC', 'SE', 'SP', 'TO'];
     const products = JSON.parse(localStorage.getItem('Produtos'));
     console.log(products);
     return (
@@ -57,9 +58,18 @@ class Checkout extends Component {
           </div>
         ))}
         <form className="pay-form">
+          <h2>Informações do comprador</h2>
           {this.generateform(customerInfo)}
+          <select name="Estado" onChange={this.handleChange}>
+            {estados.map((name) => (
+              <option name="Estado" value={name}>{name}</option>
+            ))}
+          </select>
         </form>
         <Link to="/">Continuar comprando</Link>
+        <button type="button" onClick={this.confirmBuy}>
+          Finalizar Compra
+        </button>
       </div>
     );
   }

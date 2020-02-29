@@ -121,7 +121,7 @@ class FormComment extends React.Component {
         </form>
         <button type="submit" className="reviewButton" onClick={this.handleFormSubmit}>
           Avaliar
-      </button>
+        </button>
       </div>
     );
   }
@@ -129,6 +129,7 @@ class FormComment extends React.Component {
   render() {
     return (
       <div>
+        <h2>Avaliações</h2>
         {this.review()}
         {this.generateReview()}
       </div>
