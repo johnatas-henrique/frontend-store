@@ -3,8 +3,7 @@ export default function salvaLocal(obj1, obj2, quantState, id, boolPagina) {
   let secondObject = obj2;
   if (boolPagina) {
     firstObject.quant += quantState;
-  }
-  else {
+  } else {
     firstObject.quant = quantState;
   }
   secondObject = secondObject.filter((item) => item.id !== id);

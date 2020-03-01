@@ -17,53 +17,50 @@ class Checkout extends Component {
       estado: '',
       pagamento: '',
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.updateStateInput = this.updateStateInput.bind(this);
   }
 
-  handleChange(event) {
-    const { value, name } = event.target;
+  updateStateInput(e) {
+    const { valor, nome } = e.target;
     this.setState(() => {
-      this.setState({ [name]: value });
+      this.setState({ [nome]: valor });
     });
   }
 
-  generateform(array) {
+  generateform() {
+    const custInfo = [
+      { state: 'nomeComp', holder: 'Nome Completo' },
+      { state: 'cpf', holder: 'CPF' },
+      { state: 'email', holder: 'E-Mail' },
+      { state: 'fone', holder: 'Telefone' },
+      { state: 'endereco', holder: 'Endereço completo' },
+      { state: 'compl', holder: 'Complemento' },
+      { state: 'num', holder: 'Número' },
+      { state: 'cidade', holder: 'Cidade' },
+    ];
+
     return (
-      array.map((item) => (
+      custInfo.map((item) => (
         <input
+          key={item.state}
           type="text"
-          className={`checkout-${item.state}`}
+          className={`checkout  -${item.state}`}
           name={item.state}
           placeholder={item.holder}
           value={item.state.value}
-          onChange={this.handleChange}
+          onChange={this.updateStateInput}
         />
       )));
   }
 
   render() {
-    const {
-      nomeComp, cpf, email, fone, cep, endereco, compl, num, cidade, estado, pagamento
-    } = this.state;
-    const custInfo = [
-      { state: 'nomeComp', holder: 'Nome Completo' },
-      { state: 'cpf', holder: 'CPF' },
-      { state: 'email', holder: 'E-Mail'},
-      { state: 'fone', holder: 'Telefone'},
-      { state: 'endereco', holder: 'Endereço completo'},
-      { state: 'compl', holder: 'Complemento'},
-      { state: 'num', holder: 'Número'},
-      { state: 'cidade', holder: 'Cidade'},
-    ];
-    console.log(this.state);
     const estados = ['Estado', 'AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RO', 'RS', 'RR', 'SC', 'SE', 'SP', 'TO'];
     const products = JSON.parse(localStorage.getItem('Produtos'));
-    console.log(products);
     return (
       <div>
         <h1>Confira os produtos!</h1>
         {products.map((item) => (
-          <div className="product-checkout">
+          <div key={item.id} className="product-checkout">
             <p>{item.title}</p>
             <p>{item.quant}</p>
             <p>{item.quant * item.price}</p>
@@ -72,10 +69,10 @@ class Checkout extends Component {
         ))}
         <form className="pay-form">
           <h2>Informações do comprador</h2>
-          {this.generateform(custInfo)}
-          <select name="Estado" onChange={this.handleChange}>
+          {this.generateform()}
+          <select name="Estado" onChange={this.updateStateInput}>
             {estados.map((name) => (
-              <option name="Estado" value={name}>{name}</option>
+              <option key={name} name="Estado" value={name}>{name}</option>
             ))}
           </select>
         </form>
