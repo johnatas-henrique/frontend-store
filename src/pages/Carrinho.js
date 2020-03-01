@@ -18,13 +18,24 @@ class Carrinho extends Component {
   }
 
   componentDidMount() {
-    this.funcaoProCCMount();
+    this.carrinhoMount();
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { qtdeItensCarrinho } = this.state;
     if ((qtdeItensCarrinho === 0) && qtdeItensCarrinho !== prevState.qtdeItensCarrinho) {
       this.carregaCarrinhoVazio();
+    }
+  }
+
+  carrinhoMount() {
+    const guardarX = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    if (guardarX.length > 0) {
+      this.setState({
+        qtdeItensCarrinho: guardarX.length,
+        itensCarrinho: guardarX,
+        carrinhoVazio: false,
+      });
     }
   }
 
@@ -41,16 +52,6 @@ class Carrinho extends Component {
     }));
   }
 
-  funcaoProCCMount() {
-    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
-    if (guardar.length > 0) {
-      this.setState({
-        qtdeItensCarrinho: guardar.length,
-        itensCarrinho: guardar,
-        carrinhoVazio: false,
-      });
-    }
-  }
 
   render() {
     const { itensCarrinho, carrinhoVazio } = this.state;
@@ -62,7 +63,7 @@ class Carrinho extends Component {
         <HeaderCarrinho />
         {itensCarrinho.map((item) => (
           <ItemCarrinho
-            key={item.id}
+            key={`${item.id} ${item.quant}`}
             id={item.id}
             title={item.title}
             image={item.thumbnail}

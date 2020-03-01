@@ -7,7 +7,6 @@ class ItemCarrinho extends Component {
     super(props);
     this.state = {
       quant: 1,
-      disabled: true,
       newPrice: this.props.price,
       shown: false,
     };
@@ -16,11 +15,13 @@ class ItemCarrinho extends Component {
     this.salvaNovaQuant = this.salvaNovaQuant.bind(this);
     this.removeProduct = this.removeProduct.bind(this);
     this.atualizaPreco = this.atualizaPreco.bind(this);
+    this.initDisable = this.initDisable.bind(this);
   }
 
   componentDidMount() {
     const { quant } = this.props;
     this.changeQuant(quant);
+    this.initDisable(quant);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -30,8 +31,16 @@ class ItemCarrinho extends Component {
     }
   }
 
+  initDisable(parametro) {
+    if (parametro === 1) {
+      this.setState(() => ({
+        disabled: true,
+      }));
+    }
+  }
+
   changeQuant(parametro) {
-    this.setState(({
+    this.setState(() => ({
       quant: parametro,
     }));
   }
@@ -49,7 +58,7 @@ class ItemCarrinho extends Component {
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     const itemExistente = (guardar.find((item) => item.id === id));
     if (itemExistente) {
-      salvaLocal(itemExistente, guardar, quant, id);
+      salvaLocal(itemExistente, guardar, quant, id, false);
     }
   }
 
@@ -128,7 +137,10 @@ class ItemCarrinho extends Component {
           <p>
             R$&nbsp;
             {new Intl.NumberFormat('pt-BR',
-              { style: 'currency', currency: 'BRL' }).format(price)} - {newPrice}
+              { style: 'currency', currency: 'BRL' }).format(price)}
+            {' '}
+            -
+            {newPrice}
           </p>
         </div>
       </div>
