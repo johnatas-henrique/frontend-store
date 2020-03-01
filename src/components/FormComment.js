@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FaStar } from 'react-icons/fa';
+import './FormComment.css';
 
 class FormComment extends React.Component {
   constructor(props) {
@@ -43,8 +45,8 @@ class FormComment extends React.Component {
     });
   }
 
-  ratingChange(event) {
-    this.setState({ rating: parseFloat(event.target.value) });
+  ratingChange(param) {
+    this.setState({ rating: param });
   }
 
   handleFormSubmit() {
@@ -72,8 +74,26 @@ class FormComment extends React.Component {
     );
   }
 
+  StarRating() {
+    const { rating } = this.state;
+    return (
+      <div>
+        {[...Array(5)].map((star, index) => {
+          const ratingValue = index + 1;
+          return (
+            <label>
+              <input className="Stars" type="radio" name="rating" value={ratingValue} />
+              <FaStar className="star" color={ratingValue > rating ? "gray" : "black"} index={index} onClick={() => this.ratingChange(ratingValue)} />
+            </label>
+          );
+        })}
+      </div>
+    );
+  }
+
   generateReview() {
     const { result, listaVazia } = this.state;
+    const Nota = [<FaStar color="black" />, <FaStar color="black" />, <FaStar color="black" />, <FaStar color="black" />, <FaStar color="black" />];
     if (listaVazia) {
       return (
         <div>
@@ -85,8 +105,13 @@ class FormComment extends React.Component {
       <div>
         {result.map((resultado) => (
           <div key={`${resultado.userEmailSubmit} ${resultado.ratingSubmit} ${resultado.reviewSubmit}`}>
-            <p><strong>{resultado.userEmailSubmit}</strong> Nota: {resultado.ratingSubmit}</p>
-            <p>{resultado.reviewSubmit} </p>
+            <p>
+              <strong>{resultado.userEmailSubmit}</strong>
+              {Nota.slice(0, `${resultado.ratingSubmit}`)}
+            </p>
+            <p>
+              {resultado.reviewSubmit}
+            </p>
           </div>
         ))}
       </div>
@@ -100,15 +125,8 @@ class FormComment extends React.Component {
         <form onSubmit={this.handleFormSubmit}>
           {this.inputEmail()}
           <label htmlFor="rating">
-            Avaliação:
-            <input
-              type="number"
-              value={rating}
-              onChange={(event) => this.ratingChange(event)}
-              min="0"
-              max="5"
-            />
-          </label><br />
+            {this.StarRating()}
+          </label>
           <textarea
             type="text"
             className="review"

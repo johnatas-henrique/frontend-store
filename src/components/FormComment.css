@@ -1,0 +1,8 @@
+.Stars {
+  display: none;
+}
+
+.star:hover {
+  cursor: pointer;
+  transition: color 200ms;
+}
