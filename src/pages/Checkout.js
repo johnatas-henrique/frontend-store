@@ -5,17 +5,17 @@ class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ['Nome Completo']: '',
-      CPF: '',
-      Email: '',
-      Telefone: '',
-      CEP: '',
-      Endereço: '',
-      Complemento: '',
-      Número: '',
-      Cidade: '',
-      Estado: '',
-      Pagamento: '',
+      nomeComp: '',
+      cpf: '',
+      email: '',
+      fone: '',
+      cep: '',
+      endereco: '',
+      compl: '',
+      num: '',
+      cidade: '',
+      estado: '',
+      pagamento: '',
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -32,17 +32,30 @@ class Checkout extends Component {
       array.map((item) => (
         <input
           type="text"
-          className="form-checkout"
-          name={item}
-          placeholder={item}
-          value={item.value}
+          className={`checkout-${item.state}`}
+          name={item.state}
+          placeholder={item.holder}
+          value={item.state.value}
           onChange={this.handleChange}
         />
       )));
   }
 
   render() {
-    const customerInfo = ['Nome Completo', 'CPF', 'Email', 'Telefone', 'CEP', 'Endereço', 'Complemento', 'Número', 'Cidade'];
+    const {
+      nomeComp, cpf, email, fone, cep, endereco, compl, num, cidade, estado, pagamento
+    } = this.state;
+    const custInfo = [
+      { state: 'nomeComp', holder: 'Nome Completo' },
+      { state: 'cpf', holder: 'CPF' },
+      { state: 'email', holder: 'E-Mail'},
+      { state: 'fone', holder: 'Telefone'},
+      { state: 'endereco', holder: 'Endereço completo'},
+      { state: 'compl', holder: 'Complemento'},
+      { state: 'num', holder: 'Número'},
+      { state: 'cidade', holder: 'Cidade'},
+    ];
+    console.log(this.state);
     const estados = ['Estado', 'AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RO', 'RS', 'RR', 'SC', 'SE', 'SP', 'TO'];
     const products = JSON.parse(localStorage.getItem('Produtos'));
     console.log(products);
@@ -59,7 +72,7 @@ class Checkout extends Component {
         ))}
         <form className="pay-form">
           <h2>Informações do comprador</h2>
-          {this.generateform(customerInfo)}
+          {this.generateform(custInfo)}
           <select name="Estado" onChange={this.handleChange}>
             {estados.map((name) => (
               <option name="Estado" value={name}>{name}</option>
