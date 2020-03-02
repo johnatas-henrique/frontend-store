@@ -12,9 +12,12 @@ class Carrinho extends Component {
       carrinhoVazio: true,
       itensCarrinho: [],
       qtdeItensCarrinho: 0,
+      atualizaSoma: '',
     };
     this.testaCarrinhoVazio = this.testaCarrinhoVazio.bind(this);
     this.carregaCarrinhoVazio = this.carregaCarrinhoVazio.bind(this);
+    this.somaTotal = this.somaTotal.bind(this);
+    this.setaValorTotal = this.setaValorTotal.bind(this);
   }
 
   componentDidMount() {
@@ -22,10 +25,23 @@ class Carrinho extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { qtdeItensCarrinho } = this.state;
+    const { qtdeItensCarrinho, atualizaSoma } = this.state;
     if ((qtdeItensCarrinho === 0) && qtdeItensCarrinho !== prevState.qtdeItensCarrinho) {
       this.carregaCarrinhoVazio();
     }
+    if (atualizaSoma !== prevState.atualizaSoma
+      || qtdeItensCarrinho !== prevState.qtdeItensCarrinho) {
+      this.setaValorTotal();
+    }
+  }
+
+  setaValorTotal() {
+    const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
+    const guardarMap = guardar.map((item) => item.price * item.quant);
+    const guardarReduce = guardarMap.reduce((acc, curr) => acc + curr, 0);
+    this.setState(() => ({
+      valorTotal: guardarReduce,
+    }));
   }
 
   carrinhoMount() {
@@ -52,9 +68,14 @@ class Carrinho extends Component {
     }));
   }
 
+  somaTotal(param1, param2) {
+    this.setState({
+      atualizaSoma: `{${param2} - ${param1}}`,
+    });
+  }
 
   render() {
-    const { itensCarrinho, carrinhoVazio } = this.state;
+    const { itensCarrinho, carrinhoVazio, valorTotal } = this.state;
 
     if (carrinhoVazio) return <CarrinhoVazio />;
 
@@ -70,9 +91,15 @@ class Carrinho extends Component {
             price={item.price}
             quant={item.quant}
             callbackCarrinhoVazio={this.testaCarrinhoVazio}
+            callbackSomaTotal={this.somaTotal}
           />
         ))}
-        <Link to="/carrinho/checkout">Checkout</Link>
+        <p>
+          <span className="textoCompraTotal">Valor Total da Compra: </span>
+          {new Intl.NumberFormat('pt-BR',
+            { style: 'currency', currency: 'BRL' }).format(valorTotal)}
+        </p>
+        <Link className="botaoCheckout" to="/carrinho/checkout">Checkout</Link>
       </div>
     );
   }
