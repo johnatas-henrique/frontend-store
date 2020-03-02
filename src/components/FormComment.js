@@ -50,14 +50,19 @@ class FormComment extends React.Component {
   }
 
   handleFormSubmit() {
-    this.setState((state) => ({
-      result: [...state.result, {
-        userEmailSubmit: state.userEmail,
-        reviewSubmit: state.review,
-        ratingSubmit: state.rating,
-      }],
-      listaVazia: false,
-    }));
+    const { userEmail } = this.state;
+    if (userEmail === '') {
+      alert('por favor, informe um e-mail válido');
+    } else {
+      this.setState((state) => ({
+        result: [...state.result, {
+          userEmailSubmit: state.userEmail,
+          reviewSubmit: state.review,
+          ratingSubmit: state.rating,
+        }],
+        listaVazia: false,
+      }));
+    }
   }
 
   inputEmail() {
@@ -67,9 +72,10 @@ class FormComment extends React.Component {
         type="text"
         className="userEmail"
         name="userEmail"
-        placeholder="E-mail"
+        placeholder="E-mail (obrigatório)"
         value={userEmail}
         onChange={this.handleChange}
+        required
       />
     );
   }
@@ -81,9 +87,9 @@ class FormComment extends React.Component {
         {[...Array(5)].map((star, index) => {
           const ratingValue = index + 1;
           return (
-            <label>
-              <input className="Stars" type="radio" name="rating" value={ratingValue} />
-              <FaStar className="star" color={ratingValue > rating ? "gray" : "black"} index={index} onClick={() => this.ratingChange(ratingValue)} />
+            <label htmlFor="Stars">
+              <input className="Stars" type="radio" name="rating" value={ratingValue} required />
+              <FaStar className="star" color={ratingValue > rating ? 'gray' : 'black'} index={index} onClick={() => this.ratingChange(ratingValue)} />
             </label>
           );
         })}
@@ -93,7 +99,11 @@ class FormComment extends React.Component {
 
   generateReview() {
     const { result, listaVazia } = this.state;
-    const Nota = [<FaStar color="black" />, <FaStar color="black" />, <FaStar color="black" />, <FaStar color="black" />, <FaStar color="black" />];
+    const Nota = [<FaStar color="black" />,
+      <FaStar color="black" />,
+      <FaStar color="black" />,
+      <FaStar color="black" />,
+      <FaStar color="black" />];
     if (listaVazia) {
       return (
         <div>
@@ -119,7 +129,7 @@ class FormComment extends React.Component {
   }
 
   review() {
-    const { rating, review } = this.state;
+    const { review } = this.state;
     return (
       <div className="reviewBox">
         <form onSubmit={this.handleFormSubmit}>
