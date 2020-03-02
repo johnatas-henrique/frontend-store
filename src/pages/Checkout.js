@@ -45,15 +45,16 @@ class Checkout extends Component {
       cidade: '',
       estado: '',
       pagamento: '',
-      nomeCompClass: 'nomeCompCheck',
-      cpfClass: 'cpfCheck',
-      emailClass: 'emailCheck',
-      foneClass: 'foneCheck',
-      cepClass: 'cepCheck',
-      enderecoClass: 'enderecoCheck',
-      complClass: 'complCheck',
-      numClass: 'numCheck',
-      cidadeClass: 'cidadeCheck',
+      nomeCompClass: 'nomeCompCheck caixasTexto',
+      cpfClass: 'cpfCheck caixasTexto',
+      emailClass: 'emailCheck caixasTexto',
+      foneClass: 'foneCheck caixasTexto',
+      cepClass: 'cepCheck caixasTexto',
+      enderecoClass: 'enderecoCheck caixasTexto',
+      complClass: 'complCheck caixasTexto',
+      numClass: 'numCheck caixasTexto',
+      cidadeClass: 'cidadeCheck caixasTexto',
+      estadoClass: 'estadoCheck caixasTexto',
     };
     this.updateStateInput = this.updateStateInput.bind(this);
     this.setorPagamento = this.setorPagamento.bind(this);
@@ -70,8 +71,8 @@ class Checkout extends Component {
           {this.generateform()}
           <select
             defaultValue=""
-            className="estadoCheckout"
-            name="Estado"
+            className={this.state[`estadoClass`]}
+            name="estado"
             onChange={this.updateStateInput}
           >
             <option value="" disabled>Estado</option>
@@ -105,8 +106,11 @@ class Checkout extends Component {
   updateStateInput(e) {
     const { value, name } = e.target;
     const nameClass = `${name}Class`;
+    console.log('aqui', nameClass);
+    console.log('aqui', name);
+    console.log('aqui', value);
     this.setState(() => {
-      this.setState({ [name]: value, [nameClass]: `${name}Check` });
+      this.setState({ [name]: value, [nameClass]: `${name}Check caixasTexto` });
     });
 
     const namePreenchido = `${name}Preenchido`;
@@ -166,25 +170,28 @@ class Checkout extends Component {
   }
 
   confirmBuy() {
-    const { nomeCompPreenchido, cpfPreenchido, emailPreenchido, fonePreenchido,
-      cepPreenchido, enderecoPreenchido, complPreenchido, numPreenchido, cidadePreenchido,
+    const {
+      nomeCompPreenchido, cpfPreenchido, emailPreenchido, fonePreenchido, cepPreenchido,
+      enderecoPreenchido, complPreenchido, numPreenchido, cidadePreenchido, estadoPreenchido,
     } = this.state;
     const arrayPreenchidos = [nomeCompPreenchido, cpfPreenchido, emailPreenchido,
       fonePreenchido, cepPreenchido, enderecoPreenchido, complPreenchido, numPreenchido,
-      cidadePreenchido,
+      cidadePreenchido, estadoPreenchido,
     ];
-    const arrayNomes = ['nomeComp', 'cpf', 'email', 'fone', 'cep', 'endereco', 'compl', 'num', 'cidade'];
+    const arrayNomes = ['nomeComp', 'cpf', 'email', 'fone', 'cep', 'endereco', 'compl', 'num', 'cidade', 'estado'];
     if (arrayPreenchidos.every((item) => item) && this.state.pagamento !== '') {
       localStorage.removeItem('Produtos');
       localStorage.removeItem('SomaTotal');
+      alert('Compra realizada com sucesso');
       this.setState({ shouldRedirect: true });
     } else if (!arrayPreenchidos.every((item) => item)) {
       arrayPreenchidos.forEach((item, index) => {
         const nomeClasse = `${arrayNomes[index]}Class`;
         if (!item) {
-          this.setState({ [nomeClasse]: `${arrayNomes[index]}Check campoDestacado` });
+          this.setState({ [nomeClasse]: `${arrayNomes[index]}Check caixasTexto campoDestacado` });
         }
       });
+      alert('Por favor, confira seus dados cadastrais');
     } else alert('Você não selecionou uma forma de pagamento!');
   }
 
@@ -200,8 +207,8 @@ class Checkout extends Component {
           {this.setorCaixas()}
           {this.setorPagamento()}
           <button className="botaoComprar" type="button" onClick={this.confirmBuy}>
-          Comprar
-        </button>
+            Comprar
+          </button>
         </form>
       </div>
     );
