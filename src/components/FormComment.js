@@ -94,7 +94,7 @@ class FormComment extends React.Component {
         {[...Array(5)].map((star, index) => {
           const ratingValue = index + 1;
           return (
-            <label htmlFor="Stars">
+            <label htmlFor="Stars" key={`${star}-${ratingValue}`}>
               <input className="Stars" type="radio" name="rating" value={ratingValue} required />
               <FaStar className="star" color={ratingValue > rating ? 'gray' : 'black'} index={index} onClick={() => this.ratingChange(ratingValue)} />
             </label>
