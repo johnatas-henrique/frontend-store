@@ -154,7 +154,7 @@ class FormComment extends React.Component {
             onChange={this.handleChange}
           />
         </form>
-        <button type="submit" className="reviewButton" onClick={this.handleFormSubmit}>
+        <button type="submit" className="reviewButton" onClick={() => this.handleFormSubmit()}>
           Avaliar
         </button>
       </div>
