@@ -17,12 +17,19 @@
   padding: 12px;
 }
 
+.formBox {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+}
+
 .reviewBox textarea {
   border: 2px solid black;
   height: 85px;
+  margin: 10px 0;
   padding: 5px;
   resize: none;
-  width: 50%;
+  width: 100%;
 }
 
 .reviewButton {
@@ -57,4 +64,10 @@
   border: 2px solid black;
   margin: 10px 3%;
   padding: 12px;
+}
+
+.spanStars {
+  font-size: 20px;
+  letter-spacing: 6px;
+  margin-left: 5%;
 }

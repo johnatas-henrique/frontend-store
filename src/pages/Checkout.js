@@ -106,13 +106,9 @@ class Checkout extends Component {
   updateStateInput(e) {
     const { value, name } = e.target;
     const nameClass = `${name}Class`;
-    console.log('aqui', nameClass);
-    console.log('aqui', name);
-    console.log('aqui', value);
-    this.setState(() => {
-      this.setState({ [name]: value, [nameClass]: `${name}Check caixasTexto` });
+    this.setState({
+      [name]: value, [nameClass]: `${name}Check caixasTexto`,
     });
-
     const namePreenchido = `${name}Preenchido`;
     if (value !== '') {
       this.setState({ [namePreenchido]: true });
