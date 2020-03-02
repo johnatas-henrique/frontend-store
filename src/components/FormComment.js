@@ -44,8 +44,8 @@ class FormComment extends React.Component {
 
   handleChange(event) {
     const { value, name } = event.target;
-    this.setState(() => {
-      this.setState({ [name]: value });
+    this.setState({
+      [name]: value,
     });
   }
 
@@ -95,7 +95,7 @@ class FormComment extends React.Component {
           const ratingValue = index + 1;
           return (
             <label htmlFor="Stars" key={`${star}-${ratingValue}`}>
-              <input className="Stars" name="rating" value={ratingValue} required />
+              {/* <input className="Stars" name="rating" value={ratingValue} required /> */}
               <button type="button" className="star" index={index} onClick={() => this.ratingChange(ratingValue)}>{rating > index ? '★' : '☆'}</button>
             </label>
           );
@@ -120,8 +120,10 @@ class FormComment extends React.Component {
           <div className="newComment" key={`${resultado.userEmailSubmit} ${resultado.ratingSubmit} ${resultado.reviewSubmit}`}>
             <p>
               <strong>{resultado.userEmailSubmit}</strong>
-              {Nota.repeat(`${resultado.ratingSubmit}`)}
-              {'☆'.repeat(5 - `${resultado.ratingSubmit}`)}
+              <span class="spanStars">
+                {Nota.repeat(`${resultado.ratingSubmit}`)}
+                {'☆'.repeat(5 - `${resultado.ratingSubmit}`)}
+              </span>
             </p>
             <p>
               {resultado.reviewSubmit}
@@ -136,7 +138,7 @@ class FormComment extends React.Component {
     const { review } = this.state;
     return (
       <div className="reviewBox">
-        <form onSubmit={this.handleFormSubmit}>
+        <form className="formBox" onSubmit={this.handleFormSubmit}>
           {this.inputEmail()}
           <label htmlFor="rating">
             {this.StarRating()}
