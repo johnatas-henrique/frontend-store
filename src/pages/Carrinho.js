@@ -39,6 +39,7 @@ class Carrinho extends Component {
     const guardar = JSON.parse(localStorage.getItem('Produtos') || '[]');
     const guardarMap = guardar.map((item) => item.price * item.quant);
     const guardarReduce = guardarMap.reduce((acc, curr) => acc + curr, 0);
+    localStorage.setItem('SomaTotal', JSON.stringify(guardarReduce));
     this.setState(() => ({
       valorTotal: guardarReduce,
     }));
@@ -99,7 +100,7 @@ class Carrinho extends Component {
           {new Intl.NumberFormat('pt-BR',
             { style: 'currency', currency: 'BRL' }).format(valorTotal)}
         </p>
-        <Link className="botaoCheckout" to="/carrinho/checkout">Checkout</Link>
+        <Link className="botaoCheckout" to="/carrinho/checkout">Finalizar Compra</Link>
       </div>
     );
   }
