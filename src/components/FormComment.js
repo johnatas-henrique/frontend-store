@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './FormComment.css';
 
 class FormComment extends React.Component {
+  static checkstate(param) {
+    const re = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+    return re.test(param);
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -43,19 +49,27 @@ class FormComment extends React.Component {
     });
   }
 
-  ratingChange(event) {
-    this.setState({ rating: parseFloat(event.target.value) });
+  ratingChange(param) {
+    this.setState({ rating: param });
   }
 
   handleFormSubmit() {
-    this.setState((state) => ({
-      result: [...state.result, {
-        userEmailSubmit: state.userEmail,
-        reviewSubmit: state.review,
-        ratingSubmit: state.rating,
-      }],
-      listaVazia: false,
-    }));
+    const { userEmail, rating } = this.state;
+    if (!FormComment.checkstate(userEmail)) {
+      alert('por favor, informe um e-mail válido');
+    } else if (rating === '') {
+      alert('por favor, dê uma nota ao produto');
+    } else {
+      this.setState((state) => ({
+        result: [...state.result, {
+          userEmailSubmit: state.userEmail,
+          reviewSubmit: state.review,
+          ratingSubmit: state.rating,
+        }],
+        listaVazia: false,
+        rating: 0,
+      }));
+    }
   }
 
   inputEmail() {
@@ -65,15 +79,34 @@ class FormComment extends React.Component {
         type="text"
         className="userEmail"
         name="userEmail"
-        placeholder="E-mail"
+        placeholder="E-mail (obrigatório)"
         value={userEmail}
         onChange={this.handleChange}
+        required
       />
+    );
+  }
+
+  StarRating() {
+    const { rating } = this.state;
+    return (
+      <div>
+        {[...Array(5)].map((star, index) => {
+          const ratingValue = index + 1;
+          return (
+            <label htmlFor="Stars" key={`${star}-${ratingValue}`}>
+              <input className="Stars" name="rating" value={ratingValue} required />
+              <button type="button" className="star" index={index} onClick={() => this.ratingChange(ratingValue)}>{rating > index ? '★' : '☆'}</button>
+            </label>
+          );
+        })}
+      </div>
     );
   }
 
   generateReview() {
     const { result, listaVazia } = this.state;
+    const Nota = '★';
     if (listaVazia) {
       return (
         <div>
@@ -85,8 +118,14 @@ class FormComment extends React.Component {
       <div>
         {result.map((resultado) => (
           <div key={`${resultado.userEmailSubmit} ${resultado.ratingSubmit} ${resultado.reviewSubmit}`}>
-            <p><strong>{resultado.userEmailSubmit}</strong> Nota: {resultado.ratingSubmit}</p>
-            <p>{resultado.reviewSubmit} </p>
+            <p>
+              <strong>{resultado.userEmailSubmit}</strong>
+              {Nota.repeat(`${resultado.ratingSubmit}`)}
+              {'☆'.repeat(5 - `${resultado.ratingSubmit}`)}
+            </p>
+            <p>
+              {resultado.reviewSubmit}
+            </p>
           </div>
         ))}
       </div>
@@ -94,21 +133,14 @@ class FormComment extends React.Component {
   }
 
   review() {
-    const { rating, review } = this.state;
+    const { review } = this.state;
     return (
       <div className="reviewBox">
         <form onSubmit={this.handleFormSubmit}>
           {this.inputEmail()}
           <label htmlFor="rating">
-            Avaliação:
-            <input
-              type="number"
-              value={rating}
-              onChange={(event) => this.ratingChange(event)}
-              min="0"
-              max="5"
-            />
-          </label><br />
+            {this.StarRating()}
+          </label>
           <textarea
             type="text"
             className="review"
