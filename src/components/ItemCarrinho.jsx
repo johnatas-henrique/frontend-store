@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import salvaLocal from './salvaLocal';
 import './ItemCarrinho.css';
@@ -105,7 +105,7 @@ class ItemCarrinho extends Component {
   buttons() {
     const { quant, disabled } = this.state;
     return (
-      <>
+      <Fragment>
         <button
           type="button"
           className="botaoCarrinhoQtde"
@@ -116,7 +116,7 @@ class ItemCarrinho extends Component {
         </button>
         <p className="itemCarrinhoQtde">{quant}</p>
         <button type="button" className="botaoCarrinhoQtde" onClick={this.increment}>+</button>
-      </>
+      </Fragment>
     );
   }
 
