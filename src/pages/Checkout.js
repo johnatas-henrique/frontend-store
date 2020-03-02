@@ -59,7 +59,12 @@ class Checkout extends Component {
         <h2 className="tituloBase">Informações do Comprador</h2>
         <div className="flexFormCheckout">
           {this.generateform()}
-          <select defaultValue="" className="estadoCheckout" name="Estado" onChange={this.updateStateInput}>
+          <select
+            defaultValue=""
+            className="estadoCheckout"
+            name="Estado"
+            onChange={this.updateStateInput}
+          >
             <option value="" disabled>Estado</option>
             {estados.map((name) => (
               <option key={name} name="Estado" value={name}>{name}</option>
@@ -113,7 +118,7 @@ class Checkout extends Component {
         <input
           key={item.state}
           type="text"
-          className={`${item.state}Checkout`}
+          className={`${item.state}Check`}
           name={item.state}
           placeholder={item.holder}
           value={item.state.value}

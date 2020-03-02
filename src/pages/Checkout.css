@@ -42,34 +42,28 @@
   flex-wrap: wrap;
 }
 
-.nomeCompCheckout,
-.cpfCheckout,
-.emailCheckout,
-.foneCheckout,
-.cepCheckout,
-.complCheckout {
+.nomeCompCheck , .cpfCheck , .emailCheck , .foneCheck , .cepCheck , .complCheck {
   box-sizing: border-box;
   height: 30px;
   margin: 0 1% 1% 0;
   width: 24%;
 }
 
-.enderecoCheckout {
+.enderecoCheck {
   box-sizing: border-box;
   height: 30px;
   margin: 0 1% 1% 0;
   width: 74%;
 }
 
-.cidadeCheckout {
+.cidadeCheck {
   box-sizing: border-box;
   height: 30px;
   margin: 0 1% 1% 0;
   width: 42%;
 }
 
-.numCheckout,
-.estadoCheckout {
+.numCheck , .estadoCheckout {
   box-sizing: border-box;
   height: 30px;
   margin: 0 1% 1% 0;
@@ -97,15 +91,11 @@
   margin-right: 20px;
 }
 
-.visaName,
-.mastercardName,
-.eloName {
+.visaName , .mastercardName , .eloName {
   margin-right: 15px;
 }
 
-.visaImgBox,
-.mastercardImgBox,
-.eloImgBox {
+.visaImgBox , .mastercardImgBox , .eloImgBox {
   align-items: center;
   display: flex;
   height: 100px;
@@ -115,9 +105,7 @@
   height: 100%;
 }
 
-.visaImgCheckout,
-.mastercardImgCheckout,
-.eloImgCheckout {
+.visaImgCheckout , .mastercardImgCheckout , .eloImgCheckout {
   height: 85%;
 }
 
