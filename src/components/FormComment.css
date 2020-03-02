@@ -8,3 +8,53 @@
   color: black;
   font-size: 20px;
 }
+
+.reviewBox {
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  margin: 0 3%;
+  padding: 12px
+}
+
+.reviewBox textarea {
+  border: 2px solid black;
+  height: 85px;
+  padding: 5px;
+  resize: none;
+  width: 50%;
+}
+
+.reviewButton {
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  padding: 10px;
+  width: 88px;
+}
+
+.userEmail{
+  border: 2px solid black;
+  padding: 5px 6px;
+  width: 35%;
+}
+
+.commentTitle {
+  margin-bottom: 10px;
+  margin-left: 30px;
+}
+
+.newComment:not(:last-child)::after {
+  background: black;
+  content: '';
+  display: block;
+  height: 2px;
+  margin: 10px auto;
+  width: auto;
+}
+
+.allComents {
+  border: 2px solid black;
+  margin: 10px 3%;
+  padding: 12px;
+}

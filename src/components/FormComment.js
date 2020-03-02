@@ -109,15 +109,15 @@ class FormComment extends React.Component {
     const Nota = '★';
     if (listaVazia) {
       return (
-        <div>
+        <div className="allComents">
           <p>Seja o primeiro a comentar!</p>
         </div>
       );
     }
     return (
-      <div>
+      <div className="allComents">
         {result.map((resultado) => (
-          <div key={`${resultado.userEmailSubmit} ${resultado.ratingSubmit} ${resultado.reviewSubmit}`}>
+          <div className="newComment" key={`${resultado.userEmailSubmit} ${resultado.ratingSubmit} ${resultado.reviewSubmit}`}>
             <p>
               <strong>{resultado.userEmailSubmit}</strong>
               {Nota.repeat(`${resultado.ratingSubmit}`)}
@@ -161,7 +161,7 @@ class FormComment extends React.Component {
   render() {
     return (
       <div>
-        <h2>Avaliações</h2>
+        <h2 className="commentTitle">Avaliações</h2>
         {this.review()}
         {this.generateReview()}
       </div>
