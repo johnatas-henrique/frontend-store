@@ -71,7 +71,7 @@ class Checkout extends Component {
           {this.generateform()}
           <select
             defaultValue=""
-            className={this.state[`estadoClass`]}
+            className={this.state.estadoClass}
             name="estado"
             onChange={this.updateStateInput}
           >
