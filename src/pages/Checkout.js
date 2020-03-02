@@ -171,7 +171,7 @@ class Checkout extends Component {
     } = this.state;
     const arrayPreenchidos = [nomeCompPreenchido, cpfPreenchido, emailPreenchido,
       fonePreenchido, cepPreenchido, enderecoPreenchido, complPreenchido, numPreenchido,
-      cidadePreenchido
+      cidadePreenchido,
     ];
     const arrayNomes = ['nomeComp', 'cpf', 'email', 'fone', 'cep', 'endereco', 'compl', 'num', 'cidade'];
     if (arrayPreenchidos.every((item) => item) && this.state.pagamento !== '') {
