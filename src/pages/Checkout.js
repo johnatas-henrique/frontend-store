@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import SetaVoltarCarrinho from '../images/seta-voltar.png';
 import ImgBoleto from '../images/boleto.png';
 import ImgCartao from '../images/cartao.png';
@@ -45,6 +45,15 @@ class Checkout extends Component {
       cidade: '',
       estado: '',
       pagamento: '',
+      nomeCompClass: 'nomeCompCheck',
+      cpfClass: 'cpfCheck',
+      emailClass: 'emailCheck',
+      foneClass: 'foneCheck',
+      cepClass: 'cepCheck',
+      enderecoClass: 'enderecoCheck',
+      complClass: 'complCheck',
+      numClass: 'numCheck',
+      cidadeClass: 'cidadeCheck',
     };
     this.updateStateInput = this.updateStateInput.bind(this);
     this.setorPagamento = this.setorPagamento.bind(this);
@@ -55,7 +64,7 @@ class Checkout extends Component {
   setorCaixas() {
     const estados = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RO', 'RS', 'RR', 'SC', 'SE', 'SP', 'TO'];
     return (
-      <form className="containerSetor">
+      <div className="containerSetor">
         <h2 className="tituloBase">Informações do Comprador</h2>
         <div className="flexFormCheckout">
           {this.generateform()}
@@ -71,7 +80,7 @@ class Checkout extends Component {
             ))}
           </select>
         </div>
-      </form>
+      </div>
     );
   }
 
@@ -95,9 +104,17 @@ class Checkout extends Component {
 
   updateStateInput(e) {
     const { value, name } = e.target;
+    const nameClass = `${name}Class`;
     this.setState(() => {
-      this.setState({ [name]: value });
+      this.setState({ [name]: value, [nameClass]: `${name}Check` });
     });
+  
+    const namePreenchido = `${name}Preenchido`;
+    if (value !== '') {
+      this.setState({ [namePreenchido]: true });
+    } else {
+      this.setState({ [namePreenchido]: false });
+    }
   }
 
   generateform() {
@@ -118,11 +135,12 @@ class Checkout extends Component {
         <input
           key={item.state}
           type="text"
-          className={`${item.state}Check`}
+          className={this.state[`${item.state}Class`]}
           name={item.state}
           placeholder={item.holder}
           value={item.state.value}
           onChange={this.updateStateInput}
+          required
         />
       )));
   }
@@ -148,22 +166,39 @@ class Checkout extends Component {
   }
 
   confirmBuy() {
-    const { nomeComp, pagamento } = this.state;
-    alert(`nome: ${nomeComp}, pgto em: ${pagamento}`);
+    const { nomeCompPreenchido, cpfPreenchido, emailPreenchido, fonePreenchido, cepPreenchido, enderecoPreenchido, complPreenchido, numPreenchido, cidadePreenchido,
+    } = this.state;
+    const arrayPreenchidos = [nomeCompPreenchido, cpfPreenchido, emailPreenchido, fonePreenchido, cepPreenchido, enderecoPreenchido, complPreenchido, numPreenchido, cidadePreenchido];
+    const arrayNomes = ['nomeComp', 'cpf', 'email', 'fone', 'cep', 'endereco', 'compl', 'num', 'cidade'];
+    if (arrayPreenchidos.every((item) => item) && this.state.pagamento !== '') {
+      localStorage.removeItem('Produtos');
+      localStorage.removeItem('SomaTotal');
+      this.setState({ shouldRedirect: true });
+    } else if (!arrayPreenchidos.every((item) => item)) {
+      arrayPreenchidos.forEach((item, index) => {
+        const nomeClasse = `${arrayNomes[index]}Class`;
+        if (!item) {
+          this.setState({ [nomeClasse]: `${arrayNomes[index]}Check campoDestacado` });
+        }
+      });
+    } else alert ('Você não selecionou uma forma de pagamento!');
   }
 
   render() {
+    if (this.state.shouldRedirect) return <Redirect to="/" />;
     return (
       <div>
         <Link to="/">
           <img className="setaVoltarCarrinho" src={SetaVoltarCarrinho} alt="" />
         </Link>
         {Checkout.setorProdutos()}
+        <form>
         {this.setorCaixas()}
         {this.setorPagamento()}
-        <button className="botaoComprar" type="button" onClick={this.confirmBuy}>
+        <button type="submit" className="botaoComprar" type="button" onClick={this.confirmBuy}>
           Comprar
         </button>
+        </form>
       </div>
     );
   }

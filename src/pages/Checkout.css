@@ -140,3 +140,8 @@
   background-color: rgb(72, 72, 72);
   color: white;
 }
+
+.campoDestacado {
+  box-shadow: 0 0 10px #ff0000;
+  border: 100px solid #ff0000;
+}
