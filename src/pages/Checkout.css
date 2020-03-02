@@ -30,7 +30,7 @@
   width: 40%;
 }
 
-.containerSetor input {
+.caixasTexto {
   border: 1px solid black;
   font-size: 16px;
   padding-left: 10px;
@@ -63,14 +63,14 @@
   width: 42%;
 }
 
-.numCheck , .estadoCheckout {
+.numCheck , .estadoCheck {
   box-sizing: border-box;
   height: 30px;
   margin: 0 1% 1% 0;
   width: 15%;
 }
 
-.estadoCheckout {
+.estadoCheck {
   background-color: white;
   border-color: black;
 }
@@ -139,4 +139,9 @@
 .botaoComprar:hover {
   background-color: rgb(72, 72, 72);
   color: white;
+}
+
+.campoDestacado {
+  border: 1px solid red;
+  box-shadow: 0 0 10px red;
 }
