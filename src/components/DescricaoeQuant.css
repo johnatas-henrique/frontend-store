@@ -55,7 +55,7 @@
 }
 
 .textQuant {
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 100%;
   font-size: 20px;
   height: 48px;
@@ -66,7 +66,7 @@
 
 .quantProdutoAdd {
   background-color: white;
-  border: 1px solid black;
+  border: 2px solid black;
   font-size: 18px;
   font-weight: 700;
   padding: 0.8em 0.5em;

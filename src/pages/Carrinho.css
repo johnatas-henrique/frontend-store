@@ -12,3 +12,28 @@
 .imgCarrinhoTitulo {
   height: 100%;
 }
+
+.textoCompraTotal {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.botaoCheckout {
+  background-color: white;
+  border: 1px solid black;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding: 0.8em 0.5em;
+}
+
+.botaoCheckout:visited {
+  background-color: white;
+  color: black;
+}
+
+.botaoCheckout:hover {
+  background-color: rgb(72, 72, 72);
+  color: white;
+}

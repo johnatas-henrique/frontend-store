@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import salvaLocal from './salvaLocal';
+import './ItemCarrinho.css';
 
 class ItemCarrinho extends Component {
   constructor(props) {
@@ -59,6 +60,7 @@ class ItemCarrinho extends Component {
     const itemExistente = (guardar.find((item) => item.id === id));
     if (itemExistente) {
       salvaLocal(itemExistente, guardar, quant, id, false);
+      this.props.callbackSomaTotal(quant, id);
     }
   }
 
@@ -103,44 +105,36 @@ class ItemCarrinho extends Component {
   buttons() {
     const { quant, disabled } = this.state;
     return (
-      <div>
+      <Fragment>
         <button
           type="button"
-          className="dec"
+          className="botaoCarrinhoQtde"
           onClick={this.decrement}
           disabled={disabled}
         >
           -
         </button>
-        <h2>
-          Quantidade:&nbsp;
-          {quant}
-        </h2>
-        <button type="button" className="inc" onClick={this.increment}>+</button>
-      </div>
+        <p className="itemCarrinhoQtde">{quant}</p>
+        <button type="button" className="botaoCarrinhoQtde" onClick={this.increment}>+</button>
+      </Fragment>
     );
   }
 
   render() {
-    const { title, image, price } = this.props;
+    const { title, image } = this.props;
     const { newPrice, shown } = this.state;
     return (
-      <div>
-        <div className="itemBusca" hidden={shown}>
-          <button onClick={this.removeProduct} type="button">X</button>
-          {title}
-          <div>
-            <img className="itemImage" src={image} alt={title} />
+      <div hidden={shown}>
+        <div className="itemCarrinho">
+          <button className="botaoCarrinhoX" onClick={this.removeProduct} type="button">x</button>
+          <div className="containerImageCarrinho">
+            <img className="imagemCarrinho" src={image} alt={title} />
           </div>
-          <hr />
+          <p className="descricaoItemCarrinho">{title}</p>
           {this.buttons()}
           <p>
-            R$&nbsp;
             {new Intl.NumberFormat('pt-BR',
-              { style: 'currency', currency: 'BRL' }).format(price)}
-            {' '}
-            -
-            {newPrice}
+              { style: 'currency', currency: 'BRL' }).format(newPrice)}
           </p>
         </div>
       </div>
@@ -150,6 +144,7 @@ class ItemCarrinho extends Component {
 
 ItemCarrinho.propTypes = {
   callbackCarrinhoVazio: PropTypes.func.isRequired,
+  callbackSomaTotal: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
