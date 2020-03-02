@@ -71,3 +71,8 @@
   letter-spacing: 6px;
   margin-left: 5%;
 }
+
+.userDoReview {
+  display: inline-block;
+  min-width: 25%;
+}

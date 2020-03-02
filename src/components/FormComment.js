@@ -119,7 +119,7 @@ class FormComment extends React.Component {
         {result.map((resultado) => (
           <div className="newComment" key={`${resultado.userEmailSubmit} ${resultado.ratingSubmit} ${resultado.reviewSubmit}`}>
             <p>
-              <strong>{resultado.userEmailSubmit}</strong>
+              <strong className="userDoReview">{resultado.userEmailSubmit}</strong>
               <span className="spanStars">
                 {Nota.repeat(`${resultado.ratingSubmit}`)}
                 {'☆'.repeat(5 - `${resultado.ratingSubmit}`)}
