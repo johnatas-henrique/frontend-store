@@ -16,7 +16,9 @@ class FormComment extends React.Component {
       review: '',
       rating: 0,
       result: [],
-      starSymbol: '☆',
+      fiveStars: [...Array(5)].fill('☆'),
+      blackStar: '★',
+      checked: false,
     };
     this.review = this.review.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -59,13 +61,14 @@ class FormComment extends React.Component {
     }
   }
 
-  handleFormSubmit() {
+  handleFormSubmit(event) {
     const { userEmail, rating } = this.state;
     if (!FormComment.checkstate(userEmail)) {
       alert('por favor, informe um e-mail válido');
     } else if (rating === '') {
       alert('por favor, dê uma nota ao produto');
     } else {
+      event.preventDefault();
       this.setState((state) => ({
         result: [...state.result, {
           userEmailSubmit: state.userEmail,
@@ -93,15 +96,22 @@ class FormComment extends React.Component {
   }
 
   StarRating() {
-    const { starSymbol } = this.state;
+    const { checked, fiveStars } = this.state;
     return (
       <div>
-        {[...Array(5)].map((star, index) => {
+        {fiveStars.map((star, index) => {
           const ratingValue = index + 1;
           return (
             <label htmlFor="Stars" key={`${star}-${ratingValue}`}>
-              <input className="Stars" type="radio" name="rating" value={ratingValue} required />
-              <h2 className="star" index={index} onClick={() => this.ratingChange(ratingValue)}>{starSymbol}</h2>
+              <input className="Stars" type="button" name="rating" value={ratingValue} />
+              <button
+                checked={checked}
+                className="star"
+                index={index}
+                onClick={() => this.ratingChange(ratingValue)}
+              >
+                {star}
+              </button>
             </label>
           );
         })}
@@ -110,8 +120,7 @@ class FormComment extends React.Component {
   }
 
   generateReview() {
-    const { result, listaVazia } = this.state;
-    const Nota = '★';
+    const { result, listaVazia, blackStar } = this.state;
     if (listaVazia) {
       return (
         <div>
@@ -125,7 +134,7 @@ class FormComment extends React.Component {
           <div key={`${resultado.userEmailSubmit} ${resultado.ratingSubmit} ${resultado.reviewSubmit}`}>
             <p>
               <strong>{resultado.userEmailSubmit}</strong>
-              {Nota.repeat(`${resultado.ratingSubmit}`)}
+              {blackStar.repeat(`${resultado.ratingSubmit}`)}
             </p>
             <p>
               {resultado.reviewSubmit}
@@ -140,7 +149,7 @@ class FormComment extends React.Component {
     const { review } = this.state;
     return (
       <div className="reviewBox">
-        <form onSubmit={this.handleFormSubmit}>
+        <form onSubmit={(e) => this.handleFormSubmit(e)}>
           {this.inputEmail()}
           <label htmlFor="rating">
             {this.StarRating()}
@@ -155,7 +164,7 @@ class FormComment extends React.Component {
             onChange={this.handleChange}
           />
         </form>
-        <button type="submit" className="reviewButton" onClick={() => this.handleFormSubmit()}>
+        <button type="submit" className="reviewButton" onClick={(e) => this.handleFormSubmit(e)}>
           Avaliar
         </button>
       </div>
