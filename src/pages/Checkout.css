@@ -142,6 +142,6 @@
 }
 
 .campoDestacado {
-  box-shadow: 0 0 10px #ff0000;
-  border: 100px solid #ff0000;
+  border: 100px solid red;
+  box-shadow: 0 0 10px red;
 }

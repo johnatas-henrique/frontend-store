@@ -108,7 +108,7 @@ class Checkout extends Component {
     this.setState(() => {
       this.setState({ [name]: value, [nameClass]: `${name}Check` });
     });
-  
+
     const namePreenchido = `${name}Preenchido`;
     if (value !== '') {
       this.setState({ [namePreenchido]: true });
@@ -166,9 +166,13 @@ class Checkout extends Component {
   }
 
   confirmBuy() {
-    const { nomeCompPreenchido, cpfPreenchido, emailPreenchido, fonePreenchido, cepPreenchido, enderecoPreenchido, complPreenchido, numPreenchido, cidadePreenchido,
+    const { nomeCompPreenchido, cpfPreenchido, emailPreenchido, fonePreenchido,
+      cepPreenchido, enderecoPreenchido, complPreenchido, numPreenchido, cidadePreenchido,
     } = this.state;
-    const arrayPreenchidos = [nomeCompPreenchido, cpfPreenchido, emailPreenchido, fonePreenchido, cepPreenchido, enderecoPreenchido, complPreenchido, numPreenchido, cidadePreenchido];
+    const arrayPreenchidos = [nomeCompPreenchido, cpfPreenchido, emailPreenchido,
+      fonePreenchido, cepPreenchido, enderecoPreenchido, complPreenchido, numPreenchido,
+      cidadePreenchido
+    ];
     const arrayNomes = ['nomeComp', 'cpf', 'email', 'fone', 'cep', 'endereco', 'compl', 'num', 'cidade'];
     if (arrayPreenchidos.every((item) => item) && this.state.pagamento !== '') {
       localStorage.removeItem('Produtos');
@@ -181,7 +185,7 @@ class Checkout extends Component {
           this.setState({ [nomeClasse]: `${arrayNomes[index]}Check campoDestacado` });
         }
       });
-    } else alert ('Você não selecionou uma forma de pagamento!');
+    } else alert('Você não selecionou uma forma de pagamento!');
   }
 
   render() {
@@ -193,9 +197,9 @@ class Checkout extends Component {
         </Link>
         {Checkout.setorProdutos()}
         <form>
-        {this.setorCaixas()}
-        {this.setorPagamento()}
-        <button type="submit" className="botaoComprar" type="button" onClick={this.confirmBuy}>
+          {this.setorCaixas()}
+          {this.setorPagamento()}
+          <button className="botaoComprar" type="button" onClick={this.confirmBuy}>
           Comprar
         </button>
         </form>
