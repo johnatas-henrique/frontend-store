@@ -17,6 +17,7 @@ class FormComment extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.setaOState = this.setaOState.bind(this);
+    this.checkstate = this.checkstate.bind(this);
   }
 
   componentDidMount() {
@@ -49,10 +50,18 @@ class FormComment extends React.Component {
     this.setState({ rating: param });
   }
 
+  checkstate(param) {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(param);
+  }
+
   handleFormSubmit() {
-    const { userEmail } = this.state;
-    if (userEmail === '') {
+    const { userEmail, rating } = this.state;
+    if (!this.checkstate(userEmail)) {
       alert('por favor, informe um e-mail válido');
+    }
+    if (rating === '') {
+      alert('por favor, dê uma nota ao produto');
     } else {
       this.setState((state) => ({
         result: [...state.result, {
@@ -100,10 +109,10 @@ class FormComment extends React.Component {
   generateReview() {
     const { result, listaVazia } = this.state;
     const Nota = [<FaStar color="black" />,
-      <FaStar color="black" />,
-      <FaStar color="black" />,
-      <FaStar color="black" />,
-      <FaStar color="black" />];
+    <FaStar color="black" />,
+    <FaStar color="black" />,
+    <FaStar color="black" />,
+    <FaStar color="black" />];
     if (listaVazia) {
       return (
         <div>
