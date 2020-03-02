@@ -1,0 +1,50 @@
+.itemCarrinho {
+  display: flex;
+  align-items: center;
+}
+
+.containerImageCarrinho {
+  border: 2px solid black;
+  height: 100px;
+  margin: 10px 0;
+}
+
+.botaoCarrinhoX {
+  background-color: white;
+  border: none;
+  font-size: 36px;
+  line-height: 50px;
+  margin: 0 1%;
+  width: 50px;
+}
+
+.botaoCarrinhoX:hover {
+  color: rgb(151, 38, 38);
+}
+
+.imagemCarrinho {
+  width: 100%;
+}
+
+.descricaoItemCarrinho {
+  padding: 0 2%;
+  width: 40%;
+}
+
+.itemCarrinhoQtde {
+  border: 2px solid black;
+  border-radius: 100%;
+  font-size: 20px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  width: 48px;
+}
+
+.botaoCarrinhoQtde {
+  background-color: white;
+  border: none;
+  font-size: 36px;
+  line-height: 50px;
+  width: 50px;
+}
