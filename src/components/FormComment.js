@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaStar } from 'react-icons/fa';
 import './FormComment.css';
 
 class FormComment extends React.Component {
@@ -15,8 +14,9 @@ class FormComment extends React.Component {
       listaVazia: true,
       userEmail: '',
       review: '',
-      rating: '',
+      rating: 0,
       result: [],
+      starSymbol: '☆',
     };
     this.review = this.review.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -51,7 +51,12 @@ class FormComment extends React.Component {
   }
 
   ratingChange(param) {
-    this.setState({ rating: param });
+    const { rating } = this.state;
+    if (param !== rating) {
+      this.setState({
+        rating: param,
+      });
+    }
   }
 
   handleFormSubmit() {
@@ -88,7 +93,7 @@ class FormComment extends React.Component {
   }
 
   StarRating() {
-    const { rating } = this.state;
+    const { starSymbol } = this.state;
     return (
       <div>
         {[...Array(5)].map((star, index) => {
@@ -96,7 +101,7 @@ class FormComment extends React.Component {
           return (
             <label htmlFor="Stars" key={`${star}-${ratingValue}`}>
               <input className="Stars" type="radio" name="rating" value={ratingValue} required />
-              <FaStar className="star" color={ratingValue > rating ? 'gray' : 'black'} index={index} onClick={() => this.ratingChange(ratingValue)} />
+              <h2 className="star" index={index} onClick={() => this.ratingChange(ratingValue)}>{starSymbol}</h2>
             </label>
           );
         })}
@@ -106,11 +111,7 @@ class FormComment extends React.Component {
 
   generateReview() {
     const { result, listaVazia } = this.state;
-    const Nota = [<FaStar color="black" />,
-      <FaStar color="black" />,
-      <FaStar color="black" />,
-      <FaStar color="black" />,
-      <FaStar color="black" />];
+    const Nota = '★';
     if (listaVazia) {
       return (
         <div>
@@ -124,7 +125,7 @@ class FormComment extends React.Component {
           <div key={`${resultado.userEmailSubmit} ${resultado.ratingSubmit} ${resultado.reviewSubmit}`}>
             <p>
               <strong>{resultado.userEmailSubmit}</strong>
-              {Nota.slice(0, `${resultado.ratingSubmit}`)}
+              {Nota.repeat(`${resultado.ratingSubmit}`)}
             </p>
             <p>
               {resultado.reviewSubmit}

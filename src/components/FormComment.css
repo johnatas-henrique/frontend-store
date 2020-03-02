@@ -1,8 +1,10 @@
 .Stars {
   display: none;
+  width: 10%;
 }
 
-.star:hover {
+.star {
+  width: 10%;
   cursor: pointer;
   transition: color 200ms;
 }
