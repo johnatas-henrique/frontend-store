@@ -1,0 +1,142 @@
+.containerSetor {
+  border: 2px solid black;
+  margin: 0 3% 20px;
+  padding: 2%;
+}
+
+.tituloBase {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.flexCheckout {
+  align-items: center;
+  display: flex;
+}
+
+.containerImageCheckout {
+  border: 2px solid black;
+  height: 80px;
+  margin: 10px 0;
+}
+
+.imageCheckout {
+  height: 100%;
+}
+
+.produtosCheckout {
+  margin: 0 3% 0 2%;
+  width: 40%;
+}
+
+.containerSetor input {
+  border: 1px solid black;
+  font-size: 16px;
+  padding-left: 10px;
+}
+
+.flexFormCheckout {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nomeCompCheck , .cpfCheck , .emailCheck , .foneCheck , .cepCheck , .complCheck {
+  box-sizing: border-box;
+  height: 30px;
+  margin: 0 1% 1% 0;
+  width: 24%;
+}
+
+.enderecoCheck {
+  box-sizing: border-box;
+  height: 30px;
+  margin: 0 1% 1% 0;
+  width: 74%;
+}
+
+.cidadeCheck {
+  box-sizing: border-box;
+  height: 30px;
+  margin: 0 1% 1% 0;
+  width: 42%;
+}
+
+.numCheck , .estadoCheckout {
+  box-sizing: border-box;
+  height: 30px;
+  margin: 0 1% 1% 0;
+  width: 15%;
+}
+
+.estadoCheckout {
+  background-color: white;
+  border-color: black;
+}
+
+.tipoBoleto {
+  margin-right: 15px;
+  width: 150px;
+}
+
+.boletoImgBox {
+  align-items: center;
+  display: flex;
+  height: 100px;
+  width: 150px;
+}
+
+.labelPagamentos {
+  margin-right: 20px;
+}
+
+.visaName , .mastercardName , .eloName {
+  margin-right: 15px;
+}
+
+.visaImgBox , .mastercardImgBox , .eloImgBox {
+  align-items: center;
+  display: flex;
+  height: 100px;
+}
+
+.boletoImgCheckout {
+  height: 100%;
+}
+
+.visaImgCheckout , .mastercardImgCheckout , .eloImgCheckout {
+  height: 85%;
+}
+
+.flexyTipoPagamento {
+  align-items: center;
+  display: flex;
+  font-size: 18px;
+  width: 50%;
+}
+
+.flexyPagamento {
+  align-items: center;
+  display: flex;
+}
+
+.botaoComprar {
+  background-color: white;
+  border: 1px solid black;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 3% 20px;
+  padding: 0.8em 0.5em;
+}
+
+.botaoComprar:visited {
+  background-color: white;
+  color: black;
+}
+
+.botaoComprar:hover {
+  background-color: rgb(72, 72, 72);
+  color: white;
+}
