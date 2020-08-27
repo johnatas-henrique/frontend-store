@@ -7,6 +7,8 @@
 }
 
 .tituloDesc {
+  background-color: white;
+  border: 2px solid black;
   font-size: 28px;
   margin-bottom: 15px;
 }
@@ -16,12 +18,14 @@
 }
 
 .boxEsquerda {
+  background-color: white;
   border: 2px solid black;
   text-align: center;
   width: 31%;
 }
 
 .boxDireita {
+  background-color: white;
   border: 2px solid black;
   margin-left: 4%;
   width: 60%;
@@ -39,6 +43,7 @@
 }
 
 .tituloQuant {
+  background-color: white;
   margin: 20px 0 10px;
 }
 
@@ -55,6 +60,7 @@
 }
 
 .textQuant {
+  background-color: white;
   border: 2px solid black;
   border-radius: 100%;
   font-size: 20px;

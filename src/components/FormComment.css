@@ -47,11 +47,17 @@
 }
 
 .commentTitle {
+  background-color: white;
   margin-bottom: 10px;
   margin-left: 30px;
 }
 
+.newComment{
+  background-color: white;
+}
+
 .newComment:not( :last-child ):after {
+  background-color: white;
   background: black;
   content: '';
   display: block;

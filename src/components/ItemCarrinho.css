@@ -1,9 +1,11 @@
 .itemCarrinho {
   align-items: center;
+  background-color: white;
   display: flex;
 }
 
 .containerImageCarrinho {
+  background-color: white;
   border: 2px solid black;
   height: 100px;
   margin: 10px 0;
