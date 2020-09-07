@@ -11,10 +11,10 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={PagInicial} />
-        <Route exact path="/carrinho" component={Carrinho} />
-        <Route path="/carrinho/checkout" component={Checkout} />
-        <Route path="/products/:id_of_product" component={Product} />
+        <Route exact path="/frontend-store/" component={PagInicial} />
+        <Route exact path="/frontend-store/carrinho" component={Carrinho} />
+        <Route path="/frontend-store/carrinho/checkout" component={Checkout} />
+        <Route path="/frontend-store/products/:id_of_product" component={Product} />
       </Switch>
     </BrowserRouter>
   );
