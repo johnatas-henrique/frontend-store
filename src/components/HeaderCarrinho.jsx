@@ -7,7 +7,7 @@ class HeaderCarrinho extends Component {
   render() {
     return (
       <div>
-        <Link to="/">
+        <Link to="/frontend-store/">
           <img className="setaVoltarCarrinho" src={SetaVoltarCarrinho} alt="" />
         </Link>
         <div className="flexCarrinhoTitulo">

@@ -40,7 +40,7 @@ class BotaoQtdECarrinho extends Component {
   render() {
     const { qtdeNoCarrinho } = this.state;
     return (
-      <Link to="/carrinho" className="carrinhoBusca">
+      <Link to="/frontend-store/carrinho" className="carrinhoBusca">
         <img className="imgCarrinho" src={imgCarrinho} alt="Carrinho de Compras" />
         <span className="valorCarrinho">
           {qtdeNoCarrinho}

@@ -45,7 +45,7 @@ class Product extends React.Component {
     return (
       <div>
         <div className="flexProduct">
-          <Link to="/">
+          <Link to="/frontend-store/">
             <img className="setaVoltarProduct" src={SetaVoltarProduct} alt="" />
           </Link>
           <BotaoQtdECarrinho itensNoCarrinho={itensNoCarrinho} />

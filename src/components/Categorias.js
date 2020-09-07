@@ -18,7 +18,14 @@ class Categorias extends Component {
   }
 
   listaCategorias() {
-    fetch('https://api.mercadolibre.com/sites/MLB/categories', { method: 'GET' })
+    const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+    const url = 'https://api.mercadolibre.com/sites/MLB/categories';
+    fetch(proxyurl + url, {
+      method: 'GET',
+      headers: {
+        'Access-Control-Allow-Origin': 'https://johnatas-henrique.github.io',
+      },
+    })
       .then((response) => response.json())
       .then((data) => this.setState({ categorias: data }));
   }

@@ -25,6 +25,7 @@
 .botaoCheckout {
   background-color: white;
   border: 1px solid black;
+  color: black;
   display: inline-block;
   font-size: 18px;
   font-weight: 700;

@@ -195,7 +195,7 @@ class Checkout extends Component {
     if (this.state.shouldRedirect) return <Redirect to="/" />;
     return (
       <div>
-        <Link to="/">
+        <Link to="/frontend-store/">
           <img className="setaVoltarCarrinho" src={SetaVoltarCarrinho} alt="" />
         </Link>
         {Checkout.setorProdutos()}

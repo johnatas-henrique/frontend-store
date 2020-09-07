@@ -100,7 +100,7 @@ class Carrinho extends Component {
           {new Intl.NumberFormat('pt-BR',
             { style: 'currency', currency: 'BRL' }).format(valorTotal)}
         </p>
-        <Link className="botaoCheckout" to="/carrinho/checkout">Finalizar Compra</Link>
+        <Link className="botaoCheckout" to="/frontend-store/carrinho/checkout">Finalizar Compra</Link>
       </div>
     );
   }
