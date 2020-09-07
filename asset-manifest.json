@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/frontend-store/static/css/main.47972693.chunk.css",
+    "main.js": "/frontend-store/static/js/main.09604315.chunk.js",
+    "main.js.map": "/frontend-store/static/js/main.09604315.chunk.js.map",
+    "runtime-main.js": "/frontend-store/static/js/runtime-main.0aa20018.js",
+    "runtime-main.js.map": "/frontend-store/static/js/runtime-main.0aa20018.js.map",
+    "static/js/2.bbae2dcc.chunk.js": "/frontend-store/static/js/2.bbae2dcc.chunk.js",
+    "static/js/2.bbae2dcc.chunk.js.map": "/frontend-store/static/js/2.bbae2dcc.chunk.js.map",
+    "index.html": "/frontend-store/index.html",
+    "precache-manifest.f2591080a25ab1cec04dd984628aff94.js": "/frontend-store/precache-manifest.f2591080a25ab1cec04dd984628aff94.js",
+    "service-worker.js": "/frontend-store/service-worker.js",
+    "static/css/main.47972693.chunk.css.map": "/frontend-store/static/css/main.47972693.chunk.css.map",
+    "static/js/2.bbae2dcc.chunk.js.LICENSE.txt": "/frontend-store/static/js/2.bbae2dcc.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/frontend-store/static/media/background.50cacb03.jpg",
+    "static/media/caixa-vazia.png": "/frontend-store/static/media/caixa-vazia.ee36df28.png",
+    "static/media/Busca.css": "/frontend-store/static/media/lupa.361c932e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0aa20018.js",
+    "static/js/2.bbae2dcc.chunk.js",
+    "static/css/main.47972693.chunk.css",
+    "static/js/main.09604315.chunk.js"
+  ]
+}
